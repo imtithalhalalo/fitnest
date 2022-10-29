@@ -52,28 +52,6 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function updateProfile(Request $request) {
-        //update user's name and email and phone_num
-        $id = Auth::user()->id;
-
-        if(!$id){
-            return response()->json([
-                "status"=>"failed"
-            ], 500);
-        }
-
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone_num = $request->phone_num;
-        $user->save();
-
-        return response()->json([
-            "status"=>"success",
-            "user" => $user
-        ], 200);
-    }
-
     //function to upload user image
     public function uploadImage(Request $request) {
         $id = Auth::user()->id;
