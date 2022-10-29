@@ -9,6 +9,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
+    
+    public function register(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:2|max:100',
+            'email' => 'required|string|email|max:100',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $user,
+
+        ], 201);
+    }
 
     public function login(Request $request) {
         $validator = Validator::make($request->all(), [
