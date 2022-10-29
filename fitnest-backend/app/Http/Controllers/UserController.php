@@ -13,7 +13,7 @@ class UserController extends Controller
     public function addInfo(Request $request) {
 
         $user_info = UserInfo::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::id(),
             'weight_goal' => $request->weight_goal,
             'height' => $request->height,
             'dob' => $request->dob,
@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function updateInfo(Request $request) {
         //update user's info
-        $id = Auth::user()->id;
+        $id = Auth::id();
 
         if(!$id){
             return response()->json([
