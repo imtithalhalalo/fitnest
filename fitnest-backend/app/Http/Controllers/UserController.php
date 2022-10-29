@@ -27,4 +27,28 @@ class UserController extends Controller
         ]);
 
     }
+
+    public function updateInfo(Request $request) {
+        //update user's info
+        $id = Auth::user()->id;
+
+        if(!$id){
+            return response()->json([
+                "status"=>"failed"
+            ], 500);
+        }
+
+        $user_info = UserInfo::find($id);
+        $user_info->weight_goal = $request->weight_goal;
+        $user_info->height = $request->height;
+        $user_info->dob = $request->dob;
+        $user_info->age = $request->age;
+        $user_info->country = $request->country;
+        $user_info->save();
+
+        return response()->json([
+            "status"=>"updated",
+            "user_info" => $user_info
+        ], 200);
+    }
 }
