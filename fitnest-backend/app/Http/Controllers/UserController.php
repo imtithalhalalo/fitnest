@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserInfo;
-use App\Models\Water;
+use App\Models\WaterIntake;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,5 +84,19 @@ class UserController extends Controller
         return response()->json([
             'status' => 'uploaded',
         ],200);
+    }
+
+    //function to add water intake by user
+    public function addWaterIntake(Request $request) {
+        
+        $water = WaterIntake::create([
+            'user_id' => Auth::user()->id,
+            'water_intake' => $request->water_intake,
+        ]);
+
+        return response()->json([
+            'message' => 'Added Successfully! ',
+            'user_water' => $water
+        ]);
     }
 }
