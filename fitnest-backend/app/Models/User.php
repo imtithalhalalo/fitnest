@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\UserInfo;
+use App\Models\Meal;
+
 class User extends Authenticatable implements JWTSubject {
     use HasFactory, Notifiable;
 
@@ -32,7 +34,12 @@ class User extends Authenticatable implements JWTSubject {
         return [];
     }
 
+    //Eloquents relationship
     public function info() {
         return $this->hasOne(UserInfo::class);
+    }
+
+    public function meals() {
+        return $this->belongsToMany(Meal::class, 'saves');
     }
 }
