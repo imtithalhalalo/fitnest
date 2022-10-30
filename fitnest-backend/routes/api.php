@@ -30,6 +30,12 @@ Route::group(["middleware"=> "cors"], function(){
         Route::get('/ingredient/{id?}',[MealController::class, 'getMealIngredients'])->name('get-meal-ingredients');
     });
     
+    //program apis
+    Route::group(['prefix' => 'programs'], function(){
+        Route::get('/',[ProgramController::class, 'getPrograms'])->name('get-programs');
+        Route::get('/exercise/{id?}',[ProgramController::class, 'getExercisesOfProgram'])->name('get-exercise-of-program');
+    }); 
+    
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/profile',[AuthController::class, 'profile'])->name('profile');
