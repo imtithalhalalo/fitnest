@@ -24,6 +24,12 @@ Route::group(["middleware"=> "cors"], function(){
         Route::post('/delete_ingredient/{id?}',[TrainerController::class, 'deleteIngredient'])->name('delete-ingredient');
     });    
     
+     //meal apis
+     Route::group(['prefix' => 'meals'], function(){
+        Route::get('/category/{category?}',[MealController::class, 'getMealsByCategory'])->name('get-meal');
+        Route::get('/ingredient/{id?}',[MealController::class, 'getMealIngredients'])->name('get-meal-ingredients');
+    });
+    
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/profile',[AuthController::class, 'profile'])->name('profile');
