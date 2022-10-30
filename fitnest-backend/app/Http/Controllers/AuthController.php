@@ -51,7 +51,10 @@ class AuthController extends Controller {
         return $this->respondWithToken($token);
     }
 
-    
+    public function profile() {
+        return response()->json(auth()->user());
+    }
+
     public function updateProfile(Request $request) {
         //update user's name and email and phone_num
         $id = Auth::user()->id;
@@ -96,7 +99,7 @@ class AuthController extends Controller {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60
+            // 'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 }
