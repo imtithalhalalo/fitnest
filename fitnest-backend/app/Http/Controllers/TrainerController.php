@@ -53,4 +53,16 @@ class TrainerController extends Controller {
         ],200);
     }
 
+    public function deleteMeal($id) {
+        if($id){
+            MealIngredient::where('meal_id',$id)->delete();
+            Save::where('meal_id', $id)->delete();
+        }
+        Meal::find($id)->delete();
+
+        return response()->json([
+            'status' => 'deleted'
+        ],200);
+    }
+
 }
