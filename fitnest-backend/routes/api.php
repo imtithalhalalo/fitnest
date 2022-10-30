@@ -43,4 +43,5 @@ Route::group(["middleware"=> "cors"], function(){
     Route::post('/upload_image',[UserController::class, 'uploadImage'])->name('upload-image');
     Route::post('/remove_image', [AuthController::class, 'removeImage'])->name('remove-image');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
 });
