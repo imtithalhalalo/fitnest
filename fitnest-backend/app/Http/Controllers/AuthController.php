@@ -74,6 +74,18 @@ class AuthController extends Controller {
         ], 200);
     }
 
+    //function to upload user image
+    public function uploadImage(Request $request) {
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        $user->image = $request->image;
+        $user->save();
+
+        return response()->json([
+            'status' => 'uploaded',
+        ],200);
+    }
+
     public function logout() {
         auth()->logout();
 
