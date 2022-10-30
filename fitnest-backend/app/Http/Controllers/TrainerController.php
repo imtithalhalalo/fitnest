@@ -65,4 +65,15 @@ class TrainerController extends Controller {
         ],200);
     }
 
+    public function deleteIngredient($id) {
+        if($id){
+            MealIngredient::where('ingredient_id',$id)->delete();
+        }
+        Ingredient::find($id)->delete();
+
+        return response()->json([
+            'status' => 'deleted'
+        ],200);
+    }
+
 }

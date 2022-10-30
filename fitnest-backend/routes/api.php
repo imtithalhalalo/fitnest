@@ -19,7 +19,8 @@ Route::group(["middleware"=> "cors"], function(){
     Route::group(["middleware" => "trainer.role"], function(){
         Route::post('/add_ingredient',[TrainerController::class, 'addIngredient'])->name('add-ingredient');
         Route::post('/add_meal',[TrainerController::class, 'addMeal'])->name('add-meal');
-        Route::post('/delete/{id?}',[TrainerController::class, 'deleteMeal'])->name('delete-meal');
+        Route::post('/delete_meal/{id?}',[TrainerController::class, 'deleteMeal'])->name('delete-meal');
+        Route::post('/delete_ingredient/{id?}',[TrainerController::class, 'deleteIngredient'])->name('delete-ingredient');
     });    
     
     Route::post('/register', [AuthController::class, 'register'])->name('register');
