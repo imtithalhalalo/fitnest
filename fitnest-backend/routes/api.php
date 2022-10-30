@@ -14,6 +14,7 @@ Route::group(["middleware"=> "cors"], function(){
         Route::post('/add_info',[UserController::class, 'addInfo'])->name('add-info');
         Route::post('/update_info',[UserController::class, 'updateInfo'])->name('update-info');
         Route::post('/add_water_intake',[UserController::class, 'addWaterIntake'])->name('add-water-intake');
+        Route::post('/save_meal',[UserController::class, 'saveMeal'])->name('save-meal');
     });
 
     Route::group(["middleware" => "trainer.role"], function(){

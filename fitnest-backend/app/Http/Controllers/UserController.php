@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WaterIntake;
+use App\Models\Save;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,18 +53,6 @@ class UserController extends Controller
         ], 200);
     }
 
-    //function to upload user image
-    public function uploadImage(Request $request) {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-        $user->image = $request->image;
-        $user->save();
-
-        return response()->json([
-            'status' => 'uploaded',
-        ],200);
-    }
-
     //function to add water intake by user
     public function addWaterIntake(Request $request) {
         
@@ -76,5 +65,17 @@ class UserController extends Controller
             'message' => 'Added Successfully! ',
             'user_water' => $water
         ]);
+    }
+
+    //function for user to save meal
+    public function saveMeal(Request $request) {
+        $save = new Save;
+        $save->user_id = Auth::user()->id;
+        $save->meal_id = $request->meal_id;
+        $save->save();
+
+        return response()->json([
+            'status' => 'saved',
+        ],200);
     }
 }
