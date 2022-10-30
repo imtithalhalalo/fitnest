@@ -89,6 +89,17 @@ class AuthController extends Controller {
         ],200);
     }
 
+    //function to remove image from user's profile
+    public function removeImage() {
+        $user = Auth::user()->id;
+        $user->image = null;
+        $user->save();
+
+        return response()->json([
+            'status' => 'deleted',
+        ],200);
+    }
+
     public function logout() {
         auth()->logout();
 
