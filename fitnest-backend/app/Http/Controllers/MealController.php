@@ -17,4 +17,11 @@ class MealController extends Controller {
         return response()->json($meals);
     }
 
+    //function to get meals details
+    public function getMealIngredients($id) {
+        $meal = Meal::find($id);
+        $ingredients = $meal->ingredients;
+        return response()->json($ingredients);
+    }
+
 }
