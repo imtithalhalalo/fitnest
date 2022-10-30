@@ -18,4 +18,12 @@ class ProgramController extends Controller {
         return response()->json($programs);
     }
 
+
+    //function to get exercises of program
+    public function getExercisesOfProgram($id) {
+        $program = Program::find($id);
+        $exercise = $program->exercises;
+
+        return response()->json($exercise);
+    }
 }
