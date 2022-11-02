@@ -146,4 +146,24 @@ class TrainerController extends Controller
             'program' => $program
         ], 200);
     }
+
+
+    //function to add exercises
+    public function addExercise(Request $request) {
+        $user_id = Auth::id();
+
+        //adding exercise info
+        $exercise = Exercise::create([
+            'user_id' => $user_id,
+            'title' => $request->title,
+            'time' => $request->time,
+            'description' => $request->description,
+            'image' => $request->image
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'exercise' => $exercise
+        ], 200);
+    }
 }
