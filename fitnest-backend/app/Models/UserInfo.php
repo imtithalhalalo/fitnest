@@ -14,8 +14,9 @@ class UserInfo extends Model
     protected $fillable = [
         'user_id',
         'weight_goal',
+        'calories_goal',
         'height',
-        'dob',
+        'gender',
         'age',
         'country'
     ];
