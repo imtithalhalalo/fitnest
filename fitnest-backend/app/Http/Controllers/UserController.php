@@ -8,17 +8,17 @@ use App\Models\Save;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     //function to add user info
     public function addInfo(Request $request) {
 
         $user_info = UserInfo::create([
             'user_id' => Auth::id(),
             'weight_goal' => $request->weight_goal,
+            'calories_goal' => $request->calories_goal,
             'height' => $request->height,
-            'dob' => $request->dob,
             'age' => $request->age,
+            'gender' => $request->gender,
             'country' => $request->country,
         ]);
 
@@ -35,20 +35,21 @@ class UserController extends Controller
 
         if(!$id){
             return response()->json([
-                "status"=>"failed"
+                "status" => "failed"
             ], 500);
         }
 
         $user_info = UserInfo::find($id);
         $user_info->weight_goal = $request->weight_goal;
+        $user_info->calories_goal = $request->calories_goal;
         $user_info->height = $request->height;
-        $user_info->dob = $request->dob;
+        $user_info->gender = $request->gender;
         $user_info->age = $request->age;
         $user_info->country = $request->country;
         $user_info->save();
 
         return response()->json([
-            "status"=>"updated",
+            "status" => "updated",
             "user_info" => $user_info
         ], 200);
     }
@@ -57,20 +58,20 @@ class UserController extends Controller
     public function addWaterIntake(Request $request) {
         
         $water = WaterIntake::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::id(),
             'water_intake' => $request->water_intake,
         ]);
 
         return response()->json([
-            'message' => 'Added Successfully! ',
+            'status' => 'success',
             'user_water' => $water
         ]);
     }
 
     //function for user to save meal
-    public function saveMeal(Request $request) {
+    public function saveMeal(Request $request) { 
         $save = new Save;
-        $save->user_id = Auth::user()->id;
+        $save->user_id = Auth::id();
         $save->meal_id = $request->meal_id;
         $save->save();
 
