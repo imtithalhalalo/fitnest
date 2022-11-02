@@ -32,6 +32,28 @@ class TrainerController extends Controller
         ]);
     }
 
+    public function updateInfo(Request $request) {
+        //update trainer's info
+        $id = Auth::id();
+
+        if(!$id){
+            return response()->json([
+                "status" => "failed"
+            ], 500);
+        }
+
+        $trainer_info = TrainerInfo::find($id);
+        $trainer_info->education = $request->education;
+        $trainer_info->experience = $request->experience;
+        $trainer_info->working_hours = $request->working_hours;
+        $trainer_info->save();
+
+        return response()->json([
+            "status" => "updated",
+            "trainer_info" => $trainer_info
+        ], 200);
+    }
+
     //function for user to add ingredient
     public function addIngredient(Request $request) {
 
@@ -95,5 +117,5 @@ class TrainerController extends Controller
             'status' => 'deleted'
         ], 200);
     }
-
+    
 }
