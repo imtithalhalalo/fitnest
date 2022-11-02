@@ -18,4 +18,16 @@ class ChatController extends Controller {
             'trainers' => $trainers
         ], 200);
     }
+
+    //function to get users
+    public function getUsers() {
+        $users = User::where('user_type', 'user')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'users' => $users
+        ], 200);
+    }
 }
