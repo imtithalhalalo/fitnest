@@ -12,10 +12,13 @@ class ProgramController extends Controller {
 
     //function to get programs
     public function getPrograms() {
-        $programs = Program::select('*')
-                        ->orderBy('num_weeks', 'desc')
-                        ->get();
-        return response()->json($programs);
+        $programs = Program::orderBy('num_weeks', 'desc')
+                            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'programs' => $programs
+        ], 200);
     }
 
 
@@ -24,6 +27,9 @@ class ProgramController extends Controller {
         $program = Program::find($id);
         $exercise = $program->exercises;
 
-        return response()->json($exercise);
+        return response()->json([
+            'status' => 'success',
+            'exercise' => $exercise
+        ], 200);
     }
 }
