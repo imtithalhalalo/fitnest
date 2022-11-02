@@ -27,6 +27,7 @@ Route::group(["middleware"=> "cors"], function(){
         Route::post('/add_meal',[TrainerController::class, 'addMeal'])->name('add-meal');
         Route::post('/add_program',[TrainerController::class, 'addProgram'])->name('add-program');
         Route::post('/add_exercise',[TrainerController::class, 'addExercise'])->name('add-exercise');
+        Route::post('/connect_exercise',[TrainerController::class, 'connectExerciseToProgram'])->name('connect-exercise');
         Route::post('/delete_meal/{id?}',[TrainerController::class, 'deleteMeal'])->name('delete-meal');
         Route::post('/delete_ingredient/{id?}',[TrainerController::class, 'deleteIngredient'])->name('delete-ingredient');
         Route::get('/trainer_info',[TrainerController::class, 'getInfo'])->name('get-trainer-info');
