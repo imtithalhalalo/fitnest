@@ -13,7 +13,24 @@ use App\Models\Save;
 use App\Models\TrainerInfo;
 use Illuminate\Support\Facades\Auth;
 
-class TrainerController extends Controller {
+class TrainerController extends Controller
+{
+
+    //function to add trainer info
+    public function addInfo(Request $request) {
+
+        $trainer_info = TrainerInfo::create([
+            'user_id' => Auth::id(),
+            'education' => $request->education,
+            'experience' => $request->experience,
+            'working_hours' => $request->working_hours,
+        ]);
+
+        return response()->json([
+            'message' => 'Added Successfully! ',
+            'trainer_info' => $trainer_info
+        ]);
+    }
 
     //function for user to add ingredient
     public function addIngredient(Request $request) {
