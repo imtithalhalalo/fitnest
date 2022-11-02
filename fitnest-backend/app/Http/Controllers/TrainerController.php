@@ -10,13 +10,14 @@ use App\Models\Meal;
 use App\Models\Ingredient;
 use App\Models\MealIngredient;
 use App\Models\Save;
+use App\Models\TrainerInfo;
 use Illuminate\Support\Facades\Auth;
 
 class TrainerController extends Controller {
 
     //function for user to add ingredient
     public function addIngredient(Request $request) {
-        
+
         $ingredient = new Ingredient;
         $ingredient->user_id = Auth::id();
         $ingredient->ingredient = $request->ingredient;
@@ -25,23 +26,25 @@ class TrainerController extends Controller {
         return response()->json([
             'message' => 'added',
             'ingredient' => $ingredient
-        ],200);
+        ], 200);
     }
-    
+
     //function for user to add meal
     public function addMeal(Request $request) {
-        $user_id = Auth::user()->id;
+        $user_id = Auth::id();
 
         //adding meal info
-        $meal = new Meal;
-        $meal->title = $request->title;
-        $meal->calories = $request->calories;
-        $meal->fats = $request->fats;
-        $meal->protein = $request->protein;
-        $meal->image = $request->image;
-        $meal->category = $request->category;
-        $meal->user_id = $user_id;
-        $meal->save();
+        $meal = Meal::insert([
+            'title' => $request->title,
+            'calories' => $request->calories,
+            'fats' => $request->fats,
+            'protein' => $request->protein,
+            'image' => $request->image,
+            'category' => $request->category,
+            'user_id' => $user_id
+        ]);
+
+
 
         // meal ingredients
         $ingredients = $request->ingredients;
@@ -50,30 +53,30 @@ class TrainerController extends Controller {
         return response()->json([
             'status' => 'success',
             'meal' => $meal
-        ],200);
+        ], 200);
     }
 
     public function deleteMeal($id) {
-        if($id){
-            MealIngredient::where('meal_id',$id)->delete();
+        if ($id) {
+            MealIngredient::where('meal_id', $id)->delete();
             Save::where('meal_id', $id)->delete();
         }
         Meal::find($id)->delete();
 
         return response()->json([
             'status' => 'deleted'
-        ],200);
+        ], 200);
     }
 
     public function deleteIngredient($id) {
-        if($id){
-            MealIngredient::where('ingredient_id',$id)->delete();
+        if ($id) {
+            MealIngredient::where('ingredient_id', $id)->delete();
         }
         Ingredient::find($id)->delete();
 
         return response()->json([
             'status' => 'deleted'
-        ],200);
+        ], 200);
     }
 
 }
