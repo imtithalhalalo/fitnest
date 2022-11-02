@@ -54,6 +54,17 @@ class UserController extends Controller {
         ], 200);
     }
 
+    //function to get info for specific user
+    public function getInfo() {
+        $id = Auth::id();
+        $info = UserInfo::find($id);
+
+        return response()->json([
+            'status' => 'success',
+            'user_info' => $info
+        ], 200);
+    }
+
     //function to add water intake by user
     public function addWaterIntake(Request $request) {
         
