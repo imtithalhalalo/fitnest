@@ -128,4 +128,22 @@ class TrainerController extends Controller
             'trainer_info' => $info
         ], 200);
     }
+
+    //function to add programs
+    public function addProgram(Request $request) {
+        $user_id = Auth::id();
+
+        //adding program info
+        $program = Program::create([
+            'title' => $request->title,
+            'num_weeks' => $request->num_weeks,
+            'image' => $request->image,
+            'user_id' => $user_id
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'program' => $program
+        ], 200);
+    }
 }
