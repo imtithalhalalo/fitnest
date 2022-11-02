@@ -32,4 +32,16 @@ class ProgramController extends Controller {
             'exercise' => $exercise
         ], 200);
     }
+
+    //function to get exercises of program
+    public function getExercises() {
+        $exercises = Exercise::orderBy('time', 'asc')
+                            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'exercises' => $exercises
+        ], 200);
+    }
+
 }
