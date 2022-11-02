@@ -166,4 +166,20 @@ class TrainerController extends Controller
             'exercise' => $exercise
         ], 200);
     }
+
+    public function connectExerciseToProgram(Request $request) {
+        $user_id = Auth::id();
+
+        //connecting exercise to program
+        $connect = ProgramExercise::create([
+            'user_id' => $user_id,
+            'program_id' => $request->program_id,
+            'exercise_id' => $request->exercise_id,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'connected' => $connect
+        ], 200);
+    }
 }
