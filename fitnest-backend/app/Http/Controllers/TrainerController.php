@@ -117,5 +117,15 @@ class TrainerController extends Controller
             'status' => 'deleted'
         ], 200);
     }
-    
+
+    //function to get info for specific user
+    public function getInfo() {
+        $id = Auth::id();
+        $info = TrainerInfo::find($id);
+
+        return response()->json([
+            'status' => 'success',
+            'trainer_info' => $info
+        ], 200);
+    }
 }
