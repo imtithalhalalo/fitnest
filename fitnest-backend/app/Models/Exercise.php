@@ -16,6 +16,7 @@ class Exercise extends Model
         'time',
         'description',
         'image',
+        'is_done'
     ];
 
     public function programs() {
