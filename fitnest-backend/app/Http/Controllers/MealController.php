@@ -11,17 +11,24 @@ class MealController extends Controller {
     
     //function to get meals by category
     public function getMealsByCategory($category) {
-        $meals = Meal::where('category', '=', $category)
+        $meals = Meal::where('category', $category)
                         ->orderBy('title', 'asc')
                         ->get();
-        return response()->json($meals);
+
+        return response()->json([
+            'status' => 'success',
+            'meals' => $meals
+        ],200);
     }
 
     //function to get meals details
     public function getMealIngredients($id) {
         $meal = Meal::find($id);
         $ingredients = $meal->ingredients;
-        return response()->json($ingredients);
+        return response()->json([
+            'status' => 'success',
+            'ingredients' => $ingredients
+        ],200);
     }
 
 }
