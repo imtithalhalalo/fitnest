@@ -20,7 +20,7 @@ class CreateExercisesTable extends Migration
             $table->integer('time');
             $table->longText('description');
             $table->string('image');
-            $table->binary('is_done')->default(0);
+            $table->tinyInteger('is_done')->default(0);
             $table->timestamps();
         });
     }
