@@ -47,8 +47,13 @@ class AuthController extends Controller {
         if (!$token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
-        return $this->respondWithToken($token);
+        
+        $user = Auth::user();
+        return response()->json([
+            'message' => 'User successfully logged in',
+            'user' => $user,
+            'token' => $this->respondWithToken($token)
+        ], 201);
     }
 
     public function profile() {
