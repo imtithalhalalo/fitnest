@@ -44,6 +44,13 @@ Route::group(["middleware"=> "cors"], function(){
         Route::get('/exercise/{id?}',[ProgramController::class, 'getExercisesOfProgram'])->name('get-exercise-of-program');
         Route::get('/exercises',[ProgramController::class, 'getExercises'])->name('get-exercises');
     }); 
+
+
+    //chat apis
+    Route::group(['prefix' => 'chat'], function(){
+        Route::get('/trainer',[ChatController::class, 'getTrainers'])->name('get-trainers');
+        Route::get('/user',[ChatController::class, 'getUsers'])->name('get-users');
+    }); 
     
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
