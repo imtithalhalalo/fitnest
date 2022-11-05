@@ -54,5 +54,36 @@ const SignIn = ({ navigation }) => {
 export default SignIn
 
 const styles = StyleSheet.create({
-
+  container: {
+    backgroundColor: colors.white,
+    flex: 1,
+    alignItems: 'center',
+    padding: 30
+  },
+  bar: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  p2: {
+    paddingTop: 40,
+  },
+  text: {
+    fontSize: 14,
+    color: colors.black,
+    fontWeight: '500',
+    marginBottom: 20
+  },
+  btnText: {
+    fontSize: 14, color: colors.purple,
+    fontWeight: '500',
+    marginLeft: 10,
+    marginBottom: 20
+  },
+  logo: {
+    width: 120,
+    height: 140,
+    alignSelf: 'center',
+    marginTop: 20
+  }
 })
