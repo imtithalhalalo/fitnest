@@ -10,6 +10,20 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    inputsBox: {
+        flex: 1,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+    },
+    container2: {
+        flex: 0.2,
+        backgroundColor: colors.white,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    root: {
+        alignItems: 'center',
+    },
     logo: {
         width: 300
     },
@@ -40,6 +54,21 @@ const style = StyleSheet.create({
         textAlignVertical: 'center',
         color: colors.white,
         fontSize: 22,
+    },
+    input:{
+        borderWidth: 1,
+        borderColor: colors.black,
+        borderRadius:15,
+        padding:10,
+        width: 330,
+    },
+    inputContainer: {
+        marginVertical: 10
+    },
+    inputLabel:{
+        margin:5,
+        fontSize: 14,
+        fontWeight:'bold'
     },
 })
 
