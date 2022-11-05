@@ -11,6 +11,7 @@ const SignUp = ({ navigation }) => {
         <>
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.p2}>
+                    <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
                     <View style={styles.bar}>
                         <Text style={{ fontSize: 24, fontWeight: '500' }}>Sign Up</Text>
                     </View>
