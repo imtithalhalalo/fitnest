@@ -2,6 +2,8 @@ import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity } from 'r
 import React from 'react'
 import { style } from '../styles/style'
 import colors from '../constants/colors'
+import ProfileBox from '../components/ProfileBox'
+import { FontAwesome, Feather } from "react-native-vector-icons";
 
 const Profile = ({ navigation }) => {
     return (
@@ -16,18 +18,31 @@ const Profile = ({ navigation }) => {
                     <Text style={styles.name}>Imtithal Halalo</Text>
                 </View>
 
-                <View style={style.inputContainer}>
-                    <Text style={style.inputLabel}>Email</Text>
-                    <Text style={styles.desc}>imtithal@gmail.com</Text>
+                <ProfileBox icon={"phone"} title={"Phone Number"} description={"10:00 AM - 9:00 PM"} />
+                <ProfileBox icon={"email"} title={"Email"} description={"10:00 AM - 9:00 PM"} />
+                <View>
+                    <View style={styles.row}>
+                        <FontAwesome
+                            name="university"
+                            size={20}
+                            color={colors.purple} />
+                        <Text style={styles.text}>Education</Text>
+                    </View>
+                    <Text style={styles.desc}>Lebanese Internation University</Text>
                 </View>
-
-                <View style={style.inputContainer}>
-                    <Text style={style.inputLabel}>Phone Number</Text>
-                    <Text style={styles.desc}> + 961 76 016 451</Text>
+                <ProfileBox icon={"work"} title={"Experience"} description={"N/A"} />
+                <View>
+                    <View style={styles.row}>
+                        <Feather
+                            name="clock"
+                            size={16}
+                            color={colors.purple} />
+                        <Text style={styles.text}>Working Hours</Text>
+                    </View>
+                    <Text style={styles.desc}>10:00 AM - 9:00 PM</Text>
                 </View>
-
-                <TouchableOpacity style={[style.signup, { alignSelf: 'center', marginTop: 100 }]} onPress={() => { navigation.navigate('EditProfile') }}>
-                    <Text style={style.loginText}>Edit Profile</Text>
+                <TouchableOpacity style={style.primaryBtn} onPress={() => { navigation.navigate('EditProfile') }}>
+                    <Text style={style.primaryTextBtn}>Edit Profile</Text>
                 </TouchableOpacity>
             </SafeAreaView>
         </>
@@ -37,9 +52,32 @@ const Profile = ({ navigation }) => {
 export default Profile
 
 const styles = StyleSheet.create({
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    column: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
     desc: {
+        fontSize: 16,
+        color: colors.darkGrey,
+        paddingTop: '3%',
+        paddingBottom: '3%',
+        fontWeight: '400'
+    },
+    text: {
         fontSize: 18,
-        fontWeight: '400',
+        color: colors.black,
+        fontWeight: '500',
+        paddingLeft: '4%'
+    },
+    title: {
+        fontSize: 22,
+        color: colors.black,
+        fontWeight: '500'
     },
     name: {
         fontSize: 24,
@@ -47,8 +85,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     container: {
-        padding: 40,
-        paddingTop: 120
+        padding: '10%',
+        paddingTop: '30%',
+        backgroundColor: colors.lighterPurple,
+        flex: 1,
     },
     profileImg: {
         width: 120,
@@ -59,17 +99,5 @@ const styles = StyleSheet.create({
         display: "flex",
         alignSelf: "center",
         marginBottom: 20,
-    },
-    choose: {
-        textAlign: "center",
-        paddingTop: 10,
-        color: colors.purple,
-        fontWeight: "700"
-    },
-    delete: {
-        textAlign: "center",
-        paddingTop: 10,
-        color: colors.green,
-        fontWeight: "700"
     },
 })
