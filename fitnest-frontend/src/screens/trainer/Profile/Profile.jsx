@@ -1,9 +1,9 @@
 import { StyleSheet, Text, SafeAreaView, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { style } from '../styles/style'
-import colors from '../constants/colors'
-import ProfileBox from '../components/ProfileBox'
 import { FontAwesome, AntDesign } from "react-native-vector-icons";
+import { style } from '../../../styles/style';
+import colors from '../../../constants/colors';
+import ProfileBox from '../../../components/ProfileBox';
 
 const Profile = ({ navigation }) => {
     return (
@@ -11,7 +11,7 @@ const Profile = ({ navigation }) => {
             <SafeAreaView style={styles.container}>
                 <View style={styles.profContainer}>
                     <View>
-                        <Image source={require('../../assets/images/profile.jpg')} style={styles.profileImg} />
+                        <Image source={require('../../../../assets/images/profile.jpg')} style={styles.profileImg} />
                     </View>
                 </View>
                 <View style={style.inputContainer}>
@@ -52,52 +52,4 @@ const Profile = ({ navigation }) => {
 export default Profile
 
 const styles = StyleSheet.create({
-    row: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    column: {
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    desc: {
-        fontSize: 16,
-        color: colors.darkGrey,
-        paddingTop: '3%',
-        paddingBottom: '3%',
-        fontWeight: '400'
-    },
-    text: {
-        fontSize: 18,
-        color: colors.black,
-        fontWeight: '500',
-        paddingLeft: '4%'
-    },
-    title: {
-        fontSize: 22,
-        color: colors.black,
-        fontWeight: '500'
-    },
-    name: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        alignSelf: 'center'
-    },
-    container: {
-        padding: '10%',
-        paddingTop: '30%',
-        backgroundColor: colors.lighterPurple,
-        flex: 1,
-    },
-    profileImg: {
-        width: 120,
-        height: 120,
-        borderRadius: 400 / 2,
-    },
-    profContainer: {
-        display: "flex",
-        alignSelf: "center",
-        marginBottom: 20,
-    },
 })
