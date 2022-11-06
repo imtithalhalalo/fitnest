@@ -3,7 +3,7 @@ import React from 'react'
 import { style } from '../styles/style'
 import colors from '../constants/colors'
 import ProfileBox from '../components/ProfileBox'
-import { FontAwesome, Feather } from "react-native-vector-icons";
+import { FontAwesome, AntDesign } from "react-native-vector-icons";
 
 const Profile = ({ navigation }) => {
     return (
@@ -33,9 +33,9 @@ const Profile = ({ navigation }) => {
                 <ProfileBox icon={"work"} title={"Experience"} description={"N/A"} />
                 <View>
                     <View style={styles.row}>
-                        <Feather
-                            name="clock"
-                            size={16}
+                        <AntDesign
+                            name="clockcircle"
+                            size={20}
                             color={colors.purple} />
                         <Text style={styles.text}>Working Hours</Text>
                     </View>
