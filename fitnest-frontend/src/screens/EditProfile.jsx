@@ -1,23 +1,33 @@
-import { Image, StyleSheet, SafeAreaView, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { Image, StyleSheet, SafeAreaView, Text, View, Modal, Pressable, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import React, { useState } from 'react'
 import colors from '../constants/colors'
 import { style } from '../styles/style'
 import { EvilIcons } from '@expo/vector-icons';
+
 const EditProfile = ({ navigation }) => {
+
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [email, setEmail] = useState("");
     const [phone_num, setPhoneNum] = useState('');
+
+
+    //user info
+    const [education, setEducation] = useState('');
+    const [experience, setExperience] = useState('');
+    const [working_hours, setWorkingHours] = useState('');
+
+    const [error, setError] = useState('')
+    const [modalVisibility, setModalVisibility] = useState(false);
+
     return (
         <>
-            <View style={styles.header}>
-                <TouchableWithoutFeedback onPress={() => { navigation.pop() }}>
-                    <EvilIcons name="arrow-left" size={50} color={colors.purple} />
-                </TouchableWithoutFeedback>
-            </View>
-
             <SafeAreaView style={styles.container}>
-
+                <View style={styles.header}>
+                    <TouchableWithoutFeedback onPress={() => { navigation.pop() }}>
+                        <EvilIcons name="arrow-left" size={50} color={colors.purple} />
+                    </TouchableWithoutFeedback>
+                </View>
                 <View style={styles.profContainer}>
 
                     <View>
@@ -32,6 +42,7 @@ const EditProfile = ({ navigation }) => {
                         </Text>
                     </View>
                 </View>
+
                 <View style={style.inputContainer}>
                     <Text style={style.inputLabel}>Name</Text>
                     <TextInput
@@ -52,10 +63,54 @@ const EditProfile = ({ navigation }) => {
                         style={style.input}
                         onChangeText={phone_num => setPhoneNum(phone_num)} />
                 </View>
-
-                <TouchableOpacity style={[style.signup, { alignSelf: 'center', marginTop: 100 }]}>
-                    <Text style={style.loginText}>Save</Text>
+                <TouchableOpacity style={[style.secondaryBtn]} onPress={() => setModalVisibility(true)}>
+                    <Text style={style.secondaryText}>Update More Info</Text>
                 </TouchableOpacity>
+                {
+                    //edit modal
+                    modalVisibility ?
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisibility}
+                            onRequestClose={() => {
+                                setModalVisibility(!modalVisibility);
+                            }}
+                        >
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Education</Text>
+                                        <TextInput
+                                            style={style.input}
+                                            onChangeText={education => setEducation(education)} />
+                                    </View>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Experience</Text>
+                                        <TextInput
+                                            style={[style.input, { height: 100 }]}
+                                            onChangeText={experience => setExperience(experience)} />
+                                    </View>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Working Hours</Text>
+                                        <TextInput
+                                            style={style.input}
+                                            onChangeText={working_hours => setWorkingHours(working_hours)} />
+                                    </View>
+                                    <Pressable
+                                        style={[style.primaryBtn]}
+                                        onPress={() => setModalVisibility(!modalVisibility)}
+                                    >
+                                        <Text style={style.primaryTextBtn}>Edit</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Modal> : <></>
+                }
+                <TouchableOpacity style={[style.primaryBtn]}>
+                    <Text style={style.primaryTextBtn}>Save</Text>
+                </TouchableOpacity>
+
             </SafeAreaView>
         </>
     )
@@ -65,10 +120,10 @@ export default EditProfile
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.white,
+        padding: '10%',
+        paddingTop: '20%',
+        backgroundColor: colors.lighterPurple,
         flex: 1,
-        alignItems: 'center',
-        padding: 30
     },
     profileImg: {
         width: 120,
@@ -92,8 +147,4 @@ const styles = StyleSheet.create({
         color: colors.green,
         fontWeight: "700"
     },
-    header: {
-        paddingTop: 50,
-        paddingLeft: 30
-    }
 })
