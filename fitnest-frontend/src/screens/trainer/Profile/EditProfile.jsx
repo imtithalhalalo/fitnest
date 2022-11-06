@@ -65,6 +65,47 @@ const EditProfile = ({ navigation }) => {
                 <TouchableOpacity style={[style.secondaryBtn]} onPress={() => setModalVisibility(true)}>
                     <Text style={style.secondaryText}>Update More Info</Text>
                 </TouchableOpacity>
+                {
+                    //edit modal
+                    modalVisibility ?
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisibility}
+                            onRequestClose={() => {
+                                setModalVisibility(!modalVisibility);
+                            }}
+                        >
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Education</Text>
+                                        <TextInput
+                                            style={style.input}
+                                            onChangeText={education => setEducation(education)} />
+                                    </View>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Experience</Text>
+                                        <TextInput
+                                            style={[style.input, { height: 100 }]}
+                                            onChangeText={experience => setExperience(experience)} />
+                                    </View>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Working Hours</Text>
+                                        <TextInput
+                                            style={style.input}
+                                            onChangeText={working_hours => setWorkingHours(working_hours)} />
+                                    </View>
+                                    <Pressable
+                                        style={[style.primaryBtn]}
+                                        onPress={() => setModalVisibility(!modalVisibility)}
+                                    >
+                                        <Text style={style.primaryTextBtn}>Edit</Text>
+                                    </Pressable>
+                                </View>
+                            </View>
+                        </Modal> : <></>
+                }
                 <TouchableOpacity style={[style.primaryBtn]}>
                     <Text style={style.primaryTextBtn}>Save</Text>
                 </TouchableOpacity>
