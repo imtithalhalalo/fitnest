@@ -76,8 +76,8 @@ const EditProfile = ({ navigation }) => {
                                 setModalVisibility(!modalVisibility);
                             }}
                         >
-                            <View style={styles.centeredView}>
-                                <View style={styles.modalView}>
+                            <View style={styles.centered}>
+                                <View style={styles.modal}>
                                     <View style={style.inputContainer}>
                                         <Text style={style.inputLabel}>Education</Text>
                                         <TextInput
@@ -118,4 +118,32 @@ const EditProfile = ({ navigation }) => {
 export default EditProfile
 
 const styles = StyleSheet.create({
+    container: {
+        padding: '10%',
+        paddingTop: '20%',
+        backgroundColor: colors.lighterPurple,
+        flex: 1,
+    },
+    profileImg: {
+        width: 120,
+        height: 120,
+        borderRadius: 400 / 2,
+    },
+    profContainer: {
+        display: "flex",
+        alignSelf: "center",
+        marginBottom: 20,
+    },
+    choose: {
+        textAlign: "center",
+        paddingTop: 10,
+        color: colors.purple,
+        fontWeight: "700"
+    },
+    delete: {
+        textAlign: "center",
+        paddingTop: 10,
+        color: colors.green,
+        fontWeight: "700"
+    },
 })
