@@ -14,7 +14,18 @@ const ExerciseCard = (props) => {
                 <View style={styles.box}>
                     <View style={styles.titlesContainer}>
                         <Text style={styles.cardTitle}>{props.title}</Text>
+                        {props.time ? (
+                            <Text style={styles.cardSubtitle}>{props.time} min</Text>
+                        ) : (
+                            <></>
+                        )}
+
                     </View>
+                {props.image ? (
+                    <Card.Cover style={styles.cardCover} source={{ uri: props.image }} />
+                ) : (
+                    <></>
+                )}
                 </View>
                 
                 <TouchableOpacity style={[styles.primaryBtn, { width: '50%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('StepDetails', { title: props.title, image: image, time: props.time, description: props.description }) }}>
