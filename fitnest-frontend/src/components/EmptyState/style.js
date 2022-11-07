@@ -31,6 +31,29 @@ const style = StyleSheet.create({
         color: colors.lightGrey,
         marginBottom: '5%'
     },
+    primaryBtn: {
+        width: '50%',
+        padding: '2%',
+        backgroundColor: colors.purple,
+        borderRadius: 15,
+    },
+    primaryTextBtn: {
+        fontSize: 18,
+        color: colors.white,
+        textAlign: 'center'
+    }, 
+    image: {
+        width: 150,
+        height: 150,
+        marginBottom: '10%',
+        marginTop: '30%'
+    },
+    imageContainer: {
+        width: '90%',
+        alignItems: 'center',
+        display: 'flex',
+        height: '100%'
+    }
 
 })
 
