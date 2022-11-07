@@ -16,5 +16,18 @@ const Search = (props) => {
 export default Search
 const width_proportion = '100%';
 const styles = StyleSheet.create({
-
+    
+    searchBarContainer: {
+        borderColor: colors.white,
+        backgroundColor: colors.lightPurple,
+        borderWidth: 0,
+        borderRadius: 20,
+        color: colors.purple,
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: width_proportion,
+        height: 45,
+        alignSelf: 'center',
+        marginTop: 18
+    }
 })
