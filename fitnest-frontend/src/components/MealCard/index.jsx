@@ -9,6 +9,11 @@ const MealCard = (props) => {
 
     return (
         <Card style={styles.gridItem} onPress={() => {navigation.navigate('MealDetails', {title: props.title, image: props.image, id: props.id})}}>
+            {props.image ? (
+                <Card.Cover style={styles.cardCover} source={{ uri: props.image }} resizeMode={'contain'} />
+            ) : (
+                <></>
+            )}
             <View style={styles.p4}>
                 <Text style={styles.cardTitle}>{props.title}</Text>
             </View>
