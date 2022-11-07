@@ -36,6 +36,22 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         color: colors.purple
     },
+    primaryBtn: {
+        width: '30%',
+        padding: '2%',
+        backgroundColor: colors.purple,
+        borderRadius: 15,
+    },
+    primaryTextBtn: {
+        fontSize: 18,
+        color: colors.white,
+        textAlign: 'center'
+    },
+    titlesContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    }
 })
 
 export { styles }
