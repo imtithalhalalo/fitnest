@@ -21,6 +21,11 @@ const Header = (props) => {
             <></>
             }
             <Text style={{ fontSize: 24, fontWeight: '500', marginRight: '10%' }}>{props.text}</Text>
+
+            {props.image ?  (
+                <Image source={{ uri: props.image }} style={{ width: 35, height: 35, borderRadius: 400 / 2 }} />
+            ): <></>          
+            }
                 
 
         </View>
