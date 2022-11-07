@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import colors from '../../constants/colors';
 import { EvilIcons } from '@expo/vector-icons';
 import { TouchableWithoutFeedback } from '@gorhom/bottom-sheet';
+import styles from './style';
 
 const Header = (props) => {
 
@@ -20,10 +21,10 @@ const Header = (props) => {
             ):
             <></>
             }
-            <Text style={{ fontSize: 24, fontWeight: '500', marginRight: '10%' }}>{props.text}</Text>
+            <Text style={styles.text}>{props.text}</Text>
 
             {props.image ?  (
-                <Image source={{ uri: props.image }} style={{ width: 35, height: 35, borderRadius: 400 / 2 }} />
+                <Image source={{ uri: props.image }} style={styles.profile} />
             ): <></>          
             }
                 
