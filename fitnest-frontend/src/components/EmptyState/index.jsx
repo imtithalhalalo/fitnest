@@ -8,17 +8,38 @@ const EmptyState = (props) => {
     const navigation = useNavigation();
     return (
         <View style={style.container}>
-            <Icon
-                name={props.icon}
-                color={colors.lightPurple}
-                size={130}
-                style={style.icon}
-            />
-            <Text style={style.title}>{props.title}</Text>
-            <Text style={style.description}>{props.description}</Text>
-            <TouchableOpacity style={style.primaryBtn} onPress={() => { navigation.navigate('ProfileStack') }}>
-                <Text style={style.primaryTextBtn}>Go to my profile</Text>
-            </TouchableOpacity>
+            {props.icon ? (
+                <>
+                    <Icon
+                        name={props.icon}
+                        color={colors.lightPurple}
+                        size={130}
+                        style={style.icon}
+                    />
+                    <Text style={style.title}>{props.title}</Text>
+                    <Text style={style.description}>{props.description}</Text>
+                    <TouchableOpacity style={style.primaryBtn} onPress={() => { navigation.navigate('UserProfileStack') }}>
+                        <Text style={style.primaryTextBtn}>Go to my profile</Text>
+                    </TouchableOpacity>
+                </>
+
+            ) : <>
+                <View style={style.imageContainer}>
+                    <Image
+                        source={props.image}
+                        style={style.image}
+                        resizeMode={'contain'}
+                    />
+                    <Text style={style.title}>{props.title}</Text>
+                    <Text style={style.description}>{props.description}</Text>
+                    <TouchableOpacity style={style.primaryBtn} onPress={() => { navigation.navigate('UserProfileStack') }}>
+                        <Text style={style.primaryTextBtn}>Go to my profile</Text>
+                    </TouchableOpacity>
+                </View>
+
+            </>
+
+            }
         </View>
 
     )
