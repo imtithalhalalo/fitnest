@@ -21,6 +21,7 @@ const Stacks = () => {
           <Stack.Screen name="AddStep" component={AddStep} />
           <Stack.Screen name="ConnectExerciseToProgram" component={ConnectExerciseToProgram} />
           <Stack.Screen name="AddMeal" component={AddMeal} />
+          <Stack.Screen name="Steps" component={Steps} />
         </Stack.Navigator>
     );
 }
