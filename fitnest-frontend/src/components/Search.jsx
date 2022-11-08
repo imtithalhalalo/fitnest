@@ -1,6 +1,5 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
-import { style } from '../styles/style'
 import { EvilIcons } from '@expo/vector-icons';
 import colors from '../constants/colors'
 const Search = (props) => {
