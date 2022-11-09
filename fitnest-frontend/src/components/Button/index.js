@@ -4,9 +4,19 @@ import { style } from './style'
 
 const Button = (props) => {
     return (
-        <TouchableOpacity style={style.primaryBtn} onPress={props.onPress}>
-            <Text style={style.primaryTextBtn}>{props.text}</Text>
-        </TouchableOpacity>
+        <>
+            {
+                props.secondary ? (
+                    <TouchableOpacity style={style.secondaryBtn} onPress={props.onPress}>
+                        <Text style={style.secondaryTextBtn}>{props.text}</Text>
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity style={style.primaryBtn} onPress={props.onPress}>
+                        <Text style={style.primaryTextBtn}>{props.text}</Text>
+                    </TouchableOpacity>
+                )
+            }
+        </>
     )
 }
 
