@@ -10,12 +10,30 @@ const style = StyleSheet.create({
         height: 50,
         textAlign: 'center',
         alignSelf: 'center',
-        justifyContent:'center',
-        marginTop: '30%'
+        justifyContent: 'center',
+        marginTop: '10%'
     },
     primaryTextBtn: {
         fontSize: 18,
         color: colors.white,
+        textAlign: 'center'
+    },
+    secondaryBtn: {
+        width: '100%',
+        padding: '2%',
+        backgroundColor: 'transparent',
+        borderRadius: 10,
+        height: 50,
+        textAlign: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginTop: '10%',
+        borderWidth: 2,
+        borderColor: colors.purple
+    },
+    secondaryTextBtn: {
+        fontSize: 18,
+        color: colors.purple,
         textAlign: 'center'
     },
 })
