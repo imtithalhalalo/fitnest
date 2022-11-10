@@ -55,6 +55,14 @@ const BottomTabsTrainer = ({ navigation }) => {
               </View>
             </TouchableWithoutFeedback>
 
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate('ConnectExerciseToProgram')}>
+              <View style={styles.btnBox}>
+                <FontAwesome name="plus-circle" size={30} color={colors.purple} style={{ paddingLeft: 20 }} />
+                <Text style={styles.btnText}>Connect Step To Plan</Text>
+              </View>
+            </TouchableWithoutFeedback>
+
             <TouchableWithoutFeedback onPress={() => navigation.navigate('AddMeal')}>
               <View style={styles.btnBox}>
                 <FontAwesome name="plus-circle" size={30} color={colors.purple} style={{ paddingLeft: 20 }} />
