@@ -115,6 +115,22 @@ export default BottomTabsTrainer;
 
 const styles = StyleSheet.create({
 
+  contentContainer: {
+    flex: 1,
+    padding: 10,
+    marginTop: 10
+  },
+  btnText: {
+    padding: 15,
+    fontSize: 20,
+    fontWeight: '400',
+    color: colors.purple
+  },
+  btnBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   tabBar:{
     borderTopRadius:10,
     width:'100%',
