@@ -11,7 +11,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import TrainerProfileStack from "./ProfileStack/TrainerProfileStack";
 import TrainerChatStack from "./ChatStack/TrainerChatStack";
-
+import Button from "../components/Button";
 
 const BottomTabsTrainer = ({ navigation }) => {
 
@@ -22,6 +22,9 @@ const BottomTabsTrainer = ({ navigation }) => {
     ref.current.present();
   };
 
+  const close = () => {
+    ref.current.close();
+  }
   const BottomTabsNav = createBottomTabNavigator();
 
   return (
@@ -59,6 +62,8 @@ const BottomTabsTrainer = ({ navigation }) => {
               </View>
 
             </TouchableWithoutFeedback>
+
+            <Button text={"Close"} onPress={close}/>
           </View>
         </BottomSheetModal>
 
