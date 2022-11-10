@@ -66,6 +66,8 @@ const BottomTabsTrainer = ({ navigation }) => {
           initialRouteName="ProfileStack"
           screenOptions={{
             headerShown: false,
+            tabBarActiveTintColor: colors.purple,
+            tabBarInactiveTintColor: colors.lightPurple,
             tabBarStyle: styles.tabBar
           }}
         >
