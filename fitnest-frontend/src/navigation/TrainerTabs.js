@@ -1,15 +1,22 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../constants/colors";
-import { StyleSheet } from "react-native";
-import React, { useRef } from 'react';
+import { StyleSheet, View, Text } from "react-native";
+import React, { useMemo, useRef } from 'react';
 import { FontAwesome } from "@expo/vector-icons";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  TouchableWithoutFeedback,
+} from '@gorhom/bottom-sheet';
 import TrainerProfileStack from "./ProfileStack/TrainerProfileStack";
 import TrainerChatStack from "./ChatStack/TrainerChatStack";
 
-const BottomTabsTrainer = () => {
+
+const BottomTabsTrainer = ({ navigation }) => {
 
   const ref = useRef(null);
+  const snapPoints = useMemo(() => [400], []);
 
   const onClick = () => {
     ref.current.present();
@@ -20,6 +27,40 @@ const BottomTabsTrainer = () => {
   return (
 
     <>
+      <BottomSheetModalProvider>
+       
+        <BottomSheetModal
+          ref={ref}
+          snapPoints={snapPoints}
+        >
+          <View style={styles.contentContainer}>
+
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate('AddPlan')}
+            >
+              <View style={styles.btnBox}>
+                <FontAwesome name="plus-circle" size={30} color={colors.purple} style={{ paddingLeft: 20 }} />
+                <Text style={styles.btnText}>Add Plan</Text>
+              </View>
+            </TouchableWithoutFeedback>
+
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate('AddStep')}>
+              <View style={styles.btnBox}>
+                <FontAwesome name="plus-circle" size={30} color={colors.purple} style={{ paddingLeft: 20 }} />
+                <Text style={styles.btnText}>Add Step</Text>
+              </View>
+            </TouchableWithoutFeedback>
+
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('AddMeal')}>
+              <View style={styles.btnBox}>
+                <FontAwesome name="plus-circle" size={30} color={colors.purple} style={{ paddingLeft: 20 }} />
+                <Text style={styles.btnText}>Add Meal</Text>
+              </View>
+
+            </TouchableWithoutFeedback>
+          </View>
+        </BottomSheetModal>
 
         <BottomTabsNav.Navigator
           initialRouteName="ProfileStack"
@@ -65,6 +106,7 @@ const BottomTabsTrainer = () => {
             />
           </>
         </BottomTabsNav.Navigator>
+      </BottomSheetModalProvider>
     </>
   )
 
