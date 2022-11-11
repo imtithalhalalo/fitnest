@@ -7,7 +7,9 @@ const Search = (props) => {
   return (
     <View style={styles.searchBarContainer}>
       <EvilIcons style={{marginLeft: 10}} name="search" size={24} color={colors.purple} />
-      <TextInput value={props.value} placeholderTextColor={colors.purple} placeholder="Search..."/>
+      <TextInput value={props.value} placeholderTextColor={colors.purple} placeholder="Search..."
+        onChangeText={props.onChangeText} onClear = {props.onClear}
+      />
     </View>
   )
 }
