@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Plan from "../screens/user";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../constants/colors";
 import HomeStack from "./HomeStack";
@@ -8,6 +7,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "react-native-vector-icons";
 import UserProfileStack from "./ProfileStack/UserProfileStack";
 import UserChatStack from "./ChatStack/UserChatStack";
+import ProgressStack from "./ProgressStack";
 
 const BottomTabs = () => {
   const BottomTabsNav = createBottomTabNavigator();
@@ -49,8 +49,8 @@ const BottomTabs = () => {
           }}
         />
         <BottomTabsNav.Screen
-          name="Plan"
-          component={Plan}
+          name="ProgressStack"
+          component={ProgressStack}
           options={{
             tabBarLabel: "Progress",
             tabBarIcon: ({ color, size }) => (
@@ -72,6 +72,19 @@ const BottomTabs = () => {
                 color={color}
                 size={size}
               />
+            ),
+          }}
+        />
+        <BottomTabsNav.Screen
+          name="UserProfileStack"
+          component={UserProfileStack}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome 
+                name="user"
+                size={size} 
+                color={color}/>
             ),
           }}
         />
