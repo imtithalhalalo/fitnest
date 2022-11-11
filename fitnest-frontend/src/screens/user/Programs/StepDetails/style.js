@@ -31,7 +31,32 @@ const styles = StyleSheet.create({
         height: '50%', 
         marginTop: '7%' 
     },
-    
+    timer: {
+        fontSize: 30,
+        textAlign: 'center'
+    },
+    circle: {
+        borderRadius: 400 /2,
+        borderWidth: 2,
+        borderColor: colors.black,
+        width: '50%',
+        alignSelf: 'center',
+        padding: 10
+    },
+
+    column: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        width: '30%'
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: '5%',
+        alignItems: 'center'
+    },
 })
 
 export default styles
