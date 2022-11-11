@@ -13,13 +13,23 @@ const GridCard = (props) => {
                 <Text style={styles.titleLabel}>{props.title}</Text>
                 <Image source={props.image} style={{ width: 28, height: 28 }} />
             </View>
-            <View style={[styles.row, { paddingTop: '30%' }]}>
-                <Ionicons
-                    name="stats-chart"
-                    size={40}
-                    color={colors.green} />
-                <Text style={{ color: colors.purple }}>{props.water} Cups</Text>
-            </View>
+
+            {
+                props.sleeping ? (
+                    <View style={[styles.column, { paddingTop: '30%' }]}>
+                        <Text style={styles.subtitle}>{props.hours}</Text>
+                        <Text style={styles.subtitle}>Hours</Text>
+                    </View>
+                ) : (
+                    <View style={[styles.row, { paddingTop: '30%' }]}>
+                        <Ionicons
+                            name="stats-chart"
+                            size={40}
+                            color={colors.green} />
+                        <Text style={styles.subtitle}>{props.water} Cups</Text>
+                    </View>
+                )
+            }
         </Card>
     )
 }
