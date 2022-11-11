@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
         marginTop: 7,
         fontWeight: '500'
     },
+    subtitle: { 
+        color: colors.purple, 
+        fontWeight: '400' 
+    }
 
 
 })
