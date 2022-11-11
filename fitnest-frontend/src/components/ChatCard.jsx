@@ -1,4 +1,4 @@
-import { StyleSheet, Image } from 'react-native'
+import { Image } from 'react-native'
 import React from 'react'
 import colors from '../constants/colors'
 import { Card } from 'react-native-paper';
@@ -17,6 +17,15 @@ const ChatCard = (props) => {
                         source={{uri: props.image}}
                         style={{ width: 35, height: 35, borderRadius: 400 / 2 }} />
             }
+
+            right={
+                () => 
+                    <MaterialCommunityIcons
+                    name="message-outline"
+                    size={20} color={colors.purple}
+                    style={{ paddingRight: '5%'}}
+                    onPress={props.createChat}/>
+                }
         />
 
     )
