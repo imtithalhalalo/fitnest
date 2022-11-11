@@ -37,7 +37,7 @@
 
 | Splash  | SignUp  | LogIn  | Landing  |
 | -----------------| -----|-----|-----|
-| <img src="./readme/prototyping/images/splash.png"/> | <img src="./readme/prototyping/images/signup.png"/> |<img src="./readme/prototyping/images/login.png"/> |<img src="./readme/prototyping/images/landing.png"/>
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.png) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/signup.png) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.png) |![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.png)
 
 
 
@@ -63,9 +63,6 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Using the above mentioned tech stacks and the wireframes build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-| Landing  | Home/Search  |
-| -----------------| -----|
-| ![Landing](https://github.com/julescript/spotifyndr/blob/master/demo/Landing_Page.jpg) | ![Home/Search](https://github.com/julescript/spotifyndr/blob/master/demo/Search_Page.jpg) |
 
 
 <br><br>
