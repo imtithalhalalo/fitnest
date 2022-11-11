@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import colors from "../../constants/colors";
-import fonts from "../../constants/fonts";
 
 
 const styles = StyleSheet.create({
@@ -29,7 +28,6 @@ const styles = StyleSheet.create({
         padding: '4%'
     },
     cardTitle: {
-        ...fonts.header1,
         textAlign: 'center',
         width: '50%'
     },
