@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableWithoutFeedback, } from 'react-native'
 import colors from '../../constants/colors'
 import { style } from '../../styles/style'
 import { EvilIcons } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
+import Button from '../../components/Button';
 
 
 const ConnectExerciseToProgram = ({ navigation }) => {
@@ -23,7 +24,7 @@ const ConnectExerciseToProgram = ({ navigation }) => {
           <Text style={{ fontSize: 24, fontWeight: '500' }}>Exercise To Program </Text>
         </View>
 
-        <View style={{ marginTop: '30%' }}>
+        <View style={{ marginTop: '30%', marginBottom: '30%' }}>
           <Text style={[{ textAlign: 'center', fontSize: 20 }]}>Choose Plan</Text>
           <View style={[style.inputContainer, { alignItems: "center" }]}>
             <Dropdown
@@ -55,7 +56,7 @@ const ConnectExerciseToProgram = ({ navigation }) => {
           
 
       </View>
-
+          <Button text={"Connect"} />
     </SafeAreaView>
 
 
