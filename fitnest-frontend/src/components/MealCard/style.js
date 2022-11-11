@@ -13,9 +13,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 10,
         backgroundColor: colors.white
     },
-    grid: {
-        padding: 10,
-    },
+
     cardCover: {
         padding: '0%',
         borderTopLeftRadius: 10,
