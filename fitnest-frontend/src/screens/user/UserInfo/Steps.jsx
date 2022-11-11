@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import colors from '../../../constants/colors';
 import { style } from '../../../styles/style';
 import ButtonToggleGroup from 'react-native-button-toggle-group';
+import MapView, { Marker } from 'react-native-maps'
 import styles from './style';
 
 const Steps = () => {
@@ -73,6 +74,28 @@ const Steps = () => {
                     previousBtnText="Back">
 
                     <Text style={styles.question}>Enter Your Location</Text>
+                    <MapView
+                        initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421,
+                        }}
+                        style={styles.map}
+                    >
+                        <Marker
+                            coordinate={{
+                                latitude: 37.78825,
+                                longitude: -122.4324,
+                            }}
+                            draggable={true}
+                            onDragEnd={(e) => {
+                                setLatitude(e.nativeEvent.coordinate.latitude)
+                                setLogitude(e.nativeEvent.coordinate.longitude)
+                            }}
+                        />
+
+                    </MapView>
 
                 </ProgressStep>
             </ProgressSteps>
