@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, TouchableWithoutFeedback, } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import colors from '../../constants/colors'
 import { style } from '../../styles/style'
-import { EvilIcons } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 
 
 const ConnectExerciseToProgram = ({ navigation }) => {
@@ -16,13 +16,8 @@ const ConnectExerciseToProgram = ({ navigation }) => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.bar}>
-          <TouchableWithoutFeedback onPress={() => { navigation.pop() }}>
-            <EvilIcons name="arrow-left" size={50} color={colors.purple} />
-          </TouchableWithoutFeedback>
-          <Text style={{ fontSize: 24, fontWeight: '500' }}>Exercise To Program </Text>
-        </View>
+      <SafeAreaView style={style.mainContainer}>
+        <Header text={"Exercise To Program "} back="back"/>
 
         <View style={{ marginTop: '30%', marginBottom: '30%' }}>
           <Text style={[{ textAlign: 'center', fontSize: 20 }]}>Choose Plan</Text>
@@ -90,7 +85,7 @@ const styles = StyleSheet.create({
     borderColor: colors.black,
     borderRadius: 15,
     padding: 10,
-    width: 330,
+    width: '100%',
   },
   placeholderStyle: {
     fontSize: 18,
