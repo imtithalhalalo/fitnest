@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { style } from '../../styles/style'
 import colors from '../../constants/colors'
@@ -21,13 +21,13 @@ const AddPlan = () => {
                     <Input label={"Workout Name"} handleChange={title => setTitle(title)} />
                     <Input label={"Duration in Weeks"} handleChange={num_weeks => setWeeksNum(num_weeks)} keyboardType={'number-pad'} />
 
-                    <View>
+                    <View style={styles.btnBox}>
                         <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} />
-                        <Text onPress={uploadImage} >Upload Image</Text>
+                        <Text style={styles.uploadImgTxt} onPress={uploadImage} >Upload Image</Text>
                     </View>
                 </View>
 
-                <Button text={"Add Plan"}/>
+                <Button text={"Add Plan"} />
             </ScrollView>
 
 
@@ -36,3 +36,16 @@ const AddPlan = () => {
 }
 
 export default AddPlan
+
+const styles = StyleSheet.create({
+    btnBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: 20
+    },
+    uploadImgTxt: {
+        fontSize: 14,
+        color: colors.darkGrey,
+    },
+})
