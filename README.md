@@ -37,8 +37,7 @@
 
 | Splash  | SignUp  | LogIn  | Landing  |
 | -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg)
- |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.svg) |![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.svg)
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/signup.svg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.svg) |![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.svg)
 
 
 
