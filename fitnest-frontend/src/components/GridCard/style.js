@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: '5%',
         marginTop: '6%',
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+        elevation: 24,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
