@@ -3,7 +3,10 @@ import React, { useState } from 'react'
 import { style } from '../../styles/style'
 import colors from '../../constants/colors'
 import { FontAwesome } from "@expo/vector-icons";
+import addProgram from '../../services/trainer/addProgram'
+import * as ImagePicker from "expo-image-picker";
 import Button from '../../components/Button';
+import CustomModal from '../../components/Modal';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 
@@ -11,6 +14,21 @@ const AddPlan = () => {
     const [title, setTitle] = useState('')
     const [num_weeks, setWeeksNum] = useState('');
     const [image, setImage] = useState('');
+
+    const uploadImage = async () => {
+        let res = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        })
+        if (!res.cancelled) {
+
+            setImage(res.uri);
+
+        }
+    }
+
     return (
         <SafeAreaView style={style.mainContainer}>
             <ScrollView style={style.p2}>
@@ -22,12 +40,12 @@ const AddPlan = () => {
                     <Input label={"Duration in Weeks"} handleChange={num_weeks => setWeeksNum(num_weeks)} keyboardType={'number-pad'} />
 
                     <View style={styles.btnBox}>
-                        <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} />
+                        <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} onPress={uploadImage} />
                         <Text style={styles.uploadImgTxt} onPress={uploadImage} >Upload Image</Text>
                     </View>
                 </View>
 
-                <Button text={"Add Plan"} />
+                <Button text={"Add Plan"} onPress={addPlan} />
             </ScrollView>
 
 
