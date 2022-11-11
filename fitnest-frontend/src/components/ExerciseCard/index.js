@@ -28,7 +28,7 @@ const ExerciseCard = (props) => {
                 )}
                 </View>
                 
-                <TouchableOpacity style={[styles.primaryBtn, { width: '50%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('StepDetails', { title: props.title, image: image, time: props.time, description: props.description }) }}>
+                <TouchableOpacity style={[styles.primaryBtn, { width: '50%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('StepDetails', { id: props.id, title: props.title, image: image, time: props.time, description: props.description }) }}>
                     <Text style={[styles.primaryTextBtn, { fontSize: 18, paddingLeft: '3%', paddingRight: '3%' }]}>Start</Text>
                 </TouchableOpacity>
 
