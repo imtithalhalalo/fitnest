@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         borderColor: colors.black,
         borderRadius: 15,
         padding: 10,
-        width: '100%',
+        width: '98%',
     },
     inputContainer: {
         marginVertical: 10
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     inputLabel: {
         margin: 5,
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: '500'
     },
 })
 

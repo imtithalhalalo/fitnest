@@ -3,10 +3,10 @@ import colors from "../../constants/colors";
 
 const style = StyleSheet.create({
     primaryBtn: {
-        width: '100%',
+        width: '97%',
         padding: '2%',
         backgroundColor: colors.purple,
-        borderRadius: 10,
+        borderRadius: 15,
         height: 50,
         textAlign: 'center',
         alignSelf: 'center',
@@ -14,12 +14,12 @@ const style = StyleSheet.create({
         marginTop: '10%'
     },
     primaryTextBtn: {
-        fontSize: 18,
+        fontSize: 20,
         color: colors.white,
         textAlign: 'center'
     },
     secondaryBtn: {
-        width: '100%',
+        width: '97%',
         padding: '2%',
         backgroundColor: 'transparent',
         borderRadius: 10,
