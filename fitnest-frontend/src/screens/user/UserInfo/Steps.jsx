@@ -6,7 +6,6 @@ import { style } from '../../../styles/style';
 import ButtonToggleGroup from 'react-native-button-toggle-group';
 import styles from './style';
 
-
 const Steps = () => {
 
     const [gender, setGender] = useState('Female');
@@ -62,6 +61,18 @@ const Steps = () => {
                             style={[style.input, { alignSelf: 'center', fontSize: 18, marginTop: '5%', width: '90%' }]}
                             onChangeText={age => setAge(age)} />
                     </View>
+
+                </ProgressStep>
+
+                <ProgressStep
+                    label=""
+                    nextBtnTextStyle={styles.nextBtnTextStyle}
+                    nextBtnStyle={styles.nextBtnStyle}
+                    previousBtnTextStyle={{ color: colors.purple, fontSize: 18 }}
+                    previousBtnStyle={{ textAlign: 'left', padding: 8 }}
+                    previousBtnText="Back">
+
+                    <Text style={styles.question}>Enter Your Location</Text>
 
                 </ProgressStep>
             </ProgressSteps>
