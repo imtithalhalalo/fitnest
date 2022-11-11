@@ -7,8 +7,10 @@ const Input = (props) => {
     <View style={[styles.inputContainer , props.container]} >
       <Text style={styles.inputLabel}>{props.label}</Text>
       <TextInput
-        style={[styles.input]}
-        onChangeText={props.handleChange} />
+        style={[styles.input, props.small]}
+        onChangeText={props.handleChange}
+        secureTextEntry={props.secureTextEntry}
+        keyboardType={props.keyboardType} />
     </View>
   )
 }
