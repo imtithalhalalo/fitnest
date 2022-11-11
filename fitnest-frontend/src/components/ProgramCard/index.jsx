@@ -17,7 +17,7 @@ const ProgramCard = ({ id, title, image, num_weeks }) => {
 
                 <Text style={styles.cardTitle}>{title}</Text>
                 {num_weeks ? (
-                    <Text style={styles.cardSubtitle}>{num_weeks} days • {num_weeks} weeks</Text>
+                    <Text style={styles.cardSubtitle}>{num_weeks * 7} days • {num_weeks} weeks</Text>
                 ) : (
                     <></>
                 )}
