@@ -1,11 +1,23 @@
+import { getFocusedRouteNameFromRoute } from "@react-navigation/core";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useLayoutEffect } from "react";
+import { StyleSheet } from "react-native";
 import ViewProgress from "../screens/user/Progress/ViewProgress";
 import WaterConsumption from "../screens/user/Progress/WaterConsumption";
 import Weight from "../screens/user/Progress/Weight";
 
-const ProgressStack = () => {
+const ProgressStack = ({route, navigation}) => {
 
     const StackProgress = createStackNavigator();
+    const routeName = getFocusedRouteNameFromRoute(route);
+    
+    useLayoutEffect(()=>{
+        if (routeName === "Weight" || routeName === "WaterConsumption" ){
+            navigation.setOptions({tabBarStyle: styles.hidden});
+        }else {
+            navigation.setOptions({tabBarStyle: styles.tabBar});
+        }
+    },[navigation,route])
     
     return (
       <StackProgress.Navigator initialRouteName="ViewProgress">
@@ -16,3 +28,14 @@ const ProgressStack = () => {
     );
 }
 export default ProgressStack;
+
+const styles = StyleSheet.create({
+    tabBar:{
+        position:'absolute',
+        borderTopRadius:10,
+        width:'100%',
+    },
+    hidden:{
+        display:'none'
+    }
+})

@@ -13,7 +13,7 @@ const TrainerChatStack = ({navigation , route}) => {
     
     useLayoutEffect(()=>{
         if (routeName === "Chat"){
-            navigation.setOptions({tabBarStyle: styles.hiddenTabBar});
+            navigation.setOptions({tabBarStyle: styles.hidden});
         }else {
             navigation.setOptions({tabBarStyle: styles.tabBar});
         }
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         width:'100%',
         position:'absolute',
     },
-    hiddenTabBar:{
+    hidden:{
         display:'none'
     }
 })
