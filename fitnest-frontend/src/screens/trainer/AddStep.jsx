@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, TextInput } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { style } from '../../styles/style'
 import { FontAwesome } from "@expo/vector-icons";
@@ -41,3 +41,15 @@ const AddStep = () => {
 }
 
 export default AddStep
+
+const styles = StyleSheet.create({
+    uploadImgTxt: {
+        fontSize: 14,
+        color: colors.darkGrey,
+    },
+    btnBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+})
