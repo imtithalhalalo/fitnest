@@ -1,7 +1,6 @@
-import { View, Text, Image, SafeAreaView, ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
 import { styles } from './style';
-import colors from '../../../../constants/colors';
 import Header from '../../../../components/Header';
 import { style } from '../../../../styles/style';
 import Button from '../../../../components/Button';
@@ -41,17 +40,3 @@ const MealDetails = () => {
 }
 
 export default MealDetails
-
-const styles = StyleSheet.create({
-  img: { 
-    width: 25, 
-    height: 25, 
-    alignSelf: 'flex-end', 
-    marginRight: '2%' 
-  },
-  txt: {
-    color: colors.purple, 
-    fontSize: 14, 
-    fontWeight: '400'
-  }
-})

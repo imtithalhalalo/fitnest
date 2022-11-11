@@ -27,6 +27,28 @@ const styles = StyleSheet.create({
         marginTop: '5%',
         textAlign: 'center'
     },
+    dash: {
+        width: '100%',
+        height: 1,
+        marginTop: '5%',
+        color: colors.lightGrey,
+        backgroundColor: colors.lightGrey
+    },
+    ingredientsContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    img: {
+        width: 25,
+        height: 25,
+        alignSelf: 'flex-end',
+        marginRight: '2%'
+    },
+    txt: {
+        color: colors.purple,
+        fontSize: 14,
+        fontWeight: '400'
+    }
 
 })
 
