@@ -7,7 +7,7 @@ import { Ionicons } from "react-native-vector-icons";
 
 const GridCard = (props) => {
     return (
-        <Card style={[styles.gridItem, { backgroundColor: props.color, shadowColor: props.shadowColor }]}
+        <Card style={[styles.gridItem, { backgroundColor: props.color }]}
             onPress={props.onPress} >
             <View style={styles.row}>
                 <Text style={styles.titleLabel}>{props.title}</Text>
