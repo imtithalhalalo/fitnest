@@ -15,13 +15,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: '5%',
         marginTop: '6%',
+        shadowColor: colors.black,
         shadowOffset: {
             width: 0,
-            height: 12,
+            height: 2
         },
-        shadowOpacity: 0.58,
-        shadowRadius: 16.00,
-        elevation: 24,
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
