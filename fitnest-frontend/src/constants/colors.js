@@ -8,6 +8,7 @@ const colors = {
     lighterPurple: '#F9F8FE',
     lightGrey: 'rgba(154, 154,154, 0.5)',
     darkGrey: '#676767',
+    lighterGreen: '#EDF8F9',
 }
 
 export default colors;
