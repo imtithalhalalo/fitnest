@@ -23,7 +23,7 @@ const ProgramCard = ({ id, title, image, num_weeks }) => {
                 )}
 
 
-                <TouchableOpacity style={[style.secondaryBtn, { width: '40%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('WorkoutSteps', { program_id: id }) }}>
+                <TouchableOpacity style={[style.secondaryBtn, { width: '40%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('WorkoutSteps', { program_id: id, program_name: title }) }}>
                     <Text style={[style.secondaryText, { fontSize: 18, paddingLeft: '3%', paddingRight: '3%' }]}>View Steps</Text>
                 </TouchableOpacity>
             </View>
