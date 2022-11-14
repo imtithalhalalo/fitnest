@@ -14,10 +14,11 @@ const style = StyleSheet.create({
     },
     desc: {
         fontSize: 16,
-        color: colors.darkGrey,
+        color: colors.purple,
         paddingTop: '3%',
         paddingBottom: '3%',
-        fontWeight: '400'
+        fontWeight: '400',
+        marginLeft: 30
     },
     title: {
         fontSize: 18,
