@@ -25,9 +25,9 @@
 - As a user, I want to receive notifications about my health progress.
 ### Trainer Stories
 - As a trainer, I want to add new programs and plans to be followed by users.
-- As a user,  I want to add new healthy meals with ingredients.
-- As a user, I want to add exercises for each new workout.
-- As a user, I want to chat with users about their health progress.
+- As a trainer,  I want to add new healthy meals with ingredients.
+- As a trainer, I want to add exercises for each new workout.
+- As a trainer, I want to chat with users about their health progress.
 
 <br><br>
 
