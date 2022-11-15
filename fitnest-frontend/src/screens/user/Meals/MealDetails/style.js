@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: '5%',
     },
     title: {
         fontSize: 18,
@@ -39,10 +38,9 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     img: {
-        width: 25,
-        height: 25,
-        alignSelf: 'flex-end',
-        marginRight: '2%'
+        width: 250,
+        height: 250,
+        alignSelf: 'center',
     },
     txt: {
         color: colors.purple,
