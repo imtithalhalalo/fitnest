@@ -15,6 +15,20 @@ const Chats = ({ navigation }) => {
     const [loading, setLoading] = useState(true)
     const { userData } = useContext(UserContext);
 
+    const createChat = (id, image, name ) => {
+        console.log(image, name, id)
+            const database = getFirestore();
+            addDoc(collection(database, "chats"), {
+                id: `${userData.id}${id}`,
+                userName: userData.name,
+                trainerName: name,
+                user: userData.id,
+                trainer: id,
+            })
+                .then(() => navigation.navigate('Chat', {trainer_id: id, name: name, image: image, chatID: `${userData.id}${id}`}))
+                .catch((error) => alert(error.message))
+            
+    }
     useLayoutEffect(() => {
         const getTrainer = async () => {
                 await axios({
