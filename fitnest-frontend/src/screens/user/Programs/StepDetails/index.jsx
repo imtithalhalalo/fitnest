@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Button from '../../../../components/Button';
 import { Entypo, FontAwesome } from "react-native-vector-icons";
 import colors from '../../../../constants/colors';
-
+import doneExercise from '../../../../services/user/doneExercise';
 
 const StepDetails = ({ route }) => {
     const { id, title, image, description, time } = route.params;
@@ -20,7 +20,12 @@ const StepDetails = ({ route }) => {
         reset,
     } = useStopwatch({ autoStart: false });
 
-    
+    const handleDone = async () => {
+        let data = {
+            exercise_id: id,
+        }
+        await doneExercise(data)
+    }
     return (
         <>
             <SafeAreaView style={style.mainContainer}>
@@ -48,7 +53,7 @@ const StepDetails = ({ route }) => {
                         </TouchableOpacity>
                     </View>
 
-                    <Button text={ "Mark As Done" } />
+                    <Button text={ "Mark As Done" } onPress={handleDone}/>
                     
                 </ScrollView>
             </SafeAreaView>
