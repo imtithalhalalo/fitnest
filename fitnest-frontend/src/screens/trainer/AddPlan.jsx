@@ -29,6 +29,21 @@ const AddPlan = () => {
         }
     }
 
+
+    const addPlan = async () => {
+        if (!title || !num_weeks) {
+            showError('All fields are required')
+            return
+        }
+        let data = {
+            title: title,
+            num_weeks: num_weeks,
+            image: image
+        }
+        console.log(image)
+        await addProgram(data)
+    }
+
     return (
         <SafeAreaView style={style.mainContainer}>
             <ScrollView style={style.p2}>
