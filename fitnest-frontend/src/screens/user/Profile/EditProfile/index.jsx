@@ -97,6 +97,43 @@ const EditProfile = ({ navigation }) => {
                 <Input label={"Phone Number"} handleChange={phone_num => setPhoneNum(phone_num)} />
 
                 <Button text={"Update More Info"} onPress={() => setModalVisibility(true)} secondary={true} />
+                {
+                    //edit modal
+                    modalVisibility ?
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisibility}
+                            onRequestClose={() => {
+                                setModalVisibility(!modalVisibility);
+                            }}
+                        >
+                            <View style={styles.centered}>
+                                <View style={styles.modal}>
+
+                                    <Text style={[style.secondaryText, {fontWeight: '500'}]}>Edit More Info</Text>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Weight Goal</Text>
+                                        <TextInput
+                                            style={style.input}
+                                            onChangeText={weightGoal => setWeightGoal(weightGoal)} />
+                                    </View>
+                                    <View style={style.inputContainer}>
+                                        <Text style={style.inputLabel}>Calories Goal</Text>
+                                        <TextInput
+                                            style={style.input}
+                                            onChangeText={caloriesGoal => setCaloriesGoal(caloriesGoal)} />
+                                    </View>
+                                    <TouchableOpacity
+                                        style={[style.primaryBtn]}
+                                        onPress={editMoreInfo}
+                                    >
+                                        <Text style={style.primaryTextBtn}>Edit</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </Modal> : <></>
+                }
 
                 <Button text={"Save"} onPress={handleUpdateProfile} style={{ marginTop: 0 }} />
 
