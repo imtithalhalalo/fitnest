@@ -1,10 +1,11 @@
-import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Alert } from 'react-native'
+import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Alert } from 'react-native'
 import React, { useState, useContext } from 'react'
 import { EvilIcons } from '@expo/vector-icons';
 import colors from '../../../../constants/colors';
 import { style } from '../../../../styles/style';
 import styles from './styles';
 import updateProfile from '../../../../services/user/updateProfile';
+import * as ImagePicker from "expo-image-picker";
 import { UserContext } from '../../../../stores/UserContext';
 import axios from 'axios';
 import { BASE_URL } from '../../../../variables/global.js';
@@ -23,10 +24,54 @@ const EditProfile = ({ navigation }) => {
     //user info
     const [weightGoal, setWeightGoal] = useState('');
     const [caloriesGoal, setCaloriesGoal] = useState('');
+    const [workingHours, setWorkingHours] = useState('');
+    const [load, setloading] = useState('');
     const [modalVisibility, setModalVisibility] = useState(false);
+    const [disable, setDisable] = useState(false);
     const displayError = (message) => {
         setError(message)
     }
+
+    const uploadImage = async () => {
+        let res = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        })
+        if (!res.cancelled) {
+
+            setImage(res.uri);
+            console.log(userData.image)
+        }
+
+        const token = await AsyncStorage.getItem('token')
+        console.log(image)
+        axios({
+            headers: { 'Authorization': 'Bearer ' + token },
+            method: 'POST',
+            url: `${BASE_URL}/upload_image`,
+
+            data: {
+                image: image,
+                id: userData.id
+            },
+        })
+            .then(function () {
+                Alert.alert('Added Successfully! ')
+                console.log(image)
+                setImage(image)
+                return true
+            })
+            .catch(function (error) {
+                console.log(error)
+                Alert.alert('Try again! ')
+                return false
+            });
+
+    }
+
+
     const handleUpdateProfile = async () => {
         if (!name || !email || !phoneNum) {
             displayError('All fields are required')
