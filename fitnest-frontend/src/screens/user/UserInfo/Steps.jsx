@@ -1,14 +1,17 @@
-import { Text, View } from 'react-native'
+import { Text, View, Alert } from 'react-native'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import React, { useState } from 'react'
 import colors from '../../../constants/colors';
 import { style } from '../../../styles/style';
 import ButtonToggleGroup from 'react-native-button-toggle-group';
 import MapView, { Marker } from 'react-native-maps'
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_URL } from '../../../variables/global';
 import styles from './style';
 import Input from '../../../components/Input';
 
-const Steps = () => {
+const Steps = ({ navigation }) => {
 
     const [weightGoal, setWeightGoal] = useState(0);
     const [caloriesGoal, setCaloriesGoal] = useState(0);
@@ -27,6 +30,48 @@ const Steps = () => {
         progressBarColor: colors.lightPurple,
         completedProgressBarColor: colors.purple,
         disabledStepIconColor: colors.lightPurple,
+    }
+
+    const onSubmit = () => {
+        let data = {
+            latitude: latitude,
+            longitude: longitude,
+            gender: gender,
+            age: age,
+            height: height,
+            weight_goal: weightGoal,
+            calories_goal: caloriesGoal
+        }
+        if( height == 0
+        || age == 0 
+        || weightGoal == 0
+        || caloriesGoal == 0
+        || latitude == null 
+        || longitude == null ) {
+            
+                Alert.alert('Please enter all fields... ')
+            
+            }
+        const addUserInfo = async () => {
+
+            const token = await AsyncStorage.getItem('token');
+
+            await axios({
+                headers: { 'Authorization': 'Bearer ' + token },
+                method: 'POST',
+                url: `${BASE_URL}/user_info`,
+                data: data,
+            })
+                .then(function (response) {
+                    Alert.alert('Added Successfully! ')
+                    navigation.navigate('BottomTabs');
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    Alert.alert('Please enter your calories and weight goal')
+                });
+        }
+        addUserInfo()
     }
 
     return (
