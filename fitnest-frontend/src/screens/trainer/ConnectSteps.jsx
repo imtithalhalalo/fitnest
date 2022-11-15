@@ -1,17 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import colors from '../../constants/colors'
 import { style } from '../../styles/style'
+import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
-import Button from '../../components/Button';
+import { BASE_URL } from '../../variables/global';
 import Header from '../../components/Header';
 
 
-const ConnectExerciseToProgram = ({ navigation }) => {
+const ConnectExerciseToProgram = () => {
   const [programs, setPrograms] = useState([])
   const [exercises, setExercises] = useState([])
   const [exercise, setExercise] = useState('')
   const [program, setProgram] = useState('')
+  let program_id = 0
+  
+  useLayoutEffect(() => {
+    
+    const getPrograms = () => {
+
+      axios({
+        method: 'GET',
+        url: `${BASE_URL}/programs`,
+        headers: { 'Content-Type': 'multipart/form-data;' },
+      }).then(response => {
+        setPrograms(response.data['programs'])
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+
+    getPrograms()
+  }, [])
 
 
   return (
@@ -32,6 +52,11 @@ const ConnectExerciseToProgram = ({ navigation }) => {
               labelField="title"
               valueField="id"
               value={program}
+              onChange={item => {
+                setProgram(item.id);
+                program_id = item.id
+                console.log(program_id);
+              }}
             />
           </View>
           <Text style={[{ textAlign: 'center', fontSize: 20, marginTop: '5%' }]}>Choose Exercise</Text>
@@ -46,12 +71,15 @@ const ConnectExerciseToProgram = ({ navigation }) => {
               labelField="title"
               valueField="id"
               value={exercise}
+              onChange={item => {
+                setExercise(item.id);
+                console.log(exercise);
+              }}
             />
           </View>
           
 
       </View>
-          <Button text={"Connect"} />
     </SafeAreaView>
 
 
