@@ -38,7 +38,7 @@ const MealDetails = ({ route, navigation }) => {
   return (
     <SafeAreaView style={style.mainContainer}>
     <TouchableOpacity onPress={viewSaved}>
-      <View style={[style.row, {alignSelf: 'flex-end'}]}>
+      <View style={[styles.row, {alignSelf: 'flex-end'}]}>
       <Text style={styles.txt}>Saved Meals</Text>
       <Image source={ require('../../../../../assets/images/bookmark.png')} style={{ width: 25, height: 25, alignSelf: 'flex-end', marginRight: '2%' }} />
       </View>
@@ -47,7 +47,7 @@ const MealDetails = ({ route, navigation }) => {
       
       
       {meal.image ? (
-        <Image source={{ uri: meal.image }} style={styles.img} resizeMode={'contain'}/>
+        <Image source={{ uri: meal.image }} style={styles.img} resizeMode={'cover'}/>
       ) : <></>
       }
       <ScrollView>
