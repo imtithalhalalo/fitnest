@@ -12,11 +12,13 @@ import { styles } from '../../../../components/MealCard/style';
 import { style } from '../../../../styles/style';
 
 const Meals = () => {
-
+    
     const [meals, setMeals] = useState([]);
     const [category, setCategory] = useState('Breakfast');
-    const { response, loading, error } = useAxios({ category });
-
+    const { response, loading, error } = useAxios({category});
+    const [search, setSearch] = useState('');
+    const [filteredMeals, setFilteredMeals] = useState([]);
+    
     useEffect(() => {
         if (response !== null) {
             setMeals(response);
@@ -48,16 +50,23 @@ const Meals = () => {
                 />
             </View>
 
-
-            <FlatList
-                data={meals}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                numColumns={2}
-                style={styles.grid}
-                contentContainerStyle={{ paddingBottom: 50 }}
-                ListFooterComponent={<SafeAreaView />}
-            />
+            {
+                loading ?
+                    <Loader />
+                    :
+                    meals.length == 0 ? (
+                        <EmptyState image={require("../../../../../assets/images/healthyfood.png")} description={"This section will contain available healthy meals "} title={"No meals"}/>
+                    ) :
+                        <FlatList
+                            data={meals}
+                            renderItem={renderItem}
+                            keyExtractor={item => item.id}
+                            numColumns={2}
+                            style={styles.grid}
+                            contentContainerStyle={{ paddingBottom: 50 }}
+                            ListFooterComponent={<SafeAreaView />}
+                        />
+            }
 
         </SafeAreaView>
     )
