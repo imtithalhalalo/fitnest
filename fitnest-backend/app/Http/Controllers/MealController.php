@@ -36,4 +36,9 @@ class MealController extends Controller {
         ],200);
     }
 
+    public function getLastIngredient() {
+        $ingredient = Ingredient::latest()->first();
+
+        return $ingredient;
+    }
 }
