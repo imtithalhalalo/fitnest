@@ -149,4 +149,17 @@ class UserController extends Controller
         ], 200);
     }
 
+    //function for user to mark as done a step
+    public function doneExercises(Request $request)
+    {
+        $done = new Done();
+        $done->user_id = Auth::id();
+        $done->exercise_id = $request->exercise_id;
+        $done->save();
+
+        return response()->json([
+            'status' => 'done',
+        ], 200);
+    }
+
 }
