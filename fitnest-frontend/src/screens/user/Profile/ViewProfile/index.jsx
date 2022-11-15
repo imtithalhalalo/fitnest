@@ -37,6 +37,16 @@ const Profile = ({ navigation }) => {
                     <AntDesign name="logout" size={30} color={colors.purple} style={{ marginRight: '5%', marginBottom: '10%', alignSelf: 'flex-end' }} />
                 </TouchableOpacity>
                 <View style={styles.profContainer}>
+                    <View>
+                        {userData.image ? (
+                            <Image source={{ uri: userData.image }} style={styles.profileImg} />
+                        ) : (
+                            <Image source={require('../../../../../assets/images/profile.jpg')} style={styles.profileImg} />
+                        )
+
+                        }
+
+                    </View>
                 </View>
 
                 <View style={style.inputContainer}>
