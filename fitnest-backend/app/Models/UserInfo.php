@@ -18,6 +18,7 @@ class UserInfo extends Model
         'height',
         'gender',
         'age',
-        'country'
+        'latitude',
+        'longitude'
     ];
 }
