@@ -104,6 +104,14 @@ class UserController extends Controller
         return WaterIntake::select('*')->where('user_id', Auth::id())->whereBetween('created_at', [$start_week, $end_week])->get();
     }
 
+    public function getWeightLast5Month() {
+        return Weight::select('*')
+            ->whereBetween(
+                'created_at',
+                [Carbon::now()->subMonth(6), Carbon::now()]
+            )
+            ->get();
+    }
 
     public function addWeight(Request $request) {
         $weight = new Weight;
