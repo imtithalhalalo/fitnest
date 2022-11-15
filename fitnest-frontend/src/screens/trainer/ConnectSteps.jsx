@@ -30,7 +30,20 @@ const ConnectExerciseToProgram = () => {
       })
     }
 
+    const getExercises = () => {
+
+      axios({
+        method: 'GET',
+        url: `${BASE_URL}/programs/exercises`,
+        headers: { 'Content-Type': 'multipart/form-data;' },
+      }).then(response => {
+        setExercises(response.data['exercises'])
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
     getPrograms()
+    getExercises()
   }, [])
 
 
