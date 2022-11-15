@@ -1,43 +1,50 @@
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react';
 import { style } from '../styles/style';
 import colors from '../constants/colors';
-
-const SignUp = ({ navigation }) => {
+import SignUp from '../services/signup';
+import Input from '../components/Input';
+import Button from '../components/Button';
+const Signup = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('');
+    const handleSignUp = async () => {
+        if (!name || !email || !password) {
+            displayError('All fields are required')
+            return
+        }
+        if (password.length < 6) {
+            displayError('Password must be at least 6 characters')
+            return
+        }
+        if (!email.includes('@')) {
+            displayError('Please enter valid email! ')
+            return
+        }
+        let data = {
+            name: name,
+            email: email,
+            password: password
+        }
+
+        await SignUp(data);
+        navigation.navigate('Steps');
+    }
+
     return (
         <>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={style.mainContainer}>
                 <ScrollView style={styles.p2}>
                     <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
                     <View style={styles.bar}>
                         <Text style={{ fontSize: 24, fontWeight: '500' }}>Sign Up</Text>
                     </View>
-                    <View style={{ paddingTop: 50 }}>
-                        <View style={style.inputContainer}>
-                            <Text style={style.inputLabel}>Name</Text>
-                            <TextInput
-                                style={style.input}
-                                onChangeText={name => setName(name)} />
-                        </View>
-                        <View style={style.inputContainer}>
-                            <Text style={style.inputLabel}>Email</Text>
-                            <TextInput
-                                style={style.input}
-                                onChangeText={email => setEmail(email)} />
-                        </View>
 
-                        <View style={style.inputContainer}>
-                            <Text style={style.inputLabel}>Password</Text>
-                            <TextInput
-                                style={style.input}
-                                secureTextEntry={true}
-                                onChangeText={password => setPassword(password)} />
-                        </View>
+                    <Input label={"Name"} handleChange={name => setName(name)} />
+                    <Input label={"Email"} handleChange={email => setEmail(email)} />
+                    <Input label={"Password"} handleChange={password => setPassword(password)} secureTextEntry={true} />
 
-                    </View>
                     <View style={{ flex: 0, flexDirection: 'row' }}>
                         <Text style={styles.text}>Already have account?</Text>
                         <TouchableOpacity
@@ -47,16 +54,17 @@ const SignUp = ({ navigation }) => {
                             <Text style={styles.btnText}>Sign In</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={[style.signup, { alignSelf: 'center', marginTop: '10%' }]}>
-                        <Text style={style.loginText}>Sign Up</Text>
-                    </TouchableOpacity>
+                    <View style={{marginTop: 40}}>
+
+                    </View>
+                    <Button text={"Sign Up"} onPress={handleSignUp} />
                 </ScrollView>
             </SafeAreaView>
         </>
     )
 }
 
-export default SignUp
+export default Signup
 
 const styles = StyleSheet.create({
     container: {
@@ -76,12 +84,12 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         color: colors.black,
-        fontWeight: '500',
+        fontWeight: '400',
         marginBottom: 20
     },
     btnText: {
         fontSize: 14, color: colors.purple,
-        fontWeight: '500',
+        fontWeight: 'bold',
         marginLeft: 10,
         marginBottom: 20
     },
