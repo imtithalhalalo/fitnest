@@ -1,14 +1,22 @@
-import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react';
 import { style } from '../styles/style';
 import colors from '../constants/colors';
 import SignUp from '../services/signup';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import CustomModal from '../components/Modal';
 const Signup = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('');
+    const [error, setError] = useState('')
+    const [modalVisibility, setModalVisibility] = useState(false);
+
+    const displayError = (message) => {
+        setError(message)
+        setModalVisibility(true)
+    }
     const handleSignUp = async () => {
         if (!name || !email || !password) {
             displayError('All fields are required')
@@ -54,7 +62,17 @@ const Signup = ({ navigation }) => {
                             <Text style={styles.btnText}>Sign In</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{marginTop: 40}}>
+                    {
+                        modalVisibility ? (
+                            <CustomModal
+                                onRequestClose={() => { setModalVisibility(!modalVisibility); }}
+                                visible={modalVisibility}
+                                error={error}
+                                onPress={() => setModalVisibility(!modalVisibility)}
+                                text={"Close"} />
+                        ) : <></>
+                    }
+                    <View style={{ marginTop: 40 }}>
 
                     </View>
                     <Button text={"Sign Up"} onPress={handleSignUp} />
