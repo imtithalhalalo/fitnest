@@ -29,6 +29,13 @@ const AddPlan = () => {
         }
     }
 
+    const [error, setError] = useState('')
+    const [modalVisibility, setModalVisibility] = useState(false);
+
+    const showError = (message) => {
+        setError(message)
+        setModalVisibility(true)
+    }
 
     const addPlan = async () => {
         if (!title || !num_weeks) {
@@ -58,6 +65,16 @@ const AddPlan = () => {
                         <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} onPress={uploadImage} />
                         <Text style={styles.uploadImgTxt} onPress={uploadImage} >Upload Image</Text>
                     </View>
+                    {
+                        modalVisibility ?
+                            <CustomModal 
+                                onRequestClose={() => {setModalVisibility(!modalVisibility);}} 
+                                visible={modalVisibility} 
+                                error={error} 
+                                onPress={() => setModalVisibility(!modalVisibility)} 
+                                text={"Close"} />
+                            : <></>
+                    }
                 </View>
 
                 <Button text={"Add Plan"} onPress={addPlan} />
