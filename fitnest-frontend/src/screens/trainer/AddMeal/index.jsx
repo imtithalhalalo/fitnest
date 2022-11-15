@@ -87,6 +87,44 @@ const AddMeal = () => {
 
   }, [ingredients])
 
+
+  const handleAddMeal = async () => {
+    if (!title || !calories || !fats || !proteins || !category) {
+      displayError('All fields are required')
+      return
+    }
+
+    const data = {
+      title: title,
+      image: image,
+      calories: parseInt(calories),
+      fats: parseInt(fats),
+      protein: parseInt(proteins),
+      category: category,
+      ingredients: res
+    };
+
+    const token = await AsyncStorage.getItem('token');
+    console.log(data)
+    await axios({
+      headers: { 'Authorization': 'Bearer ' + token },
+      method: 'POST',
+      url: `${BASE_URL}/add_meal`,
+      data: data,
+    })
+      .then(function (response) {
+        console.log(response);
+        Alert.alert('Added Successfully! ')
+        res = []
+        return true
+      })
+      .catch(function (error) {
+        console.log(error)
+        Alert.alert('Try again! ')
+        return false
+      });
+  }
+
   return (
     <>
       <SafeAreaView style={style.mainContainer}>
@@ -127,6 +165,15 @@ const AddMeal = () => {
 
           <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)}/>
           <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true}/>
+          <View style={styles.ingredientsContainer}>
+            {
+              ingredients.map((i =>
+                <IngredientCard
+                  title={i.text}
+                  key={i.id} />))
+            }
+          </View>
+
           <Button text={"Done"} onPress={handleAddMeal} />
         </ScrollView>
 
