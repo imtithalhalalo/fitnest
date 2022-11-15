@@ -15,6 +15,22 @@ const Chats = ({ navigation }) => {
     const [loading, setLoading] = useState(true)
     const { userData } = useContext(UserContext);
 
+    useLayoutEffect(() => {
+        const getUsers = async () => {
+            await axios({
+                method: 'GET',
+                url: `${BASE_URL}/chat/user`,
+                headers: { 'Content-Type': 'multipart/form-data;' },
+            }).then(response => {
+                setUsers(response.data['users'])
+                console.log(response.data['users'])
+                setLoading(false)
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+        getUsers();
+    }, [])
 
     return (
         <SafeAreaView style={style.mainContainer}>
