@@ -88,6 +88,11 @@ const AddMeal = () => {
   }, [ingredients])
 
 
+
+  const displayError = (message) => {
+    setError(message)
+    setModalVisibility(true)
+  }
   const handleAddMeal = async () => {
     if (!title || !calories || !fats || !proteins || !category) {
       displayError('All fields are required')
@@ -162,6 +167,18 @@ const AddMeal = () => {
             <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} />
             <Text style={styles.uploadImgTxt} onPress={uploadImage}>Upload Image</Text>
           </View>
+
+
+          {
+            modalVisibility ? (
+              <CustomModal
+                onRequestClose={() => { setModalVisibility(!modalVisibility); }}
+                visible={modalVisibility}
+                error={error}
+                onPress={() => setModalVisibility(!modalVisibility)}
+                text={"Close"} />
+            ) : <></>
+          }
 
           <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)}/>
           <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true}/>
