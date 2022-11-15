@@ -105,6 +105,18 @@ class UserController extends Controller
     }
 
 
+    public function addWeight(Request $request) {
+        $weight = new Weight;
+        $weight->user_id = Auth::id();
+        $weight->weight = $request->weight;
+        $weight->date = $request->date;
+        $weight->save();
+
+        return response()->json([
+            'status' => 'saved',
+        ], 200);
+    }
+
     //function for user to save meal
     public function saveMeal(Request $request) {
         $save = new Save;
