@@ -34,6 +34,12 @@ const AddStep = () => {
         }
     }
 
+
+    const displayError = (message) => {
+        setError(message)
+        setModalVisibility(true)
+    } 
+
     const handle = async () => {
         if (!title || !description || !time || !image) {
             displayError('All fields are required')
@@ -69,6 +75,16 @@ const AddStep = () => {
                     <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} />
                     <Text style={styles.uploadImgTxt} onPress={uploadImage}>Upload Image</Text>
                 </View>
+                {
+                    modalVisibility ? (
+                        <CustomModal
+                            onRequestClose={() => { setModalVisibility(!modalVisibility); }}
+                            visible={modalVisibility}
+                            error={error}
+                            onPress={() => setModalVisibility(!modalVisibility)}
+                            text={"Close"} />
+                    ): <></>
+                }
             </View>
 
             <Button text={"Add Step"} onPress={handle} />
