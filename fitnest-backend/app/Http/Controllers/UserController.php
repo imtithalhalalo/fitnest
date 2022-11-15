@@ -138,7 +138,7 @@ class UserController extends Controller
     }
 
     //function for user to save meal
-    public function getSavedMeals()
+    public function savedMeals()
     {
         $id = Auth::id();
         $user = User::find($id);
