@@ -61,17 +61,20 @@ const Programs = () => {
         onClear={(keyword) => handleSearch('')} value={search} />
 
       {
-        filteredPrograms.length == 0 ? (
-        <EmptyState icon={"clipboard"} description={"This section will contain available programs "} title={"No programs"} />
-      ) :
-        <FlatList
-          data={filteredPrograms}
-          keyExtractor={item => item.id}
-          contentContainerStyle={{ paddingBottom: 200 }}
-          renderItem={renderItem}
-        />
-      }
+        loading ?
+          <Loader />
+          :
+          filteredPrograms.length == 0 ? (
+            <EmptyState icon={"clipboard"} description={"This section will contain available programs "} title={"No programs"} />
+          ) :
+            <FlatList
+              data={filteredPrograms}
+              keyExtractor={item => item.id}
+              contentContainerStyle={{ paddingBottom: 200 }}
+              renderItem={renderItem}
+            />
 
+      }
     </SafeAreaView>
   )
 }
