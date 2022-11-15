@@ -5,6 +5,8 @@ import { style } from '../../styles/style'
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import { BASE_URL } from '../../variables/global';
+import connectExercise from '../../services/trainer/connectExercise';
+import Button from '../../components/Button';
 import Header from '../../components/Header';
 
 
@@ -93,6 +95,15 @@ const ConnectExerciseToProgram = () => {
           
 
       </View>
+          <Button text={"Connect"} onPress={async () => {
+            let data = {
+              program_id: program,
+              exercise_id: exercise,
+            }
+            console.log(data.program_id)
+            await connectExercise(data)
+
+          }}/>
     </SafeAreaView>
 
 
