@@ -1,14 +1,16 @@
 import { View, Text, Image, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState, useLayoutEffect } from 'react'
 import { styles } from './style';
+import colors from '../../../../constants/colors';
 import Header from '../../../../components/Header';
 import useGetMeal from '../../../../services/user/getMealById';
 import useGetMealIngredients from '../../../../services/user/getMealIngredients';
 import IngredientCard from '../../../../components/IngredientCard';
 import { style } from '../../../../styles/style';
+import saveMeal from '../../../../services/user/saveMeals';
 import Button from '../../../../components/Button';
 
-const MealDetails = ({ route }) => {
+const MealDetails = ({ route, navigation }) => {
   const { id, title, image } = route.params;
   const [meal, setMeal] = useState({});
   const [ingredients, setIngredients] = useState([]);
@@ -23,6 +25,16 @@ const MealDetails = ({ route }) => {
     }
   }, [response, res]);
 
+  const handleSave = async () => {
+      let data = {
+          meal_id: id,
+      }
+      await saveMeal(data)
+  }
+
+  const viewSaved = async () => {
+    navigation.navigate('SavedMeals');
+  }
   return (
     <SafeAreaView style={style.mainContainer}>
     <TouchableOpacity onPress={viewSaved}>
