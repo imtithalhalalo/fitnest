@@ -1,5 +1,5 @@
 import { FlatList, SafeAreaView, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useLayoutEffect, useEffect, useMemo } from 'react'
 import colors from '../../../../constants/colors';
 import Header from '../../../../components/Header';
 import Search from '../../../../components/Search';
@@ -32,6 +32,22 @@ const Meals = () => {
             id={item.id}
         />
     )
+    // const handleSearch = (keyword) => {
+    //     if (keyword) {
+    //       const newData = meals.filter(function (item) {
+    //         const itemData = item.title
+    //           ? item.title.toUpperCase()
+    //           : ''.toUpperCase();
+    //         const keywordData = keyword.toUpperCase();
+    //         return itemData.indexOf(keywordData) > -1;
+    //       });
+    //       setFilteredMeals(newData);
+    //       setSearch(keyword);
+    //     } else {
+    //       setFilteredMeals(meals)
+    //       setSearch(keyword);
+    //     }
+    //   }
     return (
         <SafeAreaView style={style.mainContainer}>
             <Header text={"My Suggested Meals"} />
