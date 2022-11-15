@@ -21,6 +21,22 @@ const Chat = ({ route }) => {
   const { chatID, trainer_id, name, image } = route.params;
   const [messages, setMessages] = useState([]);
   
+  useEffect(() => {
+    const collectionRef = collection(doc(database, "chats", chatID), "messages");
+    const q = query(collectionRef, orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setMessages(
+        snapshot.docs.map((doc) => ({
+          _id: doc.data()._id,
+          createdAt: doc.data().createdAt.toDate(),
+          text: doc.data().text,
+          user: doc.data().user,
+        }))
+      )
+    })
+    return unsubscribe;
+  }, [])
+
   const onSend = useCallback((messages = []) => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
