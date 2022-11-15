@@ -1,8 +1,10 @@
 import { Text, View, SafeAreaView, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dropdown } from 'react-native-element-dropdown';
 import { style } from '../../../styles/style';
+import * as ImagePicker from "expo-image-picker";
 import colors from '../../../constants/colors';
+import addIngredient from '../../../services/trainer/addIngredient';
 import { FontAwesome } from "@expo/vector-icons";
 import Button from '../../../components/Button';
 import Header from '../../../components/Header';
@@ -23,6 +25,42 @@ const AddMeal = () => {
   const [fats, setFats] = useState(0);
   const [proteins, setProteins] = useState(0);
   const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
+  const [id, setId] = useState(0);
+  const [ingredients, setIngredients] = useState([])
+  const [error, setError] = useState('')
+  const [modalVisibility, setModalVisibility] = useState(false);
+
+
+  const uploadImage = async () => {
+    let res = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    })
+    if (!res.cancelled) {
+
+      setImage(res.uri);
+
+    }
+  }
+
+  const handleAddIngredient = async () => {
+    //bug it not adding the last one
+    if (!ingredient) return
+    setIngredient(ingredient);
+    setIngredients([...ingredients, { id: id, text: ingredient }])
+    setId(id + 1)
+    setIngredient('')
+    await addIngredient(ingredient);
+  }
+  useEffect(() => {
+    res = ingredients.map(i => i.id);
+    console.log(res)
+
+  }, [ingredients])
+
   return (
     <>
       <SafeAreaView style={style.mainContainer}>
