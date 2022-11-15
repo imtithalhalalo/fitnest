@@ -5,6 +5,7 @@ import SavedMealCard from '../../../../components/SavedMealCard';
 import EmptyState from '../../../../components/EmptyState';
 import Header from '../../../../components/Header';
 import { style } from '../../../../styles/style';
+import Loader from '../../../../components/Loader';
 
 const SavedMeals = () => {
 
@@ -21,19 +22,21 @@ const SavedMeals = () => {
         <SafeAreaView style={style.mainContainer}>
             <Header text={"My Saved Meals"} back="back" />
 
-
-          {
-            response.length == 0 ? (
-            <EmptyState image={require("../../../../../assets/images/healthyfood.png")} description={"This section will contain your saved healthy meals "} title={"No saved meals"} />
-            ) :
-            <FlatList
-                data={response}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                contentContainerStyle={{ paddingBottom: 50 }}
-                ListFooterComponent={<SafeAreaView />}
-            />
-          } 
+            {
+                loading ? (
+                    <Loader />
+                ) :
+                    response.length == 0 ? (
+                        <EmptyState image={require("../../../../../assets/images/healthyfood.png")} description={"This section will contain your saved healthy meals "} title={"No saved meals"} />
+                    ) :
+                        <FlatList
+                            data={response}
+                            renderItem={renderItem}
+                            keyExtractor={item => item.id}
+                            contentContainerStyle={{ paddingBottom: 50 }}
+                            ListFooterComponent={<SafeAreaView />}
+                        />
+            }
 
         </SafeAreaView>
     )
