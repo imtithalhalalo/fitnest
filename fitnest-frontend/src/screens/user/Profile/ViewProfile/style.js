@@ -13,10 +13,11 @@ const styles = StyleSheet.create({
     },
     desc: {
         fontSize: 16,
-        color: colors.darkGrey,
+        color: colors.purple,
         paddingTop: '3%',
         paddingBottom: '3%',
-        fontWeight: '400'
+        fontWeight: '400',
+        marginLeft: 30
     },
     text: {
         fontSize: 18,
@@ -46,10 +47,24 @@ const styles = StyleSheet.create({
     },
     container: {
         padding: '10%',
-        paddingTop: '30%',
+        paddingTop: '15%',
         backgroundColor: colors.lighterPurple,
         flex: 1,
     },
+    valuesContainer: {
+        backgroundColor: colors.white, 
+        padding: 10, 
+        borderRadius: 15,
+        marginBottom: '2%',
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    }
 })
 
 export default styles
