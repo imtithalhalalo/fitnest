@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Done;
 use App\Models\User;
 use App\Models\UserInfo;
@@ -68,6 +69,14 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function getSpecificTrainerInfo($id) {
+        $info = User::find($id);
+
+        return response()->json([
+            'status' => 'success',
+            'trainer_info' => $info
+        ], 200);
+    }
     //function to add water intake by user
     public function addWaterIntake(Request $request)
     {
@@ -83,6 +92,7 @@ class UserController extends Controller
             'user_water' => $water
         ]);
     }
+
 
     //function for user to save meal
     public function saveMeal(Request $request) {
