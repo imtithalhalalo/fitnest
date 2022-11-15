@@ -35,7 +35,7 @@ const WorkoutSteps = ({ route }) => {
   }, [])
   return (
     <SafeAreaView style={style.mainContainer}>
-      <Header text={ program_name + " Exercises"} back={"back"}/>
+      <Header text={ program_name + " Exercise"} back={"back"}/>
 
       {
         loading ?
