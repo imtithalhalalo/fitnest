@@ -17,6 +17,13 @@ const Programs = () => {
   const { userData } = useContext(UserContext);
   const [programs, setPrograms] = useState([])
   const [loading, setloading] = useState(true);
+  const renderItem = ({ item }) => (
+    <ProgramCard
+      id={item.id}
+      title={item.title}
+      image={item.image}
+      num_weeks={item.num_weeks} />
+  )
   const getPrograms = () => {
     axios({
       method: 'GET',
@@ -34,11 +41,24 @@ const Programs = () => {
   useEffect(() => {
     getPrograms();
   }, []);
+  const handleSearch = (keyword) => {
+    if (keyword) {
+      const filteredData = programs.filter((item) =>
+        item.title.toLowerCase().includes(keyword.toLowerCase())
+      );
+      setFilteredPrograms(filteredData);
+      setSearch(keyword)
+    } else {
+      setFilteredPrograms(programs)
+      setSearch(keyword)
+    }
+  }
 
   return (
     <SafeAreaView style={style.mainContainer}>
       <Header text={"My Plans"} image={userData.image} />
-      <Search />
+      <Search onChangeText={(keyword) => { handleSearch(keyword) }}
+        onClear={(keyword) => handleSearch('')} value={search} />
     </SafeAreaView>
   )
 }
