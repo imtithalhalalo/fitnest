@@ -1,16 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Done;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WaterIntake;
 use App\Models\Save;
+use App\Models\Weight;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
     //function to add user info
-    public function addInfo(Request $request) {
+    public function addInfo(Request $request)
+    {
 
         $user_info = UserInfo::create([
             'user_id' => Auth::id(),
@@ -19,21 +24,22 @@ class UserController extends Controller {
             'height' => $request->height,
             'age' => $request->age,
             'gender' => $request->gender,
-            'country' => $request->country,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
         ]);
 
         return response()->json([
             'message' => 'Added Successfully! ',
             'user_info' => $user_info
         ]);
-
     }
 
-    public function updateInfo(Request $request) {
+    public function updateInfo(Request $request)
+    {
         //update user's info
         $id = Auth::id();
 
-        if(!$id){
+        if (!$id) {
             return response()->json([
                 "status" => "failed"
             ], 500);
@@ -42,10 +48,6 @@ class UserController extends Controller {
         $user_info = UserInfo::find($id);
         $user_info->weight_goal = $request->weight_goal;
         $user_info->calories_goal = $request->calories_goal;
-        $user_info->height = $request->height;
-        $user_info->gender = $request->gender;
-        $user_info->age = $request->age;
-        $user_info->country = $request->country;
         $user_info->save();
 
         return response()->json([
@@ -55,7 +57,8 @@ class UserController extends Controller {
     }
 
     //function to get info for specific user
-    public function getInfo() {
+    public function getInfo()
+    {
         $id = Auth::id();
         $info = UserInfo::find($id);
 
@@ -66,11 +69,13 @@ class UserController extends Controller {
     }
 
     //function to add water intake by user
-    public function addWaterIntake(Request $request) {
-        
+    public function addWaterIntake(Request $request)
+    {
+
         $water = WaterIntake::create([
             'user_id' => Auth::id(),
             'water_intake' => $request->water_intake,
+            'date' => $request->date
         ]);
 
         return response()->json([
@@ -80,7 +85,7 @@ class UserController extends Controller {
     }
 
     //function for user to save meal
-    public function saveMeal(Request $request) { 
+    public function saveMeal(Request $request) {
         $save = new Save;
         $save->user_id = Auth::id();
         $save->meal_id = $request->meal_id;
@@ -88,6 +93,6 @@ class UserController extends Controller {
 
         return response()->json([
             'status' => 'saved',
-        ],200);
+        ], 200);
     }
 }
