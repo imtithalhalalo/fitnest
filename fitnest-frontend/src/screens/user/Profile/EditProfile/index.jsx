@@ -1,19 +1,42 @@
-import { SafeAreaView, Text, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
-import React, { useState } from 'react'
+import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Alert } from 'react-native'
+import React, { useState, useContext } from 'react'
 import { EvilIcons } from '@expo/vector-icons';
 import colors from '../../../../constants/colors';
 import { style } from '../../../../styles/style';
 import styles from './styles';
+import updateProfile from '../../../../services/user/updateProfile';
+import { UserContext } from '../../../../stores/UserContext';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 
 const EditProfile = ({ navigation }) => {
-
+    const { userData } = useContext(UserContext);
     const [name, setName] = useState('');
+    const [image, setImage] = useState(userData.image);
     const [email, setEmail] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
-    const [modalVisibility, setModalVisibility] = useState(false);
 
+    const [error, setError] = useState('');
+    //user info
+    const [weightGoal, setWeightGoal] = useState('');
+    const [caloriesGoal, setCaloriesGoal] = useState('');
+    const [modalVisibility, setModalVisibility] = useState(false);
+    const displayError = (message) => {
+        setError(message)
+    }
+    const handleUpdateProfile = async () => {
+        if (!name || !email || !phoneNum) {
+            displayError('All fields are required')
+            return
+        }
+        let data = {
+            name: name,
+            email: email,
+            phone_num: phoneNum,
+            image: image
+        }
+        updateProfile(data)
+    }
     return (
         <>
             <SafeAreaView style={style.mainContainer}>
@@ -23,6 +46,17 @@ const EditProfile = ({ navigation }) => {
                     </TouchableWithoutFeedback>
                 </View>
                 <View style={styles.imgContainer}>
+                    <View>
+
+                        {image ? (
+                            <Image source={{ uri: image }} style={styles.profileImg} />
+
+                        ) : (
+                            <Image source={require('../../../../../assets/images/profile.jpg')} style={styles.profileImg} />
+                        )
+
+                        }
+                    </View>
                     <View style={styles.bar}>
                         <TouchableOpacity onPress={uploadImage}>
                             <Text style={styles.choose}>
@@ -37,7 +71,7 @@ const EditProfile = ({ navigation }) => {
 
                 <Button text={"Update More Info"} onPress={() => setModalVisibility(true)} secondary={true} />
 
-                <Button text={"Save"} style={{ marginTop: 0 }} />
+                <Button text={"Save"} onPress={handleUpdateProfile} style={{ marginTop: 0 }} />
 
             </SafeAreaView>
         </>
