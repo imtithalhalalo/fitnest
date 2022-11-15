@@ -16,6 +16,7 @@ class CreateWaterIntakeTable extends Migration
         Schema::create('water_intake', function (Blueprint $table) {
             $table->id();
             $table->integer('water_intake');
+            $table->string('date');
             $table->foreignId("user_id")->references('id')->on('users');
             $table->timestamps();
         });
