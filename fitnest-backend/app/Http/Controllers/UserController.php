@@ -69,7 +69,8 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getSpecificTrainerInfo($id) {
+    public function getSpecificTrainerInfo($id)
+    {
         $info = User::find($id);
 
         return response()->json([
@@ -91,6 +92,16 @@ class UserController extends Controller
             'status' => 'success',
             'user_water' => $water
         ]);
+    }
+
+    public function getWaterLastWeek() {
+        $previous_week = strtotime("-1 week +1 day");
+        $start_week = strtotime("last sunday", $previous_week);
+        $end_week = strtotime("next sunday", $start_week);
+        $start_week = date("Y-m-d", $start_week);
+        $end_week = date("Y-m-d", $end_week);
+
+        return WaterIntake::select('*')->where('user_id', Auth::id())->whereBetween('created_at', [$start_week, $end_week])->get();
     }
 
 
