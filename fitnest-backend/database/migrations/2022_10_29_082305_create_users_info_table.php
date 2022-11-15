@@ -18,10 +18,11 @@ class CreateUsersInfoTable extends Migration
             $table->foreignId("user_id")->references('id')->on('users');
             $table->integer('weight_goal');
             $table->integer('calories_goal');
-            $table->integer('height');
+            $table->integer('height')->nullable();
             $table->string('gender');
-            $table->integer('age');
-            $table->string('country');
+            $table->integer('age')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }
