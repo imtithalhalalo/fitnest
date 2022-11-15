@@ -136,4 +136,17 @@ class UserController extends Controller
             'status' => 'saved',
         ], 200);
     }
+
+    //function for user to save meal
+    public function getSavedMeals()
+    {
+        $id = Auth::id();
+        $user = User::find($id);
+        $meals = $user->meals;
+        return response()->json([
+            'status' => 'success',
+            'meals' => $meals
+        ], 200);
+    }
+
 }
