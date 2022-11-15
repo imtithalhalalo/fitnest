@@ -32,22 +32,7 @@ const Meals = () => {
             id={item.id}
         />
     )
-    // const handleSearch = (keyword) => {
-    //     if (keyword) {
-    //       const newData = meals.filter(function (item) {
-    //         const itemData = item.title
-    //           ? item.title.toUpperCase()
-    //           : ''.toUpperCase();
-    //         const keywordData = keyword.toUpperCase();
-    //         return itemData.indexOf(keywordData) > -1;
-    //       });
-    //       setFilteredMeals(newData);
-    //       setSearch(keyword);
-    //     } else {
-    //       setFilteredMeals(meals)
-    //       setSearch(keyword);
-    //     }
-    //   }
+
     return (
         <SafeAreaView style={style.mainContainer}>
             <Header text={"My Suggested Meals"} />
@@ -70,11 +55,11 @@ const Meals = () => {
                 loading ?
                     <Loader />
                     :
-                    meals.length == 0 ? (
+                    response.length == 0 ? (
                         <EmptyState image={require("../../../../../assets/images/healthyfood.png")} description={"This section will contain available healthy meals "} title={"No meals"}/>
                     ) :
                         <FlatList
-                            data={meals}
+                            data={response}
                             renderItem={renderItem}
                             keyExtractor={item => item.id}
                             numColumns={2}
