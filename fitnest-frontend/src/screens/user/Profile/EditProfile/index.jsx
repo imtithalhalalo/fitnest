@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Alert } from 'react-native'
+import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Alert } from 'react-native'
 import React, { useState, useContext } from 'react'
 import { EvilIcons } from '@expo/vector-icons';
 import colors from '../../../../constants/colors';
@@ -6,6 +6,9 @@ import { style } from '../../../../styles/style';
 import styles from './styles';
 import updateProfile from '../../../../services/user/updateProfile';
 import { UserContext } from '../../../../stores/UserContext';
+import axios from 'axios';
+import { BASE_URL } from '../../../../variables/global.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
 
@@ -36,6 +39,30 @@ const EditProfile = ({ navigation }) => {
             image: image
         }
         updateProfile(data)
+    }
+
+    const editMoreInfo = async () => {
+        const token = await AsyncStorage.getItem('token');
+        try {
+            await axios({
+                headers: { 'Authorization': 'Bearer ' + token },
+                method: 'POST',
+                url: `${BASE_URL}/update_info`,
+
+                data: {
+                    weight_goal: weightGoal,
+                    calories_goal: caloriesGoal
+                }
+            })
+        } catch (err) {
+            console.log(err.response.data)
+            return { success: false, error: err }
+        }
+
+
+        Alert.alert('Edited Successfully');
+
+        setModalVisibility(!modalVisibility)
     }
     return (
         <>
