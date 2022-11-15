@@ -15,25 +15,29 @@ const Chats = ({ navigation }) => {
     const [loading, setLoading] = useState(true)
     const { userData } = useContext(UserContext);
 
+
     return (
         <SafeAreaView style={style.mainContainer}>
             <Header text={"Chat With Client"} />
             {
-                users.length == 0 ? (
-                    <EmptyState image={require("../../../../assets/images/user.png")} description={"This section will contain available clients to chat with "} title={"No Available Users"} />
-                ) :
-                    <FlatList
-                        data={users}
-                        keyExtractor={item => item.id}
-                        contentContainerStyle={{ paddingBottom: 200 }}
-                        renderItem={
-                            ({ item }) =>
-                                <ChatCard
-                                    id={item.id}
-                                    title={item.name}
-                                    image={item.image}
-                                    createChat={() => createChat(item.id, item.name, item.image)} />}
-                    />
+                loading ?
+                    <Loader />
+                    :
+                    users.length == 0 ? (
+                        <EmptyState image={require("../../../../assets/images/user.png")} description={"This section will contain available clients to chat with "} title={"No Available Users"} />
+                    ) :
+                        <FlatList
+                            data={users}
+                            keyExtractor={item => item.id}
+                            contentContainerStyle={{ paddingBottom: 200 }}
+                            renderItem={
+                                ({ item }) =>
+                                    <ChatCard
+                                        id={item.id}
+                                        title={item.name}
+                                        image={item.image}
+                                        createChat={() => createChat(item.id, item.name, item.image)} />}
+                        />
             }
         </SafeAreaView>
     )
