@@ -1,20 +1,28 @@
 import { Text, View, SafeAreaView, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import { style } from '../../styles/style';
-import colors from '../../constants/colors';
+import { Dropdown } from 'react-native-element-dropdown';
+import { style } from '../../../styles/style';
+import colors from '../../../constants/colors';
 import { FontAwesome } from "@expo/vector-icons";
-import Button from '../../components/Button';
-import Header from '../../components/Header';
-import Input from '../../components/Input';
+import Button from '../../../components/Button';
+import Header from '../../../components/Header';
+import Input from '../../../components/Input';
+import styles from './style';
 
 const AddMeal = () => {
+
+  const categories = [
+    { label: 'Breakfast', category: 'Breakfast' },
+    { label: 'Lunch', category: 'Lunch' },
+    { label: 'Dinner', category: 'Dinner' },
+  ];
 
   const [title, setTitle] = useState('');
   const [ingredient, setIngredient] = useState('');
   const [calories, setCalories] = useState(0);
   const [fats, setFats] = useState(0);
   const [proteins, setProteins] = useState(0);
-
+  const [category, setCategory] = useState('');
   return (
     <>
       <SafeAreaView style={style.mainContainer}>
@@ -22,6 +30,21 @@ const AddMeal = () => {
 
           <Header text={"Add Meal"} back="back" />
           <View style={style.inputContainer}>
+            <Dropdown
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              inputSearchStyle={styles.inputSearchStyle}
+              iconStyle={styles.iconStyle}
+              data={categories}
+              placeholder="Breakfast"
+              labelField="label"
+              valueField="value"
+              value={category}
+              onChange={item => {
+                setCategory(item.category);
+              }}
+            />
           </View>
 
           <Input label={"Meal Title"} handleChange={title => setTitle(title)} />
@@ -40,7 +63,6 @@ const AddMeal = () => {
 
           <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)}/>
           <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true}/>
-
           <Button text={"Done"} onPress={handleAddMeal} />
         </ScrollView>
 
