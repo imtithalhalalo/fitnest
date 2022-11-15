@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, View } from 'react-native'
+import { Text, SafeAreaView, View, Image, TouchableOpacity } from 'react-native'
 import React, { useContext, useState, useLayoutEffect } from 'react'
 import { FontAwesome5 } from "react-native-vector-icons";
 import colors from '../../../../constants/colors';
@@ -9,6 +9,8 @@ import { UserContext } from '../../../../stores/UserContext';
 import useUserInfo from '../../../../services/user/getUserInfo';
 import useAxios from '../../../../services/user/getProfile';
 import Button from '../../../../components/Button';
+import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = ({ navigation }) => {
     const { userData } = useContext(UserContext);
@@ -24,9 +26,16 @@ const Profile = ({ navigation }) => {
         }
     }, [response]);
 
+    const logout = () => {
+        AsyncStorage.removeItem('token');
+        navigation.navigate('SignIn')
+    }
     return (
         <>
             <SafeAreaView style={styles.container}>
+                <TouchableOpacity onPress={logout}>
+                    <AntDesign name="logout" size={30} color={colors.purple} style={{ marginRight: '5%', marginBottom: '10%', alignSelf: 'flex-end' }} />
+                </TouchableOpacity>
                 <View style={styles.profContainer}>
                 </View>
 
