@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Meal;
 use App\Models\Ingredient;
+use App\Models\MealIngredient;
 
 class MealController extends Controller {
     
@@ -20,7 +21,11 @@ class MealController extends Controller {
             'meals' => $meals
         ],200);
     }
+    public function getMealsById($id) {
+        $meal = Meal::find($id);
 
+        return $meal;
+    }
     //function to get meals details
     public function getMealIngredients($id) {
         $meal = Meal::find($id);
