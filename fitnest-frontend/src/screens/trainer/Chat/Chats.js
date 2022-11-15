@@ -15,6 +15,10 @@ const Chats = ({ navigation }) => {
     const [loading, setLoading] = useState(true)
     const { userData } = useContext(UserContext);
 
+    const createChat = (id, name, image) => {
+        navigation.navigate('Chat', { chatID: `${id}${userData.id}`, trainer_id: id, name: name, image: image })
+    }
+
     useLayoutEffect(() => {
         const getUsers = async () => {
             await axios({
