@@ -13,8 +13,7 @@ use App\Models\Save;
 use App\Models\TrainerInfo;
 use Illuminate\Support\Facades\Auth;
 
-class TrainerController extends Controller
-{
+class TrainerController extends Controller {
 
     //function to add trainer info
     public function addInfo(Request $request) {
@@ -36,7 +35,7 @@ class TrainerController extends Controller
         //update trainer's info
         $id = Auth::id();
 
-        if(!$id){
+        if (!$id) {
             return response()->json([
                 "status" => "failed"
             ], 500);
@@ -70,24 +69,23 @@ class TrainerController extends Controller
 
     //function for user to add meal
     public function addMeal(Request $request) {
-        $user_id = Auth::id();
 
-        //adding meal info
-        $meal = Meal::insert([
-            'title' => $request->title,
-            'calories' => $request->calories,
-            'fats' => $request->fats,
-            'protein' => $request->protein,
-            'image' => $request->image,
-            'category' => $request->category,
-            'user_id' => $user_id
-        ]);
+        $meal = new Meal;
+        $meal->user_id = Auth::id();
+        $meal->category = $request->category;
+        $meal->title = $request->title;
+        $meal->fats = $request->fats;
+        $meal->protein = $request->protein;
+        $meal->calories = $request->calories;
+        $meal->image = $request->image;
+        $meal->save();
 
+        if ($request->ingredients != []) {
+            // meal ingredients
+            $ingredients = $request->ingredients;
+            $meal->ingredients()->attach($ingredients);
+        }
 
-
-        // meal ingredients
-        $ingredients = $request->ingredients;
-        $meal->ingredients()->attach($ingredients);
 
         return response()->json([
             'status' => 'success',

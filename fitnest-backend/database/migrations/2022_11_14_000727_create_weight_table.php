@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersInfoTable extends Migration
+class CreateWeightTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateUsersInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_info', function (Blueprint $table) {
+        Schema::create('weight', function (Blueprint $table) {
             $table->id();
+            $table->integer('weight');
+            $table->string('date')->nullable();
             $table->foreignId("user_id")->references('id')->on('users');
-            $table->integer('weight_goal');
-            $table->integer('calories_goal');
-            $table->integer('height')->nullable();
-            $table->string('gender');
-            $table->integer('age')->nullable();
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ class CreateUsersInfoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_info');
+        Schema::dropIfExists('weight');
     }
 }

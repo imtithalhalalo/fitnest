@@ -74,6 +74,7 @@ class AuthController extends Controller {
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_num = $request->phone_num;
+        $user->image = $request->image;
         $user->save();
 
         return response()->json([
@@ -84,8 +85,8 @@ class AuthController extends Controller {
 
     //function to upload user image
     public function uploadImage(Request $request) {
-        $id = Auth::user()->id;
-        $user = User::find($id);
+        
+        $user = User::find($request->id);
         $user->image = $request->image;
         $user->save();
 
