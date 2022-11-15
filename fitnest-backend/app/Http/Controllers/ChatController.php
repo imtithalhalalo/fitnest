@@ -30,4 +30,12 @@ class ChatController extends Controller {
             'users' => $users
         ], 200);
     }
+
+    public function getContactInfo($id) {
+        $contact = User::select('id','name','image','number')->where('id',$id)->get();
+
+        return response()->json([
+            'contact' => $contact
+        ],200);
+    }
 }
