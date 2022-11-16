@@ -13,13 +13,16 @@ const SignIn = ({ navigation }) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const { userData, setUserData } = useContext(UserContext);
   const [modalVisibility, setModalVisibility] = useState(false);
 
+  const displayError = (message) => {
+    setErrorMessage(message)
+  }
 
-  //function to check email and password on Login attempt
   const handleLogin = async () => {
-    //if empty fields, display error
+
     if (!email || !password) {
       displayError('All fields are required')
       return
@@ -75,6 +78,16 @@ const SignIn = ({ navigation }) => {
               <Text style={styles.btnText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
+          {
+            modalVisibility ? (
+              <CustomModal
+                onRequestClose={() => { setModalVisibility(!modalVisibility); }}
+                visible={modalVisibility}
+                error={error}
+                onPress={() => setModalVisibility(!modalVisibility)}
+                text={"Close"} />
+            ) : <></>
+          }
 
           <Button text={"Sign In"} onPress={handleLogin} />
         </ScrollView>
