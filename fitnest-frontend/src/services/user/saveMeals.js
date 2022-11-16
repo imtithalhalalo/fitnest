@@ -15,8 +15,8 @@ const saveMeal = async (meal) => {
             url: `${BASE_URL}/save_meal`,
             data: data,
     })
-    .then(function () {
-        Alert.alert('Saved Successfully! Check your saved meals')
+    .then(function (res) {
+        Alert.alert(res.data.status)
     })
     .catch(function () {
         Alert.alert('Try again! ')
