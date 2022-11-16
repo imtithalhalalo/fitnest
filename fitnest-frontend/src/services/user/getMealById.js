@@ -15,7 +15,6 @@ const useGetMeal = ({ id }) => {
             headers: { 'Content-Type': 'multipart/form-data;' },
         }).then(response => {
             setResponse(response.data)
-            console.log(response.data)
             setloading(false)
         }).catch((err) => {
             setError(err)
