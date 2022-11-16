@@ -42,15 +42,14 @@ const AddMeal = () => {
     const getLastId = async () => {
 
       await axios({
-        method: 'GET',
-        url: `${BASE_URL}/meals/last_ingredient`,
-        headers: { 'Content-Type': 'multipart/form-data;' },
+        method: 'POST',
+        url: `${BASE_URL}/meals/get_last_ingredient`,
       }).then(response => {
         setId(response.data.id)
-        console.log(response.data.id)
+        console.log(response)
       }).catch((err) => {
 
-        console.log(err);
+        console.log(err.response.data);
 
       })
     }
@@ -82,6 +81,7 @@ const AddMeal = () => {
     await addIngredient(ingredient);
   }
   useEffect(() => {
+    console.log(ingredients)
     res = ingredients.map(i => i.id);
     console.log(res)
 
@@ -130,6 +130,23 @@ const AddMeal = () => {
       });
   }
 
+  const deleteIngredient = async (id) => {
+    const token = await AsyncStorage.getItem('token');
+    console.log(id)
+    await axios({
+      headers: { 'Authorization': 'Bearer ' + token },
+      method: 'POST',
+      url: `${BASE_URL}/delete_ingredient/${id}`,
+    })
+      .then(function (response) {
+        console.log(response.data.status);
+      })
+      .catch(function (error) {
+        console.log(error.response.data)
+        Alert.alert('Try again! ')
+      });
+      setIngredients(ingredients.filter((element) => element.id !== id))
+  }
   return (
     <>
       <SafeAreaView style={style.mainContainer}>
@@ -180,14 +197,15 @@ const AddMeal = () => {
             ) : <></>
           }
 
-          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)}/>
-          <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true}/>
+          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)} />
+          <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true} />
           <View style={styles.ingredientsContainer}>
             {
               ingredients.map((i =>
                 <IngredientCard
                   title={i.text}
-                  key={i.id} />))
+                  key={i.id}
+                  onPress={() => deleteIngredient(i.id)} />))
             }
           </View>
 
