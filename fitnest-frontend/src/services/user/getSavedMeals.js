@@ -16,10 +16,9 @@ const useSavedMeals = () => {
             headers: { 'Authorization':'Bearer '+ token },
         }).then(response => {
             setResponse(response.data['meals'])
-            console.log(response.data['meals'])
             setloading(false)
         }).catch((err) => {
-            setError(err)
+            setError(err.response.data)
         })
     }
     useEffect(() => {
