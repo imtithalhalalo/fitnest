@@ -6,6 +6,7 @@ import { UserContext } from '../stores/UserContext';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import signin from '../services/signin';
+import CustomModal from '../components/Modal';
 import { style } from '../styles/style';
 
 const SignIn = ({ navigation }) => {
@@ -37,8 +38,16 @@ const SignIn = ({ navigation }) => {
       console.log(result.data.user["user_type"])
 
       if (user_type === 'trainer') {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "BottomTabsTrainer" }]
+        })
         navigation.navigate("BottomTabsTrainer")
       } else {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "BottomTabs" }]
+        })
         navigation.navigate("BottomTabs")
       }
       console.log(await AsyncStorage.getItem('token'))
