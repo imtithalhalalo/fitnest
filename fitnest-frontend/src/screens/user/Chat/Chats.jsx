@@ -1,19 +1,18 @@
-import { SafeAreaView, Text, FlatList } from 'react-native'
-import React, { useLayoutEffect, useState, useContext } from 'react'
+import { SafeAreaView, FlatList } from 'react-native'
+import React, { useContext } from 'react'
 import Header from '../../../components/Header';
 import ChatCard from '../../../components/ChatCard';
-import { BASE_URL } from '../../../variables/global';
-import axios from 'axios'
 import EmptyState from '../../../components/EmptyState';
 import { UserContext } from '../../../stores/UserContext';
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import { style } from '../../../styles/style';
 import Loader from '../../../components/Loader';
+import useGetTrainers from '../../../services/user/getTrainers';
 
 const Chats = ({ navigation }) => {
-    const [trainers, setTrainers] = useState([])
-    const [loading, setLoading] = useState(true)
+
     const { userData } = useContext(UserContext);
+    const { response, loading, error } = useGetTrainers();
 
     const createChat = (id, image, name ) => {
         console.log(image, name, id)
@@ -29,22 +28,6 @@ const Chats = ({ navigation }) => {
                 .catch((error) => alert(error.message))
             
     }
-    useLayoutEffect(() => {
-        const getTrainer = async () => {
-                await axios({
-                    method: 'GET',
-                    url: `${BASE_URL}/chat/trainer`,
-                    headers: { 'Content-Type': 'multipart/form-data;' },
-                }).then(response => {
-                    setTrainers(response.data['trainers'])
-                    console.log(response.data['trainers'])
-                    setLoading(false)
-                }).catch((err) => {
-                    console.log(err);
-                })
-        }
-        getTrainer();
-    }, [])
 
     return (
         <SafeAreaView style={style.mainContainer}>
@@ -53,11 +36,11 @@ const Chats = ({ navigation }) => {
                 loading ?
                     <Loader />
                     :
-                    trainers.length == 0 ? (
+                    response.length == 0 ? (
                         <EmptyState image={require("../../../../assets/images/gym.png")} description={"This section will contain available fitness trainers to chat with "} title={"No Available Trainers"}/>
                     ) :
                         <FlatList
-                            data={trainers}
+                            data={response}
                             keyExtractor={item => item.id}
                             contentContainerStyle={{ paddingBottom: 200 }}
                             renderItem={
