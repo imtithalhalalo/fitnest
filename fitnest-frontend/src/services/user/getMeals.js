@@ -1,28 +1,17 @@
-import { useState, useLayoutEffect } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../../variables/global';
+import axios from "axios";
+import { BASE_URL } from "../../variables/global";
 
-const useAxios = ({category}) => {
-    const [response, setResponse] = useState(null);
-    const [error, setError] = useState('');
-    const [loading, setloading] = useState(true);
-    
-    const getMeals = () => {
-        axios({
+const getMeals = async (category) => {
+    try {
+        const res = await axios({
             method: 'GET',
             url: `${BASE_URL}/meals/category/${category}`,
-        }).then(response => {
-            setResponse(response.data['meals'])
-            setloading(false)
-        }).catch((err) => {
-            setError(err)
         })
+        
+        return {success: true, data: res.data['meals']}
+    }catch (error) {
+        return {success: false, error: error}
     }
-    useLayoutEffect(() => {
-        getMeals();
-    }, [response, category, error, loading]);
+}
 
-    return { response, error, loading };
-};
-
-export default useAxios;
+export default getMeals;
