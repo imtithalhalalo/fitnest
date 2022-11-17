@@ -12,6 +12,7 @@ import { BASE_URL } from '../../../../variables/global.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../../../../components/Button';
 import Input from '../../../../components/Input';
+import { FontAwesome } from "@expo/vector-icons";
 
 const EditProfile = ({ navigation }) => {
     const { userData } = useContext(UserContext);
@@ -24,10 +25,8 @@ const EditProfile = ({ navigation }) => {
     //user info
     const [weightGoal, setWeightGoal] = useState('');
     const [caloriesGoal, setCaloriesGoal] = useState('');
-    const [workingHours, setWorkingHours] = useState('');
-    const [load, setloading] = useState('');
     const [modalVisibility, setModalVisibility] = useState(false);
-    const [disable, setDisable] = useState(false);
+
     const displayError = (message) => {
         setError(message)
     }
@@ -47,7 +46,7 @@ const EditProfile = ({ navigation }) => {
 
         const token = await AsyncStorage.getItem('token')
         console.log(image)
-        axios({
+        await axios({
             headers: { 'Authorization': 'Bearer ' + token },
             method: 'POST',
             url: `${BASE_URL}/upload_image`,
@@ -99,13 +98,11 @@ const EditProfile = ({ navigation }) => {
                     calories_goal: caloriesGoal
                 }
             })
+            Alert.alert('Edited Successfully');
         } catch (err) {
             console.log(err.response.data)
             return { success: false, error: err }
         }
-
-
-        Alert.alert('Edited Successfully');
 
         setModalVisibility(!modalVisibility)
     }
@@ -155,26 +152,32 @@ const EditProfile = ({ navigation }) => {
                         >
                             <View style={styles.centered}>
                                 <View style={styles.modal}>
-
-                                    <Text style={[style.secondaryText, {fontWeight: '500'}]}>Edit More Info</Text>
-                                    <View style={style.inputContainer}>
+                                    <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setModalVisibility(false)}>
+                                        <FontAwesome name={"close"} size={30} color={colors.purple} />
+                                    </TouchableOpacity>
+                                    <Text style={[style.secondaryText, { fontWeight: '500' }]}>Edit More Info</Text>
+                                    {/* <View style={style.inputContainer}>
                                         <Text style={style.inputLabel}>Weight Goal</Text>
                                         <TextInput
                                             style={style.input}
                                             onChangeText={weightGoal => setWeightGoal(weightGoal)} />
-                                    </View>
-                                    <View style={style.inputContainer}>
+                                    </View> */}
+
+                                    <Input label={"Weight Goal"} handleChange={weightGoal => setWeightGoal(weightGoal)}/>
+                                    <Input label={"Calories Goal"} handleChange={caloriesGoal => setCaloriesGoal(caloriesGoal)}/>
+                                    {/* <View style={style.inputContainer}>
                                         <Text style={style.inputLabel}>Calories Goal</Text>
                                         <TextInput
                                             style={style.input}
                                             onChangeText={caloriesGoal => setCaloriesGoal(caloriesGoal)} />
-                                    </View>
-                                    <TouchableOpacity
+                                    </View> */}
+                                    {/* <TouchableOpacity
                                         style={[style.primaryBtn]}
                                         onPress={editMoreInfo}
                                     >
                                         <Text style={style.primaryTextBtn}>Edit</Text>
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
+                                    <Button text={"Edit"} onPress={editMoreInfo}/>
                                 </View>
                             </View>
                         </Modal> : <></>
