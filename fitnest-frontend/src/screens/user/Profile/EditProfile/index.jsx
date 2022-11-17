@@ -156,27 +156,8 @@ const EditProfile = ({ navigation }) => {
                                         <FontAwesome name={"close"} size={30} color={colors.purple} />
                                     </TouchableOpacity>
                                     <Text style={[style.secondaryText, { fontWeight: '500' }]}>Edit More Info</Text>
-                                    {/* <View style={style.inputContainer}>
-                                        <Text style={style.inputLabel}>Weight Goal</Text>
-                                        <TextInput
-                                            style={style.input}
-                                            onChangeText={weightGoal => setWeightGoal(weightGoal)} />
-                                    </View> */}
-
                                     <Input label={"Weight Goal"} handleChange={weightGoal => setWeightGoal(weightGoal)}/>
                                     <Input label={"Calories Goal"} handleChange={caloriesGoal => setCaloriesGoal(caloriesGoal)}/>
-                                    {/* <View style={style.inputContainer}>
-                                        <Text style={style.inputLabel}>Calories Goal</Text>
-                                        <TextInput
-                                            style={style.input}
-                                            onChangeText={caloriesGoal => setCaloriesGoal(caloriesGoal)} />
-                                    </View> */}
-                                    {/* <TouchableOpacity
-                                        style={[style.primaryBtn]}
-                                        onPress={editMoreInfo}
-                                    >
-                                        <Text style={style.primaryTextBtn}>Edit</Text>
-                                    </TouchableOpacity> */}
                                     <Button text={"Edit"} onPress={editMoreInfo}/>
                                 </View>
                             </View>
