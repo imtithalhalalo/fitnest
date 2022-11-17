@@ -1,5 +1,5 @@
 import { SafeAreaView, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../../../components/Header';
 import ExerciseCard from '../../../../components/ExerciseCard';
 import EmptyState from '../../../../components/EmptyState';

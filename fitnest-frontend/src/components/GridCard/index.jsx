@@ -20,6 +20,7 @@ const GridCard = (props) => {
                     props.sleeping ? (
                         <View style={[styles.column, { paddingTop: '40%' }]}>
                             <Text style={styles.subtitle}>{props.hours}</Text>
+                            <Text style={styles.subtitle}>Hours</Text>
                         </View>
                     ) : (
                         <View style={[styles.row, { paddingTop: '30%' }]}>
