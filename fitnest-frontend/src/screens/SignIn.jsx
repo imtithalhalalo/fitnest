@@ -13,18 +13,19 @@ const SignIn = ({ navigation }) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [error, setError] = useState('')
   const { userData, setUserData } = useContext(UserContext);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const displayError = (message) => {
-    setErrorMessage(message)
+    setError(message)
   }
 
   const handleLogin = async () => {
 
     if (!email || !password) {
       displayError('All fields are required')
+      setModalVisibility(true);
       return
     }
     let user = {
@@ -54,6 +55,9 @@ const SignIn = ({ navigation }) => {
         navigation.navigate("BottomTabs")
       }
       console.log(await AsyncStorage.getItem('token'))
+    }else {
+      setError(result.error)
+      setModalVisibility(true);
     }
 
   }

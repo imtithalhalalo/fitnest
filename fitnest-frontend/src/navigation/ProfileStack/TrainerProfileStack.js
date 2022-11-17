@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import EditProfile from "../../screens/trainer/Profile/EditProfile";
-import Profile from "../../screens/trainer/Profile/Profile";
+import Profile from "../../screens/trainer/Profile/ViewProfile";
 
 
 const TrainerProfileStack = () => {
