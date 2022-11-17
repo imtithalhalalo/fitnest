@@ -1,5 +1,5 @@
 import { Text, SafeAreaView, View, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState, useLayoutEffect } from 'react'
 import { FontAwesome5, MaterialIcons } from "react-native-vector-icons";
 import colors from '../../../../constants/colors';
 import ProfileBox from '../../../../components/ProfileBox';
@@ -8,10 +8,26 @@ import styles from './style';
 import { UserContext } from '../../../../stores/UserContext';
 import Button from '../../../../components/Button';
 import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useTrainerInfo from '../../../../services/user/getTrainerInfo';
 
 const Profile = ({ navigation }) => {
     const { userData } = useContext(UserContext);
 
+    //user info - weight goal - calories goal
+    const [trainerInfo, setTrainerInfo] = useState({});
+    const { response } = useTrainerInfo();
+
+    useLayoutEffect(() => {
+        if (response !== null) {
+            setTrainerInfo(response);
+        }
+    }, [response]);
+
+    const logout = () => {
+        AsyncStorage.removeItem('token');
+        navigation.navigate('SignIn')
+    }
     return (
         <>
             <SafeAreaView style={styles.container}>
