@@ -1,14 +1,26 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Modal } from 'react-native'
 import React, { useState } from 'react'
 import colors from '../../../../constants/colors'
 import { Card } from 'react-native-paper';
 import styles from './style'
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { FontAwesome5, MaterialCommunityIcons } from "react-native-vector-icons";
+import { style } from '../../../../styles/style';
+import { FontAwesome } from "@expo/vector-icons";
+import Input from '../../../../components/Input';
+import Button from '../../../../components/Button';
+import CustomModal from '../../../../components/Modal';
 const Calories = () => {
+    const [foodModalVisibility, setFoodModalVisibility] = useState(false);
+    const [exerciseModalVisibility, setExerciseModalVisibility] = useState(false);
+    const [calories, setCalories] = useState(0);
+    const [caloriesBurned, setCaloriesBurned] = useState(0);
+    const [exerciseTime, setExerciseTime] = useState(0);
     const [userInfo, setUserInfo] = useState({});
     const [remaining, setRemaining] = useState(0)
     const [percentage, setPercentage] = useState(0);
+    const [message, setMessage] = useState('');
+
 
 
     return (
@@ -44,6 +56,29 @@ const Calories = () => {
                                 color={colors.purple} />
                             <Text style={styles.text}>Food</Text>
                         </TouchableOpacity>
+                        {
+                            foodModalVisibility ?
+                                <Modal
+                                    animationType="slide"
+                                    transparent={true}
+                                    visible={foodModalVisibility}
+                                    onRequestClose={() => {
+                                        setFoodModalVisibility(!foodModalVisibility);
+                                    }}
+                                    avoidKeyboard
+                                >
+                                    <View style={styles.centered}>
+                                        <View style={[styles.modal, {height: '55%'}]}>
+                                            <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setFoodModalVisibility(false)}>
+                                                <FontAwesome name={"close"} size={30} color={colors.purple} />
+                                            </TouchableOpacity>
+                                            <Text style={[style.secondaryText, { fontWeight: '500' }]}>Add Your Food Calories</Text>
+                                            <Input handleChange={calories => setCalories(calories)} keyboardType='number-pad' />
+                                            <Button text={"Save"} onPress={() => { addRemainingCalories(calories) }} />
+                                        </View>
+                                    </View>
+                                </Modal> : <></>
+                        }
                         <TouchableOpacity style={styles.iconTitle} onPress={() => setExerciseModalVisibility(true)}>
                             <FontAwesome5
                                 name="fire"
@@ -51,10 +86,45 @@ const Calories = () => {
                                 color={colors.purple} />
                             <Text style={styles.text}>Exercise</Text>
                         </TouchableOpacity>
+
+                        {
+                            exerciseModalVisibility ?
+                                <Modal
+                                    animationType="slide"
+                                    transparent={true}
+                                    visible={exerciseModalVisibility}
+                                    onRequestClose={() => {
+                                        setExerciseModalVisibility(!exerciseModalVisibility);
+                                    }}
+                                >
+                                    <View style={styles.centered}>
+                                        <View style={styles.modal}>
+                                            <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setExerciseModalVisibility(false)}>
+                                                <FontAwesome name={"close"} size={30} color={colors.purple} />
+                                            </TouchableOpacity>
+                                            <Text style={[style.secondaryText, { fontWeight: '500' }]}>Create an Exercise </Text>
+                                            <Input label={"How long (minutes)"} handleChange={exercise_time => setExerciseTime(exercise_time)} keyboardType='number-pad' />
+                                            <Input label={"Calories Burned"} handleChange={calories_burned => setCaloriesBurned(calories_burned)} keyboardType='number-pad' />
+
+                                            <Button text={"Save"} onPress={() => { addRemainingCalories(caloriesBurned) }} />
+                                        </View>
+                                    </View>
+                                </Modal> : <></>
+                        }
                     </View>
 
                 </View>
             </View>
+            {
+                modalVisibility ? (
+                    <CustomModal
+                        onRequestClose={() => { setModalVisibility(!modalVisibility); }}
+                        visible={modalVisibility}
+                        error={message}
+                        onPress={() => setModalVisibility(!modalVisibility)}
+                        text={"Close"} />
+                ) : <></>
+            }
         </Card >
     )
 }
