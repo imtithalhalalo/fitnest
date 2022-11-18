@@ -1,13 +1,15 @@
-import { View, Text, Modal, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 
 import { style } from '../../../../styles/style'
 import colors from '../../../../constants/colors'
 import GridCard from '../../../../components/GridCard'
 import styles from './style'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FontAwesome } from "@expo/vector-icons";
-
+import axios from 'axios';
+import { BASE_URL } from '../../../../variables/global';
 const Sleeping = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
     const [isSleepPickerVisible, showSleepPickerVisibility] = useState(false);
@@ -23,6 +25,30 @@ const Sleeping = () => {
     const [HoursDuration, setHoursDuration] = useState(0);
     const [MinDuration, setMinDuration] = useState(0);
     const [duration , setDuration] = useState('');
+
+    const showSleepPicker = () => {
+        showSleepPickerVisibility(true);
+    };
+
+    const showWokeUpPicker = () => {
+        showWokeUpPickerVisibility(true);
+    };
+
+    const hideHourPicker = () => {
+        showSleepPickerVisibility(false);
+    };
+
+    const handleSleepConfirm = (date) => {
+        setSleepHour(date.getHours())
+        setSleepMin(date.getMinutes())
+        hideHourPicker();
+    };
+
+    const handleWokeUpConfirm = (date) => {
+        setWokeUpHour(date.getHours())
+        setWokeUpMin(date.getMinutes())
+        hideHourPicker();
+    };
 
     return (
         <>
@@ -49,30 +75,30 @@ const Sleeping = () => {
                     >
                         <View style={styles.centered}>
                             <View style={styles.modal}>
-                                <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }}>
+                                <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setModalVisibility(false)}>
                                     <FontAwesome name={"close"} size={30} color={colors.purple} />
                                 </TouchableOpacity>
 
                                 <View style={[styles.row, styles.btnHoursContainer]}>
                                     <Text style={style.inputLabel}>Went to bed</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={showSleepPicker}>
                                         <Text style={styles.hoursBtn}>{`${sleepHour}h ${sleepMin}m`}</Text>
                                     </TouchableOpacity>
                                 </View>
 
                                 <View style={[styles.row, styles.btnHoursContainer]}>
                                     <Text style={style.inputLabel}>Woke Up</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={showWokeUpPicker}>
                                         <Text style={styles.hoursBtn}>{`${wokeUpHour}h ${wokeUpMin}m`}</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => calculateSleepingHoursDuration(sleepHour, sleepMin, wokeUpHour, wokeUpMin)}>
                                     <Text style={styles.btnLabel}>Get Duration </Text>
                                 </TouchableOpacity>
 
                                 
                                 <Text style={[styles.average]}>{`${HoursDuration}h ${MinDuration}m`}</Text>
-                                <TouchableOpacity style={style.primaryBtn}>
+                                <TouchableOpacity style={style.primaryBtn} onPress={addSleepDuration}>
                                     <Text style={style.primaryTextBtn}>Add</Text>
                                 </TouchableOpacity>
                             </View>
@@ -86,10 +112,14 @@ const Sleeping = () => {
             <DateTimePickerModal
                 isVisible={isSleepPickerVisible}
                 mode="time"
+                onConfirm={handleSleepConfirm}
+                onCancel={hideHourPicker}
             />
             <DateTimePickerModal
                 isVisible={isWokeUpPickerVisible}
                 mode="time"
+                onConfirm={handleWokeUpConfirm}
+                onCancel={hideHourPicker}
             />
         </>
 
