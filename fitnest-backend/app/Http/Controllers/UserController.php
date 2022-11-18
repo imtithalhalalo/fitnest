@@ -225,4 +225,23 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function addRemainingCalories(Request $request) {
+        if(!$request->remaining_calories) return;
+        $data = [
+            'remaining_calories' =>  $request->remaining_calories,
+        ];
+        if(Calories::where('user_id', Auth::id())->exists()) {
+            Calories::where('user_id', Auth::id())->update($data);
+        }else {
+            $calories = new Calories();
+            $calories->user_id = Auth::user()->id;
+            $calories->remaining_calories = $request->remaining_calories;
+            $calories->save();
+        }
+
+        return response()->json([
+            'status' => 'added',
+            'calories' => $request->remaining_calories
+        ], 200);
+    }
 }
