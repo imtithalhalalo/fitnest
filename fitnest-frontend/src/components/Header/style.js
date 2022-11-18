@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         borderRadius: 400 / 2 
     },
     text: { 
-        fontSize: 24, 
+        fontSize: 22, 
         fontWeight: '500', 
     }
 })

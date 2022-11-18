@@ -20,6 +20,7 @@ const GridCard = (props) => {
                     props.sleeping ? (
                         <View style={[styles.column, { paddingTop: '40%' }]}>
                             <Text style={styles.subtitle}>{props.hours}</Text>
+                            <Text style={styles.subtitle}>Hours</Text>
                         </View>
                     ) : (
                         <View style={[styles.row, { paddingTop: '30%' }]}>
@@ -27,7 +28,7 @@ const GridCard = (props) => {
                                 name="stats-chart"
                                 size={40}
                                 color={colors.green} />
-                            <Text style={styles.subtitle}>{props.water} Cups</Text>
+                            <Text style={styles.subtitle}>{props.water} ml</Text>
                         </View>
                     )
                 }
