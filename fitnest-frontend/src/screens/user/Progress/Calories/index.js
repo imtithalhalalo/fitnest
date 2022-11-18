@@ -1,14 +1,17 @@
-import { View, Text, Image, TouchableOpacity, Modal } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Image, TextInput, TouchableOpacity, Modal } from 'react-native'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
 import colors from '../../../../constants/colors'
 import { Card } from 'react-native-paper';
 import styles from './style'
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5, MaterialCommunityIcons } from "react-native-vector-icons";
 import { style } from '../../../../styles/style';
 import { FontAwesome } from "@expo/vector-icons";
+import useUserInfo from '../../../../services/user/getUserInfo';
 import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
+import addCalories from '../../../../services/user/addCalories';
 import CustomModal from '../../../../components/Modal';
 const Calories = () => {
     const [foodModalVisibility, setFoodModalVisibility] = useState(false);
@@ -17,10 +20,48 @@ const Calories = () => {
     const [caloriesBurned, setCaloriesBurned] = useState(0);
     const [exerciseTime, setExerciseTime] = useState(0);
     const [userInfo, setUserInfo] = useState({});
+    const { response } = useUserInfo();
     const [remaining, setRemaining] = useState(0)
     const [percentage, setPercentage] = useState(0);
     const [message, setMessage] = useState('');
+    const [modalVisibility, setModalVisibility] = useState(false);
+    useLayoutEffect(() => {
+        if (response !== null) {
+            setUserInfo(response);
+            
+        }
+    }, [response]);
+    
+    const displayMessage = (message) => {
+        setMessage(message)
+        setModalVisibility(true)
+    }
+    const addRemainingCalories = async (calories_burned = null, calories = null) => {
+        let remaining_calories = parseInt(userInfo.calories_goal)
+        console.log(remaining_calories)
+        if (calories) {
+            console.log(calories)
+            remaining_calories = remaining_calories + parseInt(calories);
 
+        } else {
+
+            remaining_calories = remaining_calories - parseInt(calories_burned);
+
+        }
+        setRemaining(remaining_calories)
+        let data = {
+            remaining_calories: remaining_calories,
+        }
+        await addCalories(data)
+        setFoodModalVisibility(false);
+        setExerciseModalVisibility(false);
+        
+        setPercentage(Math.floor((remaining_calories / parseInt(userInfo.calories_goal)) * 100))
+        if (percentage == 100) {
+            displayMessage('Congratulations reaching your calories goal..')
+            setModalVisibility(true)
+        }
+    }
 
 
     return (
