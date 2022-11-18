@@ -1,5 +1,5 @@
-import { View, Text, SafeAreaView, Dimensions, ScrollView } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { View, Text, SafeAreaView, Image, Dimensions, ScrollView, TouchableOpacity, Pressable } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import GridCard from '../../../../components/GridCard'
 import colors from '../../../../constants/colors'
 import { style } from '../../../../styles/style'
@@ -11,18 +11,30 @@ import {
     LineChart,
 } from "react-native-chart-kit";
 import styles from './style'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
+import ProgramCard from '../../../../components/ProgramCard'
+import { Entypo } from "react-native-vector-icons";
 import { UserContext } from '../../../../stores/UserContext'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import PushNotificationsComponent from '../../../../../notifications'
 import { AntDesign } from "@expo/vector-icons";
 import Calories from '../Calories'
 import Sleeping from '../Sleeping'
+import getPrograms from '../../../../services/user/getPrograms'
 import useWaterHistory from '../../../../services/user/getWaterHistory'
+import getWeightAxios from '../../../../services/user/getWeight'
 import Loader from '../../../../components/Loader'
 
 const ViewProgress = ({ navigation }) => {
-
+    const isCarousel = React.useRef(null)
+    const [programs, setPrograms] = useState([])
+    const SLIDER_WIDTH = Dimensions.get('window').width
+    const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
+    const [index, setIndex] = useState(0)
     const { userData } = useContext(UserContext);
     const [loading, isLoading] = useState(true);
     const [weightArray, setWeightArray] = useState([]);
+    const [monthsArray, setMonthsArray] = useState([]);
     const { response, load, error } = useWaterHistory();
 
 
@@ -88,6 +100,45 @@ const ViewProgress = ({ navigation }) => {
                     </Card>
 
                 </SafeAreaView>
+                <View style={{ backgroundColor: colors.white, paddingBottom: '20%', height: 600 }}>
+                    <Carousel
+                        layout="tinder"
+                        layoutCardOffset={9}
+                        ref={isCarousel}
+                        data={programs}
+                        renderItem={renderItem}
+                        inactiveSlideShift={0}
+                        useScrollView={true}
+                        sliderWidth={SLIDER_WIDTH}
+                        itemWidth={ITEM_WIDTH}
+                        onSnapToItem={(index) => setIndex(index)}
+                    />
+                    <Pagination
+                        dotsLength={programs.length}
+                        activeDotIndex={index}
+                        carouselRef={isCarousel}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            marginHorizontal: 0,
+                            backgroundColor: colors.purple
+                        }}
+                        inactiveDotOpacity={0.4}
+                        inactiveDotScale={1}
+                        tappableDots={true}
+                    />
+                    <View style={{
+                        paddingLeft: '5%',
+                        paddingRight: '5%',
+                    }}>
+                        <TouchableOpacity style={styles.barContainer} onPress={() => { navigation.navigate('MealStack') }}>
+                            <Text style={styles.titleLabel}>Suggested Meals</Text>
+                            <Entypo name={"controller-play"} size={35} color={colors.purple} style={{ alignSelf: 'center' }} />
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
             </ScrollView>
         </>
 
