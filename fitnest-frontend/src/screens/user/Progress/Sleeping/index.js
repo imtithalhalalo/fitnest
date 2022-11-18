@@ -50,6 +50,27 @@ const Sleeping = () => {
         hideHourPicker();
     };
 
+    //function to calculate the duration between the slept hour and woke up hour for user
+    const calculateSleepingHoursDuration = (sleepHour, sleepMin, wokeUpHour, wokeUpMin) => {
+        let sleepMinutes = sleepHour * 60 + sleepMin;
+        let wokeUpMinutes = wokeUpHour * 60 + wokeUpMin;
+        let totalHours = 0;
+        let totalMin = 0;
+        if (sleepMinutes > wokeUpMinutes) {
+            totalHours = Math.floor((sleepMinutes - wokeUpMinutes) / 60);
+        } else {
+            totalHours = Math.floor((wokeUpMinutes - sleepMinutes) / 60);
+        }
+        totalMin = totalHours - Math.floor(totalHours)
+        totalMin = totalMin.toFixed(1) * 60;
+        console.log(totalHours)
+        console.log(totalMin)
+        setHoursDuration(totalHours)
+        setMinDuration(totalMin);
+        return { totalHours, totalMin };
+    }
+
+
     return (
         <>
             {/* Sleeping Card */}
