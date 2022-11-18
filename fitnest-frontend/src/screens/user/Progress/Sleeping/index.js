@@ -91,6 +91,24 @@ const Sleeping = () => {
         }
     }
 
+    const getDuration = async () => {
+        const token = await AsyncStorage.getItem('token');
+        try {
+            const res = await axios({
+                headers: { 'Authorization': 'Bearer ' + token },
+                method: 'GET',
+                url: `${BASE_URL}/get_sleep_duration`,
+                
+            })
+            setDuration(res.data['duration'])
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
+    useEffect(() => {
+        getDuration()
+    }, [])
 
     return (
         <>
