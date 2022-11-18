@@ -25,6 +25,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: colors.lighterPurple,
     },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    column: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+    },
     titleLabel: {
         fontSize: 20,
         color: colors.purple,

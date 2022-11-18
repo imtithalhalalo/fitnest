@@ -28,7 +28,7 @@ const GridCard = (props) => {
                                 name="stats-chart"
                                 size={40}
                                 color={colors.green} />
-                            <Text style={styles.subtitle}>{props.water} Cups</Text>
+                            <Text style={styles.subtitle}>{props.water} ml</Text>
                         </View>
                     )
                 }

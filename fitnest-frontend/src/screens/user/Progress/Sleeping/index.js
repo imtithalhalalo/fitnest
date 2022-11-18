@@ -1,15 +1,14 @@
 import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-
 import { style } from '../../../../styles/style'
 import colors from '../../../../constants/colors'
 import GridCard from '../../../../components/GridCard'
-import styles from './style'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FontAwesome } from "@expo/vector-icons";
 import axios from 'axios';
 import { BASE_URL } from '../../../../variables/global';
+import getSleepDuration from '../../../../services/user/getSleepDuration'
 const Sleeping = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
     const [isSleepPickerVisible, showSleepPickerVisibility] = useState(false);
@@ -92,18 +91,8 @@ const Sleeping = () => {
     }
 
     const getDuration = async () => {
-        const token = await AsyncStorage.getItem('token');
-        try {
-            const res = await axios({
-                headers: { 'Authorization': 'Bearer ' + token },
-                method: 'GET',
-                url: `${BASE_URL}/get_sleep_duration`,
-                
-            })
-            setDuration(res.data['duration'])
-        } catch (error) {
-            console.log(error.response.data);
-        }
+        const res = await getSleepDuration();
+        setDuration(res)
     }
 
     useEffect(() => {
