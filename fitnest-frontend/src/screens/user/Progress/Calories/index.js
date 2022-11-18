@@ -1,10 +1,9 @@
-import { View, Text, Image, TextInput, TouchableOpacity, Modal } from 'react-native'
-import React, { useLayoutEffect, useState, useEffect } from 'react'
+import { View, Text, Image, TouchableOpacity, Modal } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react'
 import colors from '../../../../constants/colors'
 import { Card } from 'react-native-paper';
 import styles from './style'
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5, MaterialCommunityIcons } from "react-native-vector-icons";
 import { style } from '../../../../styles/style';
 import { FontAwesome } from "@expo/vector-icons";
