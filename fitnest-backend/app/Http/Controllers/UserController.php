@@ -176,7 +176,8 @@ class UserController extends Controller
     }
 
     //function for user to save meal
-    public function getSavedMeals() {
+    public function getSavedMeals()
+    {
         $id = Auth::id();
         $user = User::find($id);
         $meals = $user->meals;
@@ -196,6 +197,31 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 'done',
+        ], 200);
+    }
+
+    public function addSleepDuration(Request $request)
+    {
+
+        $sleep = new Sleep();
+        $sleep->user_id = Auth::id();
+        $sleep->slept = $request->slept;
+        $sleep->woke_up = $request->woke_up;
+        $sleep->duration = $request->duration;
+        $sleep->save();
+
+        return response()->json([
+            'status' => 'done',
+            'duration' => $sleep->duration
+        ], 200);
+    }
+
+    public function getSleepDuration() {
+        $sleep = Sleep::latest('id')->first();
+
+        return response()->json([
+            'status' => 'done',
+            'duration' => $sleep->duration
         ], 200);
     }
 
