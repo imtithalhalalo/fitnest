@@ -36,6 +36,69 @@ const ViewProgress = ({ navigation }) => {
     const [weightArray, setWeightArray] = useState([]);
     const [monthsArray, setMonthsArray] = useState([]);
     const { response, load, error } = useWaterHistory();
+    const [expoPushToken, setExpoPushToken] = useState("");
+    
+    const getData = async () => {
+        const result = await getPrograms();
+        if (result.success) {
+            isLoading(false)
+            setPrograms(result.data);
+        }
+    }
+
+    useEffect(() => {
+        getData()
+
+        if (weightArray.length == 0) {
+            getWeight()
+        }
+        const timeId = setTimeout(() => {
+            isLoading(true)
+        }, 10000);
+        clearTimeout(timeId)
+    }, [])
+
+    let data = {
+        labels: monthsArray,
+        datasets: [
+            {
+                data: weightArray,
+                color: (opacity = 1) => `rgba(134, 125, 234, ${opacity})`,
+            }
+        ],
+    };
+
+    
+
+    const renderItem = ({ item }) => (
+        <ProgramCard
+            id={item.id}
+            title={item.title}
+            image={item.image}
+            num_weeks={item.num_weeks} />
+    )
+
+    const getWeight = async () => {
+        try {
+            const weightData = await getWeightAxios();
+            if (weightData.success) {
+                do {
+                    weightData.data.map(({ weight }) => (weightArray.push(weight)))
+                    weightData.data.map(({ created_at }) => (monthsArray.push(parseInt(parseInt(new Date(created_at).getMonth()) + 1) + `/` + new Date(created_at).getDate())))
+                    console.log(weightArray)
+                    setWeightArray(weightArray.slice(0, 5))
+                    setMonthsArray(monthsArray.slice(0, 5))
+                    console.log(monthsArray)
+
+                } while (weightArray.length == 0)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+
+
+    }
 
 
     return (
