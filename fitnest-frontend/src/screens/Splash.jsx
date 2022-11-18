@@ -1,7 +1,6 @@
 import { Text, Image, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
 import { style } from '../styles/style';
-import colors from '../constants/colors';
 import Button from '../components/Button';
 
 const Splash = ({ navigation }) => {

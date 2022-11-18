@@ -1,29 +1,49 @@
 import { FlatList, SafeAreaView, View } from 'react-native'
-import React, { useState, useLayoutEffect, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import colors from '../../../../constants/colors';
 import Header from '../../../../components/Header';
 import Search from '../../../../components/Search';
 import ButtonToggleGroup from 'react-native-button-toggle-group';
 import EmptyState from '../../../../components/EmptyState';
 import MealCard from '../../../../components/MealCard';
-import useAxios from '../../../../services/user/getMeals';
 import Loader from '../../../../components/Loader';
 import { styles } from '../../../../components/MealCard/style';
 import { style } from '../../../../styles/style';
+import getMeals from '../../../../services/user/getMeals';
 
 const Meals = () => {
-    
-    const [meals, setMeals] = useState([]);
+
     const [category, setCategory] = useState('Breakfast');
-    const { response, loading, error } = useAxios({category});
     const [search, setSearch] = useState('');
     const [filteredMeals, setFilteredMeals] = useState([]);
-    
-    useEffect(() => {
-        if (response !== null) {
-            setMeals(response);
+    const [meals, setMeals] = useState([]);
+    const [loading, isLoading] = useState(true);
+
+    const getData = async () => {
+        const result = await getMeals(category);
+        console.log(result.data)
+        if (result.success) {
+            isLoading(false)
+            setMeals(result.data);
+            setFilteredMeals(result.data)
         }
-    }, []);
+    }
+    useEffect(() => {
+        getData()
+    }, [])
+    
+    const handleSearch = (keyword) => {
+        if (keyword) {
+            const filteredData = meals.filter((item) =>
+                item.title.toLowerCase().includes(keyword.toLowerCase())
+            );
+            setFilteredMeals(filteredData);
+            setSearch(keyword)
+        } else {
+            setFilteredMeals(meals)
+            setSearch(keyword)
+        }
+    }
 
     const renderItem = ({ item }) => (
         <MealCard
@@ -36,7 +56,8 @@ const Meals = () => {
     return (
         <SafeAreaView style={style.mainContainer}>
             <Header text={"My Suggested Meals"} />
-            <Search />
+            <Search onChangeText={(keyword) => { handleSearch(keyword) }}
+                onClear={(keyword) => handleSearch('')} value={search} />
 
             <View style={{ width: '98%', alignSelf: 'center', marginTop: '5%', marginBottom: '3%' }}>
                 <ButtonToggleGroup
@@ -55,11 +76,11 @@ const Meals = () => {
                 loading ?
                     <Loader />
                     :
-                    response.length == 0 ? (
-                        <EmptyState image={require("../../../../../assets/images/healthyfood.png")} description={"This section will contain available healthy meals "} title={"No meals"}/>
+                    filteredMeals.length == 0 ? (
+                        <EmptyState image={require("../../../../../assets/images/healthyfood.png")} description={"This section will contain available healthy meals "} title={"No meals"} />
                     ) :
                         <FlatList
-                            data={response}
+                            data={filteredMeals}
                             renderItem={renderItem}
                             keyExtractor={item => item.id}
                             numColumns={2}
