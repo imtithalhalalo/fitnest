@@ -38,7 +38,34 @@ const Weight = ({ navigation }) => {
     ],
   };
 
+  const getWeight = async () => {
+    const weightData = await getWeightAxios();
+    if (weightData.success) {
+      do {
+        setWeightArray([])
+        weightData.data.map(({ weight }) => (weightArray.push(weight)))
+        weightData.data.map(({ created_at }) => (monthsArray.push(parseInt(parseInt(new Date(created_at).getMonth()) + 1) + `/` + new Date(created_at).getDate())))
+        console.log(weightArray)
+        setWeightArray(weightArray.slice(0,5))
+        setMonthsArray(monthsArray.slice(0,5))
+        console.log(monthsArray)
 
+      } while (weightArray.length == 0)
+    }
+
+  }
+  useEffect(() => {
+
+    if (weightArray.length == 0) {
+      getWeight()
+    }
+    const timeId = setTimeout(() => {
+      setLoading(true)
+    }, 10000);
+    clearTimeout(timeId)
+    console.log(monthsArray)
+    console.log(weightArray)
+  }, [])
 
   const addWeight = async () => {
     const token = await AsyncStorage.getItem('token');
