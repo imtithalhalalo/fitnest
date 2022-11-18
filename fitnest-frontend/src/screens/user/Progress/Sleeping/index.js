@@ -70,6 +70,27 @@ const Sleeping = () => {
         return { totalHours, totalMin };
     }
 
+    const addSleepDuration = async () => {
+        let data = {
+            slept: `${sleepHour}:${sleepMin}`,
+            woke_up: `${wokeUpHour}:${wokeUpMin}`,
+            duration: `${HoursDuration}:${MinDuration}`
+        }
+        const token = await AsyncStorage.getItem('token');
+        try {
+            await axios({
+                headers: { 'Authorization': 'Bearer ' + token },
+                method: 'POST',
+                url: `${BASE_URL}/add_sleep_duration`,
+                data: data,
+            })
+            Alert.alert('Added Successfully!')
+        } catch (error) {
+            console.log(error.response.data);
+            Alert.alert('Please get duration ...')
+        }
+    }
+
 
     return (
         <>
