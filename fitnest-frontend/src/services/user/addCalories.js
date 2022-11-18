@@ -3,24 +3,24 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { BASE_URL } from '../../variables/global';
 
-const saveMeal = async (meal) => {
-    
+const addCalories = async (user) => {
+
     const data = {
-        meal_id: meal.meal_id,
+        remaining_calories: user.remaining_calories,
     };
     const token = await AsyncStorage.getItem('token');
-    axios({
-            headers: { 'Authorization':'Bearer '+ token },
+    try {
+        const res = await axios({
+            headers: { 'Authorization': 'Bearer ' + token },
             method: 'POST',
-            url: `${BASE_URL}/save_meal`,
+            url: `${BASE_URL}/remaining_calories`,
             data: data,
-    })
-    .then(function (res) {
-        Alert.alert(res.data.status)
-    })
-    .catch(function () {
+        })
+        return res.data
+    }catch (err) {
         Alert.alert('Try again! ')
-    });
+    }
+    
 }
 
-export default saveMeal;
+export default addCalories;

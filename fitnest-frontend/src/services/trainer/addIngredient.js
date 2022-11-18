@@ -16,7 +16,6 @@ const addIngredient = async (ingredient) => {
             data:data,
     })
     .then(function (response) {
-        Alert.alert('Added Successfully! ')
         return true
     })
     .catch(function (error) {

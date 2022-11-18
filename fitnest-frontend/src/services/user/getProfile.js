@@ -2,30 +2,28 @@ import { useState, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../variables/global';
 
-const useGetMeal = ({ id }) => {
-    const [response, setResponse] = useState(null);
+const useAxios = () => {
+    const [res, setResponse] = useState(null);
     const [error, setError] = useState('');
     const [loading, setloading] = useState(true);
-
-    const getMeals = () => {
-
+    
+    const getProfile = () => {
         axios({
             method: 'GET',
-            url: `${BASE_URL}/meals/${id}`,
-            headers: { 'Content-Type': 'multipart/form-data;' },
+            url: `${BASE_URL}/profile`,
         }).then(response => {
-            setResponse(response.data)
+            setResponse(response.data['user'])
+            console.log(response.data['user'])
             setloading(false)
         }).catch((err) => {
             setError(err)
         })
-        
     }
     useLayoutEffect(() => {
-        getMeals();
-    }, [response, id, error, loading]);
+        getProfile();
+    }, [res, error, loading]);
 
-    return { response, error, loading };
+    return { res, error, loading };
 };
 
-export default useGetMeal;
+export default useAxios;

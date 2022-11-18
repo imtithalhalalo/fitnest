@@ -1,48 +1,40 @@
 import { SafeAreaView, FlatList } from 'react-native'
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../../../components/Header';
-import { BASE_URL } from '../../../../variables/global';
 import ExerciseCard from '../../../../components/ExerciseCard';
-import axios from 'axios';
 import EmptyState from '../../../../components/EmptyState';
 import { style } from '../../../../styles/style';
 import Loader from '../../../../components/Loader';
+import getSteps from '../../../../services/user/getSteps';
 
 const WorkoutSteps = ({ route }) => {
   const { program_id, program_name } = route.params;
-  const [loading, setLoading] = useState(true)
 
   const [steps, setSteps] = useState([])
 
-  useLayoutEffect( () => {
+  const [loading, isLoading] = useState(true);
 
-    const getSteps = async () => {
-
-      await axios({
-        method: 'GET',
-        url: `${BASE_URL}/programs/exercise/${program_id}`,
-        headers: { 'Content-Type': 'multipart/form-data;' },
-      }).then(response => {
-        setSteps(response.data['exercise']);
-        console.log(response.data)
-        setLoading(false)
-      }).catch((err) => {
-        console.log(err);
-      })
+  const getData = async () => {
+    const result = await getSteps(program_id);
+    console.log(result.data)
+    if (result.success) {
+      isLoading(false)
+      setSteps(result.data);
     }
-    getSteps()
-
+  }
+  useEffect(() => {
+    getData()
   }, [])
   return (
     <SafeAreaView style={style.mainContainer}>
-      <Header text={ program_name + " Exercise"} back={"back"}/>
+      <Header text={program_name + " Exercise"} back={"back"} />
 
       {
         loading ?
           <Loader />
           :
           steps.length == 0 ? (
-            <EmptyState image={require("../../../../../assets/images/gym.png")} description={"This section will contain all steps for this program "} title={"No Steps"}/>
+            <EmptyState image={require("../../../../../assets/images/gym.png")} description={"This section will contain all steps for this program "} title={"No Steps"} />
           ) :
             <FlatList
               data={steps}
