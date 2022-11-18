@@ -1,9 +1,10 @@
-import { SafeAreaView, Text, View } from 'react-native'
-import React, { useContext, useState } from 'react'
+import { SafeAreaView, Text, View, Modal, TouchableOpacity, TextInput, Alert } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from '../../../../components/Button'
 import colors from '../../../../constants/colors';
 import Header from '../../../../components/Header';
 import styles from './style';
+import getWeightAxios from '../../../../services/user/getWeight';
 import {
   LineChart,
 } from "react-native-chart-kit";
@@ -12,13 +13,19 @@ import { style } from '../../../../styles/style';
 import { FontAwesome5 } from "react-native-vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { BASE_URL } from '../../../../variables/global';
 import Loader from '../../../../components/Loader';
+import { FontAwesome } from "@expo/vector-icons";
 const Weight = ({ navigation }) => {
 
   const [weightArray, setWeightArray] = useState([]);
+  const [date, setDate] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const { userData } = useContext(UserContext);
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [weight, setWeight] = useState(0)
   const [monthsArray, setMonthsArray] = useState([]);
   const [loading, setLoading] = useState(false);
   let data = {
@@ -32,6 +39,43 @@ const Weight = ({ navigation }) => {
   };
 
 
+
+  const addWeight = async () => {
+    const token = await AsyncStorage.getItem('token');
+    try {
+      await axios({
+        headers: { 'Authorization': 'Bearer ' + token },
+        method: 'POST',
+        url: `${BASE_URL}/add_weight`,
+
+        data: {
+          weight: weight,
+          date: date
+        }
+      })
+      setLoading(true)
+    } catch (err) {
+      console.log(err.response.data)
+      return { success: false, error: err }
+    }
+
+
+    Alert.alert('Added Successfully');
+
+    setModalVisibility(!modalVisibility)
+
+    setLoading(false)
+    weightArray.reverse().pop()
+    weightArray.reverse()
+    try{
+      setWeightArray([...weightArray, weight])
+      setMonthsArray([...monthsArray, parseInt(parseInt(new Date().getMonth()) + 1) + `/` + new Date(created_at).getDate()])
+    }catch (err) {
+      console.log(err)
+    }
+    
+    console.log(data)
+  }
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -90,6 +134,44 @@ const Weight = ({ navigation }) => {
         <View style={[style.mainContainer]}>
           <Button text={"Go Back"} onPress={() => { navigation.pop() }} />
         </View>
+        {
+          modalVisibility ?
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisibility}
+              onRequestClose={() => {
+                setModalVisibility(!modalVisibility);
+              }}
+              avoidKeyboard
+            >
+              <View style={styles.centered}>
+                <View style={styles.modal}>
+                  <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setModalVisibility(false)}>
+                    <FontAwesome name={"close"} size={30} color={colors.purple} />
+                  </TouchableOpacity>
+                  <Text style={[style.secondaryText, { fontWeight: '500' }]}>Add Your Weight</Text>
+
+                  <View style={style.inputContainer}>
+                    <Text style={style.inputLabel}>Weight lbs</Text>
+                    <TextInput
+                      style={style.input}
+                      onChangeText={weight => setWeight(weight)} />
+                  </View>
+                  <TouchableOpacity onPress={showDatePicker}>
+                    <Text style={[style.secondaryText, { textAlign: 'left', fontSize: 16 }]}>Choose Date</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={[style.primaryBtn]}
+                    onPress={addWeight}
+                  >
+                    <Text style={style.primaryTextBtn}>Add</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal> : <></>
+        }
       </SafeAreaView>
     </>
 
