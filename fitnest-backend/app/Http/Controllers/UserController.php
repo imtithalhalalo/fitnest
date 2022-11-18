@@ -115,7 +115,22 @@ class UserController extends Controller
         ]);
     }
 
+    public function getWaterLastWeek() {
+        $date = Carbon::today()->subDays(7);
+        $water = WaterIntake::where('created_at', '>=', $date)->get();
+        return $water;
+    }
 
+    public function getWaterIntake() {
+        $water_history = WaterIntake::where('user_id', '=', Auth::id())
+            ->select('user_id','water_intake', DB::raw('DATE(`created_at`)'))
+            ->get();
+        $num = 0;
+        foreach ($water_history as $key => $value) {
+            $num += $value->water_intake;
+        }
+        return $num;
+    }
 
     public function getWeightLast5Month() {
         return Weight::select('*')
