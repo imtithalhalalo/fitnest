@@ -20,6 +20,12 @@ const WaterConsumption = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [customAmount, setCustomAmount] = useState(0);
 
+  //function to display day of the week as string
+  let dayOfTheWeek = (timestamp) => {
+    const weekday = ["S", "M", "T", "W", "T", "F", "S"];
+    return weekday[new Date(timestamp).getDay()];
+  };
+
   //function to get water intake and add data to array
   const getWaterConsumption = async () => {
     const waterData = await getWaterIntake();
@@ -29,7 +35,7 @@ const WaterConsumption = ({ navigation }) => {
       do {
         setWaterArray([])
         waterData.data.map(({ water_intake }) => (waterArray.push(water_intake)))
-        waterData.data.map(({ created_at }) => (daysArray.push(created_at)))
+        waterData.data.map(({ created_at }) => (daysArray.push(dayOfTheWeek(new Date(created_at)))))
 
         setWaterArray(waterArray)
         setDaysArray(daysArray)
@@ -44,7 +50,6 @@ const WaterConsumption = ({ navigation }) => {
       getWaterConsumption()
     }
   }, [])
-
   let data = {
     labels: daysArray,
     datasets: [
