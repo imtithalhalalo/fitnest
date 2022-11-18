@@ -1,4 +1,4 @@
-import { Dimensions, SafeAreaView, Text, TouchableOpacity, View, Modal } from 'react-native'
+import { Dimensions, SafeAreaView, Text, TouchableOpacity, View, Modal, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Button from '../../../../components/Button'
 import {
@@ -12,6 +12,9 @@ import getWaterIntake from '../../../../services/user/getWaterStats';
 import Loader from '../../../../components/Loader';
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_URL } from '../../../../variables/global';
 import Input from '../../../../components/Input';
 const WaterConsumption = ({ navigation }) => {
   const [waterArray, setWaterArray] = useState([]);
@@ -45,6 +48,35 @@ const WaterConsumption = ({ navigation }) => {
     }
 
   }
+  const addWater = async (amount) => {
+    const token = await AsyncStorage.getItem('token');
+    try {
+      await axios({
+        headers: { 'Authorization': 'Bearer ' + token },
+        method: 'POST',
+        url: `${BASE_URL}/add_water_intake`,
+
+        data: {
+          water_intake: amount,
+        }
+      })
+      setLoading(true)
+    } catch (err) {
+      console.log(err.response.data)
+      return { success: false, error: err }
+    }
+
+    try {
+      setLoading(true)
+      Alert.alert('Added Successfully');
+
+      setModalVisibility(!modalVisibility)
+      setLoading(false)
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
   useEffect(() => {
     if (waterArray.length == 0) {
       getWaterConsumption()
@@ -65,7 +97,7 @@ const WaterConsumption = ({ navigation }) => {
           <Header text={"Water Consumption"} back={"back"} />
         </View>
         {
-          data.length == 0 || loading ? (
+          waterArray.length == 0 || loading ? (
             <Loader />
           ) : (
             <>
