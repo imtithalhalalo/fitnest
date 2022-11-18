@@ -1,5 +1,5 @@
-import { Dimensions, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { Dimensions, SafeAreaView, Text, TouchableOpacity, View, Modal } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../../components/Button'
 import {
   BarChart,
@@ -8,18 +8,48 @@ import colors from '../../../../constants/colors';
 import { style } from '../../../../styles/style';
 import Header from '../../../../components/Header';
 import styles from './style';
+import getWaterIntake from '../../../../services/user/getWaterStats';
 import Loader from '../../../../components/Loader';
 import { AntDesign } from "@expo/vector-icons";
-
-
+import { FontAwesome } from "@expo/vector-icons";
+import Input from '../../../../components/Input';
 const WaterConsumption = ({ navigation }) => {
+  const [waterArray, setWaterArray] = useState([]);
+  const [daysArray, setDaysArray] = useState([]);
+  const [modalVisibility, setModalVisibility] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [customAmount, setCustomAmount] = useState(0);
+
+  //function to get water intake and add data to array
+  const getWaterConsumption = async () => {
+    const waterData = await getWaterIntake();
+    
+    if (waterData.success) {
+      console.log(waterData)
+      do {
+        setWaterArray([])
+        waterData.data.map(({ water_intake }) => (waterArray.push(water_intake)))
+        waterData.data.map(({ created_at }) => (daysArray.push(created_at)))
+
+        setWaterArray(waterArray)
+        setDaysArray(daysArray)
+      } while (waterArray.length == 0)
+
+
+    }
+
+  }
+  useEffect(() => {
+    if (waterArray.length == 0) {
+      getWaterConsumption()
+    }
+  }, [])
 
   let data = {
-    labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    labels: daysArray,
     datasets: [
       {
-        data: [60, 90, 70, 50, 80]
+        data: waterArray
       }
     ]
   };
@@ -35,7 +65,7 @@ const WaterConsumption = ({ navigation }) => {
           ) : (
             <>
               <View style={{ marginTop: '20%' }}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalVisibility(true)}>
                   <Text style={[style.secondaryText, { marginBottom: '10%' }]}><AntDesign name="plus" size={18} color={colors.purple} style={{ marginRight: '5%', marginBottom: '10%', }} /> Add Water Amount</Text>
                 </TouchableOpacity>
 
@@ -63,6 +93,42 @@ const WaterConsumption = ({ navigation }) => {
               </View>
             </>
           )
+        }
+
+        {
+          modalVisibility ?
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisibility}
+              onRequestClose={() => {
+                setModalVisibility(!modalVisibility);
+              }}
+              avoidKeyboard
+            >
+              <View style={styles.centered}>
+                <View style={styles.modal}>
+                  <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setModalVisibility(false)}>
+                    <FontAwesome name={"close"} size={30} color={colors.purple} />
+                  </TouchableOpacity>
+                  <Text style={[style.secondaryText, { fontWeight: '500' }]}>Add today's water intake</Text>
+
+                  <View style={style.inputContainer}>
+                    <Text style={[style.inputLabel, { textAlign: 'center' }]}>Water ml</Text>
+                  </View>
+                  <View style={styles.row}>
+                    <View style={{ width: '50%' }}>
+                      <Button text={"Bottle 500 ml"} onPress={() => { addWater(500) }} />
+                    </View>
+                    <View style={{ width: '50%' }}>
+                      <Button text={"Cup 330 ml"} onPress={() => { addWater(330) }} />
+                    </View>
+                  </View>
+                  <Input handleChange={amount => setCustomAmount(amount)} label={"Custom Amount"} />
+                  <Button text={"Save"} onPress={() => { addWater(customAmount) }} />
+                </View>
+              </View>
+            </Modal> : <></>
         }
         <View style={[style.mainContainer, { marginTop: '10%' }]}>
           <Button text={"Go Back"} onPress={() => { navigation.pop() }} />
