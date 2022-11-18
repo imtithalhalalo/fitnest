@@ -38,6 +38,18 @@ const Weight = ({ navigation }) => {
     ],
   };
 
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    setDate(date)
+    hideDatePicker();
+  };
   const getWeight = async () => {
     const weightData = await getWeightAxios();
     if (weightData.success) {
