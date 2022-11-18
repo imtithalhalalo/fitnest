@@ -1,13 +1,17 @@
 import { View, Text, Modal, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
+
 import { style } from '../../../../styles/style'
 import colors from '../../../../constants/colors'
 import GridCard from '../../../../components/GridCard'
 import styles from './style'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { FontAwesome } from "@expo/vector-icons";
 
 const Sleeping = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
+    const [isSleepPickerVisible, showSleepPickerVisibility] = useState(false);
+    const [isWokeUpPickerVisible, showWokeUpPickerVisibility] = useState(false);
 
 
     const [wokeUpHour, setWokeUpHour] = useState(0);
@@ -77,6 +81,16 @@ const Sleeping = () => {
 
                     </Modal> : <></>
             }
+
+            {/* two pickers for woke up and sleep duration of user */}
+            <DateTimePickerModal
+                isVisible={isSleepPickerVisible}
+                mode="time"
+            />
+            <DateTimePickerModal
+                isVisible={isWokeUpPickerVisible}
+                mode="time"
+            />
         </>
 
     )
