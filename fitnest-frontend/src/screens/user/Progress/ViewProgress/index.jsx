@@ -77,6 +77,34 @@ const ViewProgress = ({ navigation }) => {
             image={item.image}
             num_weeks={item.num_weeks} />
     )
+    // send notification function
+    const sendNotification = async () => {
+        const pushToken = await AsyncStorage.getItem('push_token')
+        const message = {
+            to: pushToken,
+            sound: "default",
+            title: `Stay Hydrated`,
+            body: `Don't forget to drink water every two hours ...`
+        };
+
+        await fetch("https://exp.host/--/api/v2/push/send", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Accept-encoding": "gzip, deflate",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(message),
+        });
+    };
+
+    const start = 13 * 60 + 5;
+    const end = 12 * 60 + 17;
+    const dateNow = new Date();
+    const now = dateNow.getHours() * 60 + dateNow.getMinutes();
+
+    if (start <= now && now <= end)
+        sendNotification();
 
     const getWeight = async () => {
         try {
@@ -201,6 +229,10 @@ const ViewProgress = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
+                    <PushNotificationsComponent
+                        expoPushToken={expoPushToken}
+                        setExpoPushToken={setExpoPushToken}
+                    />
                 </View>
             </ScrollView>
         </>
