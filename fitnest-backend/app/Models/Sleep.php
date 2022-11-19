@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WaterIntake extends Model
+class Sleep extends Model
 {
     use HasFactory;
-    protected $table = 'water_intake'; 
-    
+    protected $table = 'sleep_duration'; 
+
     protected $fillable = [
         'user_id',
-        'water_intake',
+        'slept',
+        'woke_up',
+        'duration',
     ];
 }

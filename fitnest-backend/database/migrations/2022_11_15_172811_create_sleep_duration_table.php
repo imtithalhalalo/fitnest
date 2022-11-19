@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWaterIntakeTable extends Migration
+class CreateSleepDurationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateWaterIntakeTable extends Migration
      */
     public function up()
     {
-        Schema::create('water_intake', function (Blueprint $table) {
+        Schema::create('sleep_duration', function (Blueprint $table) {
             $table->id();
-            $table->integer('water_intake');
-            $table->foreignId("user_id")->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('slept')->nullable();
+            $table->string('woke_up')->nullable();
+            $table->string('duration')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateWaterIntakeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('water_intake');
+        Schema::dropIfExists('sleep_duration');
     }
 }

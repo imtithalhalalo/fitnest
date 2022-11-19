@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Calories;
 use App\Models\Done;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WaterIntake;
 use App\Models\Save;
+use App\Models\Sleep;
 use App\Models\Weight;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -81,12 +85,29 @@ class UserController extends Controller
     //function to add water intake by user
     public function addWaterIntake(Request $request)
     {
+        //check if already exist
+        if (
+            WaterIntake::where('user_id', '=', Auth::id())->exists()
+            && WaterIntake::where(DB::raw('DATE(`created_at`)'),  Carbon::now()->format('Y-m-d'))->exists()
+        ) {
+            $water_intake_exists = WaterIntake::where('user_id', '=', Auth::id())
+            ->where(DB::raw('DATE(`created_at`)'),  Carbon::now()->format('Y-m-d'))->get();
+            foreach($water_intake_exists as $key => $value){
+                $value->water_intake += $request->water_intake;
+                WaterIntake::where('user_id', Auth::id())
+                ->where(DB::raw('DATE(`created_at`)'),  Carbon::now()->format('Y-m-d'))
+                ->update(array('water_intake' => $value->water_intake));
+            }
 
-        $water = WaterIntake::create([
-            'user_id' => Auth::id(),
-            'water_intake' => $request->water_intake,
-            'date' => $request->date
-        ]);
+            
+            
+            return $water_intake_exists;
+        }
+
+        $water = new WaterIntake;
+        $water->user_id = Auth::id();
+        $water->water_intake = $request->water_intake;
+        $water->save();
 
         return response()->json([
             'status' => 'success',
@@ -95,13 +116,20 @@ class UserController extends Controller
     }
 
     public function getWaterLastWeek() {
-        $previous_week = strtotime("-1 week +1 day");
-        $start_week = strtotime("last sunday", $previous_week);
-        $end_week = strtotime("next sunday", $start_week);
-        $start_week = date("Y-m-d", $start_week);
-        $end_week = date("Y-m-d", $end_week);
+        $date = Carbon::today()->subDays(7);
+        $water = WaterIntake::where('created_at', '>=', $date)->get();
+        return $water;
+    }
 
-        return WaterIntake::select('*')->where('user_id', Auth::id())->whereBetween('created_at', [$start_week, $end_week])->get();
+    public function getWaterIntake() {
+        $water_history = WaterIntake::where('user_id', '=', Auth::id())
+            ->select('user_id','water_intake', DB::raw('DATE(`created_at`)'))
+            ->get();
+        $num = 0;
+        foreach ($water_history as $key => $value) {
+            $num += $value->water_intake;
+        }
+        return $num;
     }
 
     public function getWeightLast5Month() {
@@ -127,6 +155,16 @@ class UserController extends Controller
 
     //function for user to save meal
     public function saveMeal(Request $request) {
+
+        //check if already exist
+        if (
+            Save::where('user_id', '=', Auth::id())->exists()
+            && Save::where('meal_id', '=', $request->meal_id)->exists()
+        ) {
+            return response()->json([
+                'status' => 'already saved, check your saved meals',
+            ], 200);
+        }
         $save = new Save;
         $save->user_id = Auth::id();
         $save->meal_id = $request->meal_id;
@@ -138,7 +176,7 @@ class UserController extends Controller
     }
 
     //function for user to save meal
-    public function savedMeals()
+    public function getSavedMeals()
     {
         $id = Auth::id();
         $user = User::find($id);
@@ -162,4 +200,48 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function addSleepDuration(Request $request)
+    {
+
+        $sleep = new Sleep();
+        $sleep->user_id = Auth::id();
+        $sleep->slept = $request->slept;
+        $sleep->woke_up = $request->woke_up;
+        $sleep->duration = $request->duration;
+        $sleep->save();
+
+        return response()->json([
+            'status' => 'done',
+            'duration' => $sleep->duration
+        ], 200);
+    }
+
+    public function getSleepDuration() {
+        $sleep = Sleep::latest('id')->first();
+
+        return response()->json([
+            'status' => 'done',
+            'duration' => $sleep->duration
+        ], 200);
+    }
+
+    public function addRemainingCalories(Request $request) {
+        if(!$request->remaining_calories) return;
+        $data = [
+            'remaining_calories' =>  $request->remaining_calories,
+        ];
+        if(Calories::where('user_id', Auth::id())->exists()) {
+            Calories::where('user_id', Auth::id())->update($data);
+        }else {
+            $calories = new Calories();
+            $calories->user_id = Auth::user()->id;
+            $calories->remaining_calories = $request->remaining_calories;
+            $calories->save();
+        }
+
+        return response()->json([
+            'status' => 'added',
+            'calories' => $request->remaining_calories
+        ], 200);
+    }
 }
