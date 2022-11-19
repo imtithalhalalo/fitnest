@@ -1,4 +1,4 @@
-<img src="./readme/title1.svg"/>
+img src="./readme/title1.svg"/>
 
 <div align="center">
 
@@ -37,8 +37,15 @@
 
 | Splash  | SignUp  | LogIn  | Landing  |
 | -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/signup.svg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.svg) |![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.svg)
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/signup.svg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.svg) |![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/profile.svg)
 
+| Landing  | Exercises  | Meals  | Weight  |
+| -----------------| -----|-----|-----|
+| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.svg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/exercises.svg) |![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/meals.svg) |![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/weight.svg)
+
+| Chat  | Chat with Trainer  |
+| -----------------| -----|
+| ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/chats.svg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/chat.svg)
 
 
 
@@ -91,7 +98,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 2. Navigate to frontend-fitnest / Install NPM packages
    ```sh
-   cd frontend-fitnest
+   cd fitnest-frontend
    npm install
    ```
 3. Run the start up command
