@@ -10,6 +10,7 @@ use App\Models\Meal;
 use App\Models\Ingredient;
 use App\Models\MealIngredient;
 use App\Models\Save;
+use App\Models\Tips;
 use App\Models\TrainerInfo;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,6 +80,17 @@ class TrainerController extends Controller {
         $meal->calories = $request->calories;
         $meal->image = $request->image;
         $meal->save();
+
+        $meal_id = $meal->id;
+
+        //meal tips
+        $tips = json_decode($request->tips);
+        foreach($tips as $tip) {
+            $req = new Tips;
+            $req->meal_id = $meal_id;
+            $req->tip = $tip->text;
+            $req->save();
+        }
 
         if ($request->ingredients != []) {
             // meal ingredients
