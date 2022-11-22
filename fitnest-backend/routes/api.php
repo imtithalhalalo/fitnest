@@ -27,6 +27,7 @@ Route::group(["middleware" => "cors"], function () {
         Route::get('/get_user_info', [UserController::class, 'getInfo'])->name('get-user-info');
         Route::post('/remaining_calories', [UserController::class, 'addRemainingCalories'])->name('remaining-calories');
         Route::get('/water_history', [UserController::class, 'getWaterIntake'])->name('water-intake');
+        Route::get('/personal_plans', [UserController::class, 'getPersonalPlans'])->name('get-programs');
     });
 
     Route::group(["middleware" => "trainer.role"], function () {
