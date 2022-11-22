@@ -13,8 +13,9 @@ import Button from '../../../../components/Button';
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import updateProfile from '../../../../services/user/updateProfile';
 const EditProfile = ({ navigation }) => {
-    const { userData } = useContext(UserContext);
+    const { userData, setUserData } = useContext(UserContext);
     const [name, setName] = useState('');
     const [image, setImage] = useState(userData.image);
     const [email, setEmail] = useState('');
@@ -43,32 +44,8 @@ const EditProfile = ({ navigation }) => {
         if (!res.cancelled) {
 
             setImage(res.uri);
-            console.log(userData.image)
         }
 
-        const token = await AsyncStorage.getItem('token')
-        console.log(image)
-        await axios({
-            headers: { 'Authorization': 'Bearer ' + token },
-            method: 'POST',
-            url: `${BASE_URL}/upload_image`,
-
-            data: {
-                image: image,
-                id: userData.id
-            },
-        })
-            .then(function () {
-                Alert.alert('Added Successfully! ')
-                console.log(image)
-                setImage(image)
-                return true
-            })
-            .catch(function (error) {
-                console.log(error.response.data)
-                Alert.alert('Try again! ')
-                return false
-            });
 
     }
 
@@ -85,6 +62,7 @@ const EditProfile = ({ navigation }) => {
             image: image
         }
         updateProfile(data)
+        setUserData(data)
     }
 
     const showPicker = () => {
@@ -133,15 +111,7 @@ const EditProfile = ({ navigation }) => {
                 </View>
                 <View style={styles.imgContainer}>
                     <View>
-
-                        {image ? (
-                            <Image source={{ uri: image }} style={styles.profileImg} />
-
-                        ) : (
-                            <Image source={require('../../../../../assets/images/profile.jpg')} style={styles.profileImg} />
-                        )
-
-                        }
+                        <Image source={{ uri: image }} style={styles.profileImg} />
                     </View>
                     <View style={styles.bar}>
                         <TouchableOpacity onPress={uploadImage}>

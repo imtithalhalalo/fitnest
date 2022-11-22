@@ -19,6 +19,7 @@ const updateProfile = async (user) => {
             data:data,
     })
     .then(function (response) {
+        Alert.alert('Updated')
         return true
     })
     .catch(function (error) {
