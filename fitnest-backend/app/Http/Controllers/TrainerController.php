@@ -9,6 +9,7 @@ use App\Models\ProgramExercise;
 use App\Models\Meal;
 use App\Models\Ingredient;
 use App\Models\MealIngredient;
+use App\Models\PersonalPlans;
 use App\Models\Save;
 use App\Models\Tips;
 use App\Models\TrainerInfo;
@@ -141,16 +142,27 @@ class TrainerController extends Controller {
 
     //function to add programs
     public function addProgram(Request $request) {
+        $program = [];
         $user_id = Auth::id();
-
-        //adding program info
-        $program = Program::create([
-            'title' => $request->title,
-            'num_weeks' => $request->num_weeks,
-            'image' => $request->image,
-            'user_id' => $user_id
-        ]);
-
+        if( $request->user_id ) {
+            //adding personal plan info
+            $program = PersonalPlans::create([
+                'title' => $request->title,
+                'num_weeks' => $request->num_weeks,
+                'image' => $request->image,
+                'trainer_id' => $user_id,
+                'user_id' => $request->user_id
+            ]);
+        }else {
+            //adding program info
+            $program = Program::create([
+                'title' => $request->title,
+                'num_weeks' => $request->num_weeks,
+                'image' => $request->image,
+                'user_id' => $user_id
+            ]);
+        }
+        
         return response()->json([
             'status' => 'success',
             'program' => $program
