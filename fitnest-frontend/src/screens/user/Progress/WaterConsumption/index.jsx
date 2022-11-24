@@ -16,6 +16,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../../../../variables/global';
 import Input from '../../../../components/Input';
+
 const WaterConsumption = ({ navigation }) => {
   const [waterArray, setWaterArray] = useState([]);
   const [daysArray, setDaysArray] = useState([]);
@@ -43,8 +44,6 @@ const WaterConsumption = ({ navigation }) => {
         setWaterArray(waterArray)
         setDaysArray(daysArray)
       } while (waterArray.length == 0)
-
-
     }
 
   }
@@ -61,6 +60,10 @@ const WaterConsumption = ({ navigation }) => {
         }
       })
       setLoading(true)
+      const timeId = setTimeout(() => {
+        setLoading(true)
+      }, 50000);
+      clearTimeout(timeId)
     } catch (err) {
       console.log(err.response.data)
       return { success: false, error: err }
@@ -80,6 +83,10 @@ const WaterConsumption = ({ navigation }) => {
   useEffect(() => {
     if (waterArray.length == 0) {
       getWaterConsumption()
+      const timeId = setTimeout(() => {
+        setLoading(true)
+      }, 50000);
+      clearTimeout(timeId)
     }
   }, [])
   let data = {
@@ -105,7 +112,7 @@ const WaterConsumption = ({ navigation }) => {
                 <TouchableOpacity onPress={() => setModalVisibility(true)}>
                   <Text style={[style.secondaryText, { marginBottom: '10%' }]}><AntDesign name="plus" size={18} color={colors.purple} style={{ marginRight: '5%', marginBottom: '10%', }} /> Add Water Amount</Text>
                 </TouchableOpacity>
-
+                <Text style={styles.label}>Last 7 days</Text>
                 <BarChart
                   data={data}
                   height={300}
