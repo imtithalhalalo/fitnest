@@ -143,7 +143,7 @@ const Calories = () => {
                                                 <FontAwesome name={"close"} size={30} color={colors.purple} />
                                             </TouchableOpacity>
                                             <Text style={[style.secondaryText, { fontWeight: '500' }]}>Create an Exercise </Text>
-                                            <Input label={"How long (minutes)"} handleChange={exercise_time => setExerciseTime(exercise_time)} keyboardType='number-pad' />
+                                            <Input label={"Duration (minutes)"} handleChange={exercise_time => setExerciseTime(exercise_time)} keyboardType='number-pad' />
                                             <Input label={"Calories Burned"} handleChange={calories_burned => setCaloriesBurned(calories_burned)} keyboardType='number-pad' />
 
                                             <Button text={"Save"} onPress={() => { addRemainingCalories(caloriesBurned) }} />
