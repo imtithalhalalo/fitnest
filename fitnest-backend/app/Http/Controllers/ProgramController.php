@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\Exercise;
+use App\Models\PersonalPlans;
 use App\Models\ProgramExercise;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,5 +44,16 @@ class ProgramController extends Controller {
             'exercises' => $exercises
         ], 200);
     }
+    //function to get programs
+    public function getPersonalPlans() {
+        $user_id = Auth::id();
+        $programs = PersonalPlans::get();
+
+        return response()->json([
+            'status' => 'success',
+            'plans' => $programs
+        ], 200);
+    }
+
 
 }
