@@ -1,34 +1,33 @@
-import { Image } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import colors from '../constants/colors'
-import { Card } from 'react-native-paper';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
+import { styles } from './ExerciseCard/style';
+import { address } from '../variables/global';
 const ChatCard = (props) => {
     return (
-        <Card.Title
-            title={props.title}
-
-            style={{ backgroundColor: colors.lightPurple, borderRadius: 15 , marginTop: '5%'}}
-
-            left={ 
-                () =>
-                    <Image
-                        source={{uri: props.image}}
-                        style={{ width: 35, height: 35, borderRadius: 400 / 2 }} />
-            }
-
-            right={
-                () => 
-                    <MaterialCommunityIcons
+        <View style={[style.cardBox, styles.rowSpace]}>
+            <View style={styles.row}>
+                <Image
+                    source={{ uri: `${address}/${props.image}` }}
+                    style={{ width: 35, height: 35, borderRadius: 400 / 2 }} />
+                <Text style={{ fontSize: 16, fontWeight: '400', paddingLeft: 20 }}>{props.title}</Text>
+            </View>
+            <View style={styles.row}>
+                <MaterialCommunityIcons
                     name="message-outline"
                     size={20} color={colors.purple}
-                    style={{ paddingRight: '5%'}}
-                    onPress={props.createChat}/>
-                }
-        />
+                    style={{ paddingRight: '5%' }}
+                    onPress={props.createChat} />
+            </View>
+
+        </View>
 
     )
 }
 
 export default ChatCard
+
+const style = StyleSheet.create({
+
+})
