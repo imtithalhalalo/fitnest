@@ -7,13 +7,13 @@ import { address } from '../variables/global';
 const ChatCard = (props) => {
     return (
         <View style={[style.cardBox, styles.rowSpace]}>
-            <View style={styles.row}>
+            <View style={[styles.row]}>
                 <Image
                     source={{ uri: `${address}/${props.image}` }}
-                    style={{ width: 35, height: 35, borderRadius: 400 / 2 }} />
-                <Text style={{ fontSize: 16, fontWeight: '400', paddingLeft: 20 }}>{props.title}</Text>
+                    style={style.profile} />
+                <Text style={style.title}>{props.title}</Text>
             </View>
-            <View style={styles.row}>
+            <View style={[styles.row]}>
                 <MaterialCommunityIcons
                     name="message-outline"
                     size={20} color={colors.purple}
@@ -29,5 +29,26 @@ const ChatCard = (props) => {
 export default ChatCard
 
 const style = StyleSheet.create({
+    cardBox: {
+        marginTop: '5%',
+        backgroundColor: colors.lighterPurple,
+        borderRadius: 20,
+        width: '98%',
+        alignSelf: 'center',
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingBottom: 20,
+        paddingTop: 20,
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    profile: { width: 35, height: 35, borderRadius: 400 / 2 },
+    title: { fontSize: 16, fontWeight: '400', paddingLeft: 20 }
 
 })
