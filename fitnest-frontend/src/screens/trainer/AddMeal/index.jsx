@@ -79,7 +79,7 @@ const AddMeal = () => {
     setBase64(res.base64);
   }
   useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
-
+  
   const handleAddIngredient = async () => {
     if (!ingredient) return
     setIngredient(ingredient);
@@ -219,7 +219,7 @@ const AddMeal = () => {
             ) : <></>
           }
 
-          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)}/>
+          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)} input={ingredient}/>
           <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true} />
           <View style={styles.ingredientsContainer}>
             {
@@ -229,6 +229,19 @@ const AddMeal = () => {
                   key={i.id}
                   onPress={() => deleteIngredient(i.id)} />))
             }
+          </View>
+
+          <View style={style.inputContainer}>
+            <Text style={style.inputLabel}>Meal Tips</Text>
+            <TextInput
+              multiline
+              style={[style.input, { height: 150 }]}
+              onChangeText={tip => setTip(tip)} 
+              value={tip}
+              />
+          </View>
+          <Button text={"Add Tip"} onPress={handleAddTip} secondary={true} />
+          <View style={styles.ingredientsContainer}>
           </View>
 
           <Button text={"Done"} onPress={handleAddMeal} />
