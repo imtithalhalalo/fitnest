@@ -55,5 +55,20 @@ class ProgramController extends Controller {
         ], 200);
     }
 
+    //function to get exercises of program
+    public function getExercisesOfPlan($id) {
+        $program = PersonalPlans::where('user_id', Auth::id())->where('id', $id)->get();
+        $exercise = [];
+        foreach($program as $p) {
+            
+            $exercise =  $p->exercises;
+        }
+        
+
+        return response()->json([
+            'status' => 'success',
+            'exercise' => $exercise
+        ], 200);
+    }
 
 }
