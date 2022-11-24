@@ -36,6 +36,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    label: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: colors.purple,
+        marginBottom: 5,
+        marginLeft: 6 
+    }
 })
 
 export default styles
