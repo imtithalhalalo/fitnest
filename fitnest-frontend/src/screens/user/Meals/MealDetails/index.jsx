@@ -89,6 +89,24 @@ const MealDetails = ({ route, navigation }) => {
         </View> 
           </>: <></>
         }
+        {
+          tips.length ?
+            <>
+              <Text style={styles.title}>How to make?</Text>
+                {
+                  tips.map((req, index) => (
+                    <View style={styles.tipsContainer}  key={index}>
+                      <Text style={styles.tipText} key={index}>• {req.tip}</Text>
+                    </View>
+                  ))
+                }
+
+            </>
+
+            : <></>
+        }
+
+
         <Button text={"Save"} onPress={handleSave} />
       </ScrollView>
     </SafeAreaView>
