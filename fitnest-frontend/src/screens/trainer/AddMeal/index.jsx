@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, ScrollView, Alert } from 'react-native'
+import { Text, View, SafeAreaView, ScrollView, Alert, TextInput } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { Dropdown } from 'react-native-element-dropdown';
 import { style } from '../../../styles/style';
@@ -14,6 +14,8 @@ import Button from '../../../components/Button';
 import Header from '../../../components/Header';
 import Input from '../../../components/Input';
 import styles from './style';
+import TipCard from '../../../components/TipCard';
+import CustomModal from '../../../components/Modal';
 
 const AddMeal = () => {
 
@@ -34,7 +36,11 @@ const AddMeal = () => {
   const [ingredients, setIngredients] = useState([])
   const [error, setError] = useState('')
   const [modalVisibility, setModalVisibility] = useState(false);
-
+  const [tips, setTips] = useState([]);
+  const [tip, setTip] = useState('');
+  const [key,setKey] = useState(0);
+  const [base64, setBase64] = useState('');
+  const [ext, setExt] = useState('');
 
   let res = [];
   useLayoutEffect(() => {
@@ -63,16 +69,18 @@ const AddMeal = () => {
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
+      base64: true
     })
     if (!res.cancelled) {
 
       setImage(res.uri);
 
     }
+    setBase64(res.base64);
   }
+  useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
 
   const handleAddIngredient = async () => {
-    //bug it not adding the last one
     if (!ingredient) return
     setIngredient(ingredient);
     setIngredients([...ingredients, { id: id, text: ingredient }])
@@ -101,12 +109,14 @@ const AddMeal = () => {
 
     const data = {
       title: title,
-      image: image,
+      image: base64,
+      ext: ext,
       calories: parseInt(calories),
       fats: parseInt(fats),
       protein: parseInt(proteins),
       category: category,
-      ingredients: res
+      ingredients: res,
+      tips: JSON.stringify(tips)
     };
 
     const token = await AsyncStorage.getItem('token');
@@ -145,8 +155,20 @@ const AddMeal = () => {
         console.log(error.response.data)
         Alert.alert('Try again! ')
       });
-      setIngredients(ingredients.filter((element) => element.id !== id))
+    setIngredients(ingredients.filter((element) => element.id !== id))
   }
+
+  const handleAddTip = () => {
+    if (!tip) return
+    setTips([...tips, { id: key, text: tip }])
+    setKey(key + 1)
+    setTip('')
+  }
+
+  const deleteTip = (key) => {
+    setTips(tips.filter((e) => e.key !== key))
+  }
+
   return (
     <>
       <SafeAreaView style={style.mainContainer}>
@@ -197,7 +219,7 @@ const AddMeal = () => {
             ) : <></>
           }
 
-          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)} />
+          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)}/>
           <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true} />
           <View style={styles.ingredientsContainer}>
             {
