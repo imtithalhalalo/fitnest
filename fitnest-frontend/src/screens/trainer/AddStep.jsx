@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { style } from '../../styles/style'
 import { FontAwesome } from "@expo/vector-icons";
 import colors from '../../constants/colors';
@@ -13,17 +13,20 @@ import CustomModal from '../../components/Modal';
 
 const AddStep = () => {
     const [image, setImage] = useState('');
+    const [base64, setBase64] = useState('');
+    const [ext, setExt] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [time, setTime] = useState(0);
     const [error, setError] = useState('')
     const [modalVisibility, setModalVisibility] = useState(false);
-
+    
 
     const uploadImage = async () => {
         let res = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
+            base64: true,
             aspect: [1, 1],
             quality: 1,
         })
@@ -32,15 +35,17 @@ const AddStep = () => {
             setImage(res.uri);
 
         }
+        setBase64(res.base64)
     }
 
-
+    useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
     const displayError = (message) => {
         setError(message)
         setModalVisibility(true)
     } 
 
     const handle = async () => {
+        console.log(title, description, time, image)
         if (!title || !description || !time || !image) {
             displayError('All fields are required')
             return
@@ -48,11 +53,12 @@ const AddStep = () => {
         let data = {
             title: title,
             description: description,
-            image: image,
+            image: base64,
+            ext: ext,
             time: time
         }
-        addExercise(data)
-
+        
+        await addExercise(data)
     }
     return (
         <SafeAreaView style={style.mainContainer}>
