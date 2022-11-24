@@ -242,6 +242,13 @@ const AddMeal = () => {
           </View>
           <Button text={"Add Tip"} onPress={handleAddTip} secondary={true} />
           <View style={styles.ingredientsContainer}>
+            {
+              tips.map((i =>
+                <TipCard
+                  title={i.text}
+                  key={i.id}
+                  onPress={() => deleteTip(i.id)} />))
+            }
           </View>
 
           <Button text={"Done"} onPress={handleAddMeal} />
