@@ -55,8 +55,10 @@ Route::group(["middleware" => "cors"], function () {
     //program apis
     Route::group(['prefix' => 'programs'], function () {
         Route::get('/', [ProgramController::class, 'getPrograms'])->name('get-programs');
+        Route::get('/personal_plans', [ProgramController::class, 'getPersonalPlans'])->name('get-personal-plans');
         Route::get('/exercise/{id?}', [ProgramController::class, 'getExercisesOfProgram'])->name('get-exercise-of-program');
         Route::get('/exercises', [ProgramController::class, 'getExercises'])->name('get-exercises');
+        Route::get('/exercise_plan/{id?}', [ProgramController::class, 'getExercisesOfPlan'])->name('get-exercise-of-plan');
     });
 
 
