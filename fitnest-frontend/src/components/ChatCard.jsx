@@ -3,6 +3,8 @@ import React from 'react'
 import colors from '../constants/colors'
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { styles } from './ExerciseCard/style';
+import { MaterialIcons } from "react-native-vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { address } from '../variables/global';
 const ChatCard = (props) => {
     return (
@@ -19,6 +21,17 @@ const ChatCard = (props) => {
                     size={20} color={colors.purple}
                     style={{ paddingRight: '5%' }}
                     onPress={props.createChat} />
+                <MaterialIcons
+                    name={"phone"}
+                    size={20}
+                    color={colors.purple}
+                    style={{ paddingRight: '5%' }}
+                    onPress={props.call} />
+                <FontAwesome
+                    name={"whatsapp"}
+                    size={20}
+                    color={colors.purple}
+                    onPress={props.sendWhatsappMessage} />
             </View>
 
         </View>
