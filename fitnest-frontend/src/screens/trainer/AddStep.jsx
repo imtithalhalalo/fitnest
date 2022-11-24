@@ -66,15 +66,14 @@ const AddStep = () => {
             <Header text={"Add Step"} back="back"/>
 
             <View style={{ paddingTop: 50 }}>
-                <Input label={"Step Title"} onChangeText={title => setTitle(title)}/>
-                <Input label={"Step Time"} keyboardType='number-pad' onChangeText={time => setTime(time)}/>
+                <Input label={"Step Title"} handleChange={title => setTitle(title)}/>
+                <Input label={"Step Time"} keyboardType='number-pad' handleChange={time => setTime(time)}/>
 
                 <View style={[style.inputContainer]}>
                     <Text style={style.inputLabel}>Step Description</Text>
                     <TextInput
                         multiline
                         style={[style.input, { height: 150 }]}
-                        maxLength={40}
                         onChangeText={description => setDescription(description)} />
                 </View>
                 <View style={styles.btnBox}>
