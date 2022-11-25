@@ -20,7 +20,6 @@ const ConnectExerciseToProgram = () => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [personalPlans, setPersonalPlans] = useState([])
   const [personalPlan, setPersonalPlan] = useState([])
-  
   const [programID, setProgramID] = useState(0)
   const getData = async () => {
     const result = await getPersonalPlans();
@@ -131,6 +130,44 @@ const ConnectExerciseToProgram = () => {
          />
 
         <Button text={"Personal Plan"} secondary={true} onPress={() => { setModalVisibility(true) }} />
+        {
+          //edit modal
+          modalVisibility ?
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisibility}
+              onRequestClose={() => {
+                setModalVisibility(!modalVisibility);
+              }}
+            >
+              <View style={styles.centered}>
+                <View style={styles.modal}>
+                  <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setModalVisibility(false)}>
+                    <FontAwesome name={"close"} size={30} color={colors.purple} />
+                  </TouchableOpacity>
+                  <Text style={[style.secondaryText, { fontWeight: '500' }]}>Choose Personal Plan</Text>
+                  <View style={[style.inputContainer, { alignItems: "center" }]}>
+                    <Dropdown
+                      style={styles.dropdown}
+                      placeholderStyle={styles.placeholderStyle}
+                      selectedTextStyle={styles.selectedTextStyle}
+                      inputSearchStyle={styles.inputSearchStyle}
+                      data={personalPlans}
+                      placeholder="Choose Personal Plan"
+                      labelField="title"
+                      valueField="id"
+                      value={personalPlan}
+                      onChange={item => {
+                        setPersonalPlan(item.id);
+                      }}
+                    />
+                  </View>
+                  <Button text={"Add"} onPress={() => { setModalVisibility(false) }} />
+                </View>
+              </View>
+            </Modal> : <></>
+        }
 
       </SafeAreaView>
 
