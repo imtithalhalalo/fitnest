@@ -25,6 +25,28 @@ const AddPlan = () => {
     const [ base64, setBase64 ] = useState('');
     const [ ext, setExt ] = useState('');
 
+    const uploadImage = async () => {
+        let res = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            base64: true,
+            allowsEditing: true,
+            aspect: [1,1],
+            quality: 1,
+        })
+        if (!res.cancelled) {
+            setImage(res.uri);
+        }
+        console.log(res.base64)
+        setBase64(res.base64)
+    }
+    useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
+    const [error, setError] = useState('')
+    const [modalVisibility, setModalVisibility] = useState(false);
+
+    const showError = (message) => {
+        setError(message)
+        setModalVisibility(true)
+    }
 
     return (
         <SafeAreaView style={style.mainContainer}>
