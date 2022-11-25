@@ -24,10 +24,12 @@ import getPrograms from '../../../../services/user/getPrograms'
 import useWaterHistory from '../../../../services/user/getWaterHistory'
 import getWeightAxios from '../../../../services/user/getWeight'
 import Loader from '../../../../components/Loader'
+import getPersonalPlan from '../../../../services/user/getPersonalPlan'
+import getPrograms from '../../../../services/user/getPrograms'
 
 const ViewProgress = ({ navigation }) => {
     const isCarousel = React.useRef(null)
-    const [programs, setPrograms] = useState([])
+    const [personalPlans, setPersonalPlans] = useState([])
     const SLIDER_WIDTH = Dimensions.get('window').width
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
     const [index, setIndex] = useState(0)
@@ -37,12 +39,14 @@ const ViewProgress = ({ navigation }) => {
     const [monthsArray, setMonthsArray] = useState([]);
     const { response, load, error } = useWaterHistory();
     const [expoPushToken, setExpoPushToken] = useState("");
-    
+    const [programs, setPrograms] = useState([])
     const getData = async () => {
-        const result = await getPrograms();
-        if (result.success) {
+        const result = await getPersonalPlan();
+        const res = await getPrograms();
+        if (result.success || res.success) {
             isLoading(false)
-            setPrograms(result.data);
+            setPersonalPlans(result.data);
+            setPrograms(res.data)
         }
     }
 
@@ -75,7 +79,8 @@ const ViewProgress = ({ navigation }) => {
             id={item.id}
             title={item.title}
             image={item.image}
-            num_weeks={item.num_weeks} />
+            num_weeks={item.num_weeks}
+            personal_plan={true} />
     )
     // send notification function
     const sendNotification = async () => {
@@ -114,8 +119,8 @@ const ViewProgress = ({ navigation }) => {
                     weightData.data.map(({ weight }) => (weightArray.push(weight)))
                     weightData.data.map(({ created_at }) => (monthsArray.push(parseInt(parseInt(new Date(created_at).getMonth()) + 1) + `/` + new Date(created_at).getDate())))
                     console.log(weightArray)
-                    setWeightArray(weightArray.slice(0, 5))
-                    setMonthsArray(monthsArray.slice(0, 5))
+                    setWeightArray(weightArray.slice(weightArray.length - 5, weightArray.length))
+                    setMonthsArray(monthsArray.slice(weightArray.length - 5, weightArray.length))
                     console.log(monthsArray)
 
                 } while (weightArray.length == 0)
@@ -123,8 +128,6 @@ const ViewProgress = ({ navigation }) => {
         } catch (error) {
             console.log(error)
         }
-
-
 
     }
 
@@ -182,24 +185,21 @@ const ViewProgress = ({ navigation }) => {
                                         },
                                         withInnerLines: false
                                     }}
-
                                     height={210}
-
                                 />
                             </>
                         )}
                     </Card>
 
                 </SafeAreaView>
-                <View style={{ backgroundColor: colors.white, paddingBottom: '20%', height: 600 }}>
+
+                    <View style={{ backgroundColor: colors.white, paddingBottom: '20%', height: 700 }}>
+                    <Text style={[style.subtitle, {marginLeft: '7%'}]}>Suggested Plans</Text>
                     <Carousel
                         layout="tinder"
-                        layoutCardOffset={9}
                         ref={isCarousel}
                         data={programs}
                         renderItem={renderItem}
-                        inactiveSlideShift={0}
-                        useScrollView={true}
                         sliderWidth={SLIDER_WIDTH}
                         itemWidth={ITEM_WIDTH}
                         onSnapToItem={(index) => setIndex(index)}
@@ -219,6 +219,13 @@ const ViewProgress = ({ navigation }) => {
                         inactiveDotScale={1}
                         tappableDots={true}
                     />
+                    <View style={{
+                        paddingLeft: '5%',
+                        paddingRight: '5%',
+                    }}>
+                        
+                    </View>
+                    
                     <View style={{
                         paddingLeft: '5%',
                         paddingRight: '5%',
