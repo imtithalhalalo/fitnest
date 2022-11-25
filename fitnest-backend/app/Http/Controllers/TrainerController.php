@@ -10,6 +10,7 @@ use App\Models\Meal;
 use App\Models\Ingredient;
 use App\Models\MealIngredient;
 use App\Models\PersonalPlans;
+use App\Models\PlanExercise;
 use App\Models\Save;
 use App\Models\Tips;
 use App\Models\TrainerInfo;
@@ -71,7 +72,13 @@ class TrainerController extends Controller {
 
     //function for user to add meal
     public function addMeal(Request $request) {
-
+        //image upload
+        $extension=$request->ext;
+        $image_64 = $request->image; 
+        $img = base64_decode($image_64);
+        $path = uniqid() . "." . $extension;
+        file_put_contents($path, $img);
+        
         $meal = new Meal;
         $meal->user_id = Auth::id();
         $meal->category = $request->category;
@@ -79,7 +86,7 @@ class TrainerController extends Controller {
         $meal->fats = $request->fats;
         $meal->protein = $request->protein;
         $meal->calories = $request->calories;
-        $meal->image = $request->image;
+        $meal->image = $path;
         $meal->save();
 
         $meal_id = $meal->id;
@@ -172,6 +179,13 @@ class TrainerController extends Controller {
 
     //function to add exercises
     public function addExercise(Request $request) {
+        //image upload
+        $extension=$request->ext;
+        $image_64 = $request->image; 
+        $img = base64_decode($image_64);
+        $path = uniqid() . "." . $extension;
+        file_put_contents($path, $img);
+
         $user_id = Auth::id();
 
         //adding exercise info
@@ -180,7 +194,7 @@ class TrainerController extends Controller {
             'title' => $request->title,
             'time' => $request->time,
             'description' => $request->description,
-            'image' => $request->image
+            'image' => $path
         ]);
 
         return response()->json([
