@@ -20,10 +20,10 @@ import PushNotificationsComponent from '../../../../../notifications'
 import { AntDesign } from "@expo/vector-icons";
 import Calories from '../Calories'
 import Sleeping from '../Sleeping'
-import getPrograms from '../../../../services/user/getPrograms'
 import useWaterHistory from '../../../../services/user/getWaterHistory'
 import getWeightAxios from '../../../../services/user/getWeight'
 import Loader from '../../../../components/Loader'
+import getPersonalPlans from '../../../../services/user/getPersonalPlans'
 import getPersonalPlan from '../../../../services/user/getPersonalPlan'
 import getPrograms from '../../../../services/user/getPrograms'
 
@@ -72,7 +72,7 @@ const ViewProgress = ({ navigation }) => {
         ],
     };
 
-    
+
 
     const renderItem = ({ item }) => (
         <ProgramCard
@@ -108,8 +108,10 @@ const ViewProgress = ({ navigation }) => {
     const dateNow = new Date();
     const now = dateNow.getHours() * 60 + dateNow.getMinutes();
 
-    if (start <= now && now <= end)
-        sendNotification();
+    // if(true)
+    //     sendNotification();
+
+
 
     const getWeight = async () => {
         try {
@@ -170,6 +172,7 @@ const ViewProgress = ({ navigation }) => {
                             <Loader />
                         ) : (
                             <>
+                                
                                 <LineChart
                                     data={data}
                                     width={350}
@@ -192,7 +195,33 @@ const ViewProgress = ({ navigation }) => {
                     </Card>
 
                 </SafeAreaView>
-
+                <View style={{ backgroundColor: colors.white, height: 440}}>
+                    <Text style={[style.subtitle, {marginLeft: '7%'}]}>My Personal Plan</Text>
+                    <Carousel
+                        layout="tinder"
+                        ref={isCarousel}
+                        data={personalPlans}
+                        renderItem={renderItem}
+                        sliderWidth={SLIDER_WIDTH}
+                        itemWidth={ITEM_WIDTH}
+                        onSnapToItem={(index) => setIndex(index)}
+                    />
+                    <Pagination
+                        dotsLength={personalPlans.length}
+                        activeDotIndex={index}
+                        carouselRef={isCarousel}
+                        dotStyle={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            marginHorizontal: 0,
+                            backgroundColor: colors.purple
+                        }}
+                        inactiveDotOpacity={0.4}
+                        inactiveDotScale={1}
+                        tappableDots={true}
+                    />
+                    </View>
                     <View style={{ backgroundColor: colors.white, paddingBottom: '20%', height: 700 }}>
                     <Text style={[style.subtitle, {marginLeft: '7%'}]}>Suggested Plans</Text>
                     <Carousel
