@@ -32,6 +32,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 20
     },
+    centered: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: colors.lightGrey
+    },
+    modal: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: '5%',
+        height: '40%',
+        width: '90%',
+        shadowColor: colors.black,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
 });
 
 export default styles;
