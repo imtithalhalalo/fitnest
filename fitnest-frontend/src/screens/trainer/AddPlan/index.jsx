@@ -48,6 +48,39 @@ const AddPlan = () => {
         setModalVisibility(true)
     }
 
+    const addPlan = async () => {
+        
+        if (user != '') {
+            if (!title || !num_weeks) {
+                showError('All fields are required')
+                return
+            }
+            let data = {
+                title: title,
+                num_weeks: num_weeks,
+                ext: ext,
+                image: base64,
+                user_id: user
+            }
+            console.log(data)
+            console.log(image)
+            await addPersonalPlan(data)
+        } else {
+            if (!title || !num_weeks) {
+                showError('All fields are required')
+                return
+            }
+            let data = {
+                title: title,
+                num_weeks: num_weeks,
+                ext: ext,
+                image: base64,
+            }
+
+            await addProgram(data)
+        }
+    }
+
     return (
         <SafeAreaView style={style.mainContainer}>
             <ScrollView style={style.p2}>
