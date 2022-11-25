@@ -88,7 +88,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 ### GIFs
 | Splash / LogIn  | SignUp  | LogIn  | Edit Profile  |
 | -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg)
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.gif)
 <br><br>
 <img src="./readme/title6.svg"/>
 
