@@ -7,7 +7,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { SafeAreaView, View } from 'react-native'
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useContext } from 'react'
 import Header from '../../../components/Header'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { database } from '../../../../firebase'
@@ -15,12 +15,14 @@ import renderBubble from '../../../helpers/renderBubble'
 import renderInputToolbar from '../../../helpers/renderInputToolbar'
 import renderSend from '../../../helpers/renderSend'
 import { style } from '../../../styles/style'
-
+import { address } from "../../../variables/global";
+import { UserContext } from "../../../stores/UserContext";
 const Chat = ({ route }) => {
 
   const { chatID, trainer_id, name, image } = route.params;
   const [messages, setMessages] = useState([]);
-  
+  const {userData , setUserData } = useContext(UserContext);
+  const [state, setState] = useState('');
   useEffect(() => {
     const collectionRef = collection(doc(database, "chats", chatID), "messages");
     const q = query(collectionRef, orderBy("createdAt", "desc"));
@@ -49,9 +51,10 @@ const Chat = ({ route }) => {
       text,
       user,
     })
+    return clearTextState()
   }, [])
 
-
+  const clearTextState = () => { setState('') }
   return (
     <SafeAreaView style={style.mainContainer}>
       <Header text={name} image={image} back="back" />
@@ -63,11 +66,12 @@ const Chat = ({ route }) => {
           user={{
             _id: trainer_id,
             name: name,
-            avatar: image
+            avatar: `${address}/${userData.image}`
           }}
           renderBubble={renderBubble}
           renderInputToolbar={renderInputToolbar}
           renderSend={renderSend}
+          state={state}
         />
       </View>
     </SafeAreaView>
