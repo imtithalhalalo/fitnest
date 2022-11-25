@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 20,
         padding: '5%',
-        height: '57%',
+        height: '60%',
         justifyContent: 'center',
         width: '90%',
         shadowColor: colors.black,
@@ -41,6 +41,27 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         flexDirection: 'column',
         paddingTop: '20%',
+    }, 
+    dropdown: {
+        borderWidth: 1,
+        borderRadius: 10,
+        marginBottom: '20%',
+        padding: 5
+    },
+    placeholderStyle: {
+        margin: 5,
+        fontSize: 14,
+        fontWeight: '500'
+    },
+    selectedTextStyle: {
+        margin: 5,
+        fontSize: 14,
+        fontWeight: '500'
+    },
+    inputSearchStyle: {
+        margin: 5,
+        fontSize: 14,
+        fontWeight: '500'
     }
 })
 export default styles
