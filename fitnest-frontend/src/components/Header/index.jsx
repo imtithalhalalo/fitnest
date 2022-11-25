@@ -6,7 +6,7 @@ import colors from '../../constants/colors';
 import { EvilIcons } from '@expo/vector-icons';
 import { TouchableWithoutFeedback } from '@gorhom/bottom-sheet';
 import styles from './style';
-
+import { address } from '../../variables/global';
 const Header = (props) => {
 
     const navigation = useNavigation();
@@ -26,7 +26,7 @@ const Header = (props) => {
             </View>
             <View>
                 {props.image ? (
-                    <Image source={{ uri: props.image }} style={styles.profile} />
+                    <Image source={{ uri: `${address}/${props.image}` }} style={styles.profile} />
                 ) : <></>
                 }
 

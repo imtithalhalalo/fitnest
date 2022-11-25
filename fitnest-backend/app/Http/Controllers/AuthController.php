@@ -69,12 +69,18 @@ class AuthController extends Controller {
                 "status"=>"failed"
             ], 500);
         }
+        //image upload
+        $extension=$request->ext;
+        $image_64 = $request->image; 
+        $img = base64_decode($image_64);
+        $path = uniqid() . "." . $extension;
+        file_put_contents($path, $img);
 
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_num = $request->phone_num;
-        $user->image = $request->image;
+        $user->image = $path;
         $user->save();
 
         return response()->json([

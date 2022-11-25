@@ -4,12 +4,15 @@ import { Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 import { style } from '../../styles/style';
 import { styles } from './style';
-const ProgramCard = ({ id, title, image, num_weeks }) => {
+import { address } from '../../variables/global';
+const ProgramCard = ({ id, title, image, num_weeks, personal_plan = false }) => {
     const navigation = useNavigation();
+    console.log(image)
     return (
         <Card style={styles.cardBox}>
+        
             {image ? (
-                <Card.Cover style={styles.cardCover} source={{ uri: image }} resizeMode={'contain'}/>
+                <Card.Cover style={styles.cardCover} source={{ uri: `${address}/${image}` }} resizeMode={'contain'}/>
             ) : (
                 <></>
             )}
@@ -23,7 +26,7 @@ const ProgramCard = ({ id, title, image, num_weeks }) => {
                 )}
 
 
-                <TouchableOpacity style={[style.secondaryBtn, { width: '40%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('WorkoutSteps', { program_id: id, program_name: title }) }}>
+                <TouchableOpacity style={[style.secondaryBtn, { width: '40%', alignSelf: 'flex-end', marginTop: 10, marginBottom: 10 }]} onPress={() => { navigation.navigate('WorkoutSteps', { program_id: id, program_name: title, personal_plan: personal_plan  }) }}>
                     <Text style={[style.secondaryText, { fontSize: 18, paddingLeft: '3%', paddingRight: '3%' }]}>View Steps</Text>
                 </TouchableOpacity>
             </View>

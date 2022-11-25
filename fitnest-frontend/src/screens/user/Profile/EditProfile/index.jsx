@@ -1,5 +1,5 @@
-import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Alert } from 'react-native'
-import React, { useState, useContext } from 'react'
+import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Alert, ScrollView } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
 import { EvilIcons } from '@expo/vector-icons';
 import colors from '../../../../constants/colors';
 import { style } from '../../../../styles/style';
@@ -15,9 +15,11 @@ import Input from '../../../../components/Input';
 import { FontAwesome } from "@expo/vector-icons";
 
 const EditProfile = ({ navigation }) => {
-    const { userData } = useContext(UserContext);
+    const { userData, setUserData } = useContext(UserContext);
     const [name, setName] = useState('');
     const [image, setImage] = useState(userData.image);
+    const [base64, setBase64] = useState('');
+    const [ext, setExt] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
 
@@ -35,41 +37,18 @@ const EditProfile = ({ navigation }) => {
         let res = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
+            base64: true,
             aspect: [1, 1],
             quality: 1,
         })
         if (!res.cancelled) {
-
             setImage(res.uri);
-            console.log(userData.image)
         }
-
-        const token = await AsyncStorage.getItem('token')
+        setBase64(res.base64);
         console.log(image)
-        await axios({
-            headers: { 'Authorization': 'Bearer ' + token },
-            method: 'POST',
-            url: `${BASE_URL}/upload_image`,
-
-            data: {
-                image: image,
-                id: userData.id
-            },
-        })
-            .then(function () {
-                Alert.alert('Added Successfully! ')
-                console.log(image)
-                setImage(image)
-                return true
-            })
-            .catch(function (error) {
-                console.log(error)
-                Alert.alert('Try again! ')
-                return false
-            });
 
     }
-
+    useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
 
     const handleUpdateProfile = async () => {
         if (!name || !email || !phoneNum) {
@@ -80,9 +59,15 @@ const EditProfile = ({ navigation }) => {
             name: name,
             email: email,
             phone_num: phoneNum,
-            image: image
+            image: base64,
+            ext: ext
         }
-        updateProfile(data)
+        try {
+            const res = await updateProfile(data)
+            setUserData(res.data)
+        }catch(error) {
+            console.log(error)
+        }
     }
 
     const editMoreInfo = async () => {
@@ -114,6 +99,7 @@ const EditProfile = ({ navigation }) => {
                         <EvilIcons name="arrow-left" size={50} color={colors.purple} />
                     </TouchableWithoutFeedback>
                 </View>
+                <ScrollView>
                 <View style={styles.imgContainer}>
                     <View>
 
@@ -139,6 +125,7 @@ const EditProfile = ({ navigation }) => {
                 <Input label={"Phone Number"} handleChange={phone_num => setPhoneNum(phone_num)} />
 
                 <Button text={"Update More Info"} onPress={() => setModalVisibility(true)} secondary={true} />
+                </ScrollView>
                 {
                     //edit modal
                     modalVisibility ?

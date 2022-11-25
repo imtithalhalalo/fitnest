@@ -18,6 +18,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../../../variables/global';
 import Loader from '../../../../components/Loader';
 import { FontAwesome } from "@expo/vector-icons";
+import { Dropdown } from 'react-native-element-dropdown';
 const Weight = ({ navigation }) => {
 
   const [weightArray, setWeightArray] = useState([]);
@@ -38,6 +39,12 @@ const Weight = ({ navigation }) => {
     ],
   };
 
+  const units = [
+    { label: 'Kg', value: 'kg' },
+    { label: 'lbs', value: 'lbs' },
+  ];
+  const [weightUnit, setWeightUnit] = useState('');
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -52,14 +59,15 @@ const Weight = ({ navigation }) => {
   };
   const getWeight = async () => {
     const weightData = await getWeightAxios();
+    console.log(weightData)
     if (weightData.success) {
       do {
         setWeightArray([])
         weightData.data.map(({ weight }) => (weightArray.push(weight)))
         weightData.data.map(({ created_at }) => (monthsArray.push(parseInt(parseInt(new Date(created_at).getMonth()) + 1) + `/` + new Date(created_at).getDate())))
         console.log(weightArray)
-        setWeightArray(weightArray.slice(0,5))
-        setMonthsArray(monthsArray.slice(0,5))
+        setWeightArray(weightArray.slice(weightArray.length - 5, weightArray.length))
+        setMonthsArray(monthsArray.slice(weightArray.length - 5, weightArray.length + 1))
         console.log(monthsArray)
 
       } while (weightArray.length == 0)
@@ -106,13 +114,13 @@ const Weight = ({ navigation }) => {
     setLoading(false)
     weightArray.reverse().pop()
     weightArray.reverse()
-    try{
+    try {
       setWeightArray([...weightArray, weight])
       setMonthsArray([...monthsArray, parseInt(parseInt(new Date().getMonth()) + 1) + `/` + new Date(created_at).getDate()])
-    }catch (err) {
+    } catch (err) {
       console.log(err)
     }
-    
+
     console.log(data)
   }
   return (
@@ -192,7 +200,27 @@ const Weight = ({ navigation }) => {
                   <Text style={[style.secondaryText, { fontWeight: '500' }]}>Add Your Weight</Text>
 
                   <View style={style.inputContainer}>
-                    <Text style={style.inputLabel}>Weight lbs</Text>
+                  <View style={styles.row}>
+                  <Text style={style.inputLabel}>{`Weight ${weightUnit}`}</Text>
+                  <View style={{width: '30%'}}>
+                   <Dropdown
+                      style={styles.dropdown}
+                      placeholderStyle={styles.placeholderStyle}
+                      selectedTextStyle={styles.selectedTextStyle}
+                      inputSearchStyle={styles.inputSearchStyle}
+                      data={units}
+                      placeholder="unit"
+                      labelField="label"
+                      valueField="value"
+                      value={weightUnit}
+                      onChange={item => {
+                        setWeightUnit(item.value)
+                      }}
+                    /> 
+                  </View>
+                    
+                  </View>
+                    
                     <TextInput
                       style={style.input}
                       onChangeText={weight => setWeight(weight)} />

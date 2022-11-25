@@ -9,7 +9,7 @@ import Button from '../../../../components/Button';
 import { Entypo, FontAwesome } from "react-native-vector-icons";
 import colors from '../../../../constants/colors';
 import doneExercise from '../../../../services/user/doneExercise';
-
+import { address } from '../../../../variables/global';
 const StepDetails = ({ route }) => {
     const { id, title, image, description, time } = route.params;
     const {
@@ -31,10 +31,10 @@ const StepDetails = ({ route }) => {
             <SafeAreaView style={style.mainContainer}>
                 <Header text={title} back="back" />
                 {image ? (
-                    <Image source={{ uri: image }} style={{ width: '100%', height: '30%', marginTop: '7%' }} resizeMode={'contain'} />
+                    <Image source={{ uri: `${address}/${image}` }} style={{ width: '100%', height: '30%', marginTop: '7%' }} resizeMode={'contain'} />
                 ) : <></>
                 }
-                <ScrollView style={{ marginBottom: '20%'}} >
+                <ScrollView style={{ marginBottom: '10%'}} >
                     <Text style={styles.title}>Step Description</Text>
                     <Text style={styles.description}>{description}</Text>
                     <View style={styles.circle}>

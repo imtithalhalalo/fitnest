@@ -5,10 +5,11 @@ const width_proportion = '100%';
 const style = StyleSheet.create({
     //splash - sign in - sign up pages
     container: {
-        flex: 1,
         backgroundColor: colors.white,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1,
+        paddingLeft: '5%',
+        paddingRight: '5%',
+        paddingTop: '5%'
     },
     inputsBox: {
         flex: 1,
@@ -159,7 +160,12 @@ const style = StyleSheet.create({
         borderRadius: 15, 
         marginTop: '5%', 
         marginBottom: '10%'
-      }
+      },
+      subtitle: { 
+        paddingTop: 10,
+        fontSize: 18, 
+        fontWeight: '500', 
+    }
 })
 
 export { style }

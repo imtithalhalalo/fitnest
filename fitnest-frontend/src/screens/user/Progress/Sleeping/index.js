@@ -9,6 +9,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import axios from 'axios';
 import { BASE_URL } from '../../../../variables/global';
 import getSleepDuration from '../../../../services/user/getSleepDuration'
+import styles from './style'
 const Sleeping = () => {
     const [modalVisibility, setModalVisibility] = useState(false);
     const [isSleepPickerVisible, showSleepPickerVisibility] = useState(false);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Calories;
 use App\Models\Done;
+use App\Models\PersonalPlans;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WaterIntake;
@@ -242,6 +243,16 @@ class UserController extends Controller
         return response()->json([
             'status' => 'added',
             'calories' => $request->remaining_calories
+        ], 200);
+    }
+
+    public function getPersonalPlans() {
+        $id = Auth::id();
+        $plans = PersonalPlans::where( 'user_id', $id )->get();
+        
+        return response()->json([
+            'status' => 'success',
+            'plans' => $plans
         ], 200);
     }
 }

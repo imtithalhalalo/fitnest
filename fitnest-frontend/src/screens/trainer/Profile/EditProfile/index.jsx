@@ -1,10 +1,10 @@
 import { Image, SafeAreaView, Text, View, Modal, TextInput, TouchableOpacity, TouchableWithoutFeedback, Dimensions, Alert } from 'react-native'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { EvilIcons } from '@expo/vector-icons';
 import colors from '../../../../constants/colors';
 import { style } from '../../../../styles/style';
 import { UserContext } from '../../../../stores/UserContext';
-import { BASE_URL } from '../../../../variables/global';
+import { address, BASE_URL } from '../../../../variables/global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import styles from './style';
@@ -13,10 +13,13 @@ import Button from '../../../../components/Button';
 import { FontAwesome } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import updateProfile from '../../../../services/user/updateProfile';
 const EditProfile = ({ navigation }) => {
-    const { userData } = useContext(UserContext);
+    const { userData, setUserData } = useContext(UserContext);
     const [name, setName] = useState('');
     const [image, setImage] = useState(userData.image);
+    const [base64, setBase64] = useState('');
+    const [ext, setExt] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
 
@@ -37,41 +40,19 @@ const EditProfile = ({ navigation }) => {
         let res = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
+            base64: true,
             aspect: [1, 1],
             quality: 1,
         })
         if (!res.cancelled) {
 
             setImage(res.uri);
-            console.log(userData.image)
         }
-
-        const token = await AsyncStorage.getItem('token')
+        setBase64(res.base64);
         console.log(image)
-        await axios({
-            headers: { 'Authorization': 'Bearer ' + token },
-            method: 'POST',
-            url: `${BASE_URL}/upload_image`,
-
-            data: {
-                image: image,
-                id: userData.id
-            },
-        })
-            .then(function () {
-                Alert.alert('Added Successfully! ')
-                console.log(image)
-                setImage(image)
-                return true
-            })
-            .catch(function (error) {
-                console.log(error.response.data)
-                Alert.alert('Try again! ')
-                return false
-            });
 
     }
-
+    useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
 
     const handleUpdateProfile = async () => {
         if (!name || !email || !phoneNum) {
@@ -82,9 +63,15 @@ const EditProfile = ({ navigation }) => {
             name: name,
             email: email,
             phone_num: phoneNum,
-            image: image
+            image: base64,
+            ext: ext
         }
-        updateProfile(data)
+        try {
+            const res = await updateProfile(data)
+            setUserData(res.data)
+        }catch(error) {
+            console.log(error)
+        }
     }
 
     const showPicker = () => {
@@ -133,15 +120,7 @@ const EditProfile = ({ navigation }) => {
                 </View>
                 <View style={styles.imgContainer}>
                     <View>
-
-                        {image ? (
-                            <Image source={{ uri: image }} style={styles.profileImg} />
-
-                        ) : (
-                            <Image source={require('../../../../../assets/images/profile.jpg')} style={styles.profileImg} />
-                        )
-
-                        }
+                        <Image source={{ uri: image }} style={styles.profileImg} />
                     </View>
                     <View style={styles.bar}>
                         <TouchableOpacity onPress={uploadImage}>

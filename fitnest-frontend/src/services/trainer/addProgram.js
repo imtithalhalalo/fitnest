@@ -8,7 +8,8 @@ const addProgram = async (program) => {
     const data = {
         title: program.title,
         num_weeks: program.num_weeks,
-        image: program.image,
+        ext: program.ext,
+        image: program.image
     };
     const token = await AsyncStorage.getItem('token');
     await axios({

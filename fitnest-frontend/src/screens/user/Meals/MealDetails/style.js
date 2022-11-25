@@ -46,6 +46,16 @@ const styles = StyleSheet.create({
         color: colors.purple,
         fontSize: 14,
         fontWeight: '400'
+    },
+    tipText: {
+        color: colors.black,
+        fontSize: 16,
+        fontWeight: '400'
+    },
+    tipsContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 10,
     }
 
 })

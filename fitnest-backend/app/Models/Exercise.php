@@ -22,4 +22,8 @@ class Exercise extends Model
     public function programs() {
         return $this->belongsToMany(Program::class, 'program_exercise');
     }
+
+    public function plans() {
+        return $this->belongsToMany(PersonalPlans::class, 'exercise_plan');
+    }
 }

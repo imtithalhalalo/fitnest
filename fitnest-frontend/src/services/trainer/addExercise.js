@@ -9,6 +9,7 @@ const addExercise = async (exercise) => {
         title: exercise.title,
         description: exercise.description,
         image: exercise.image,
+        ext: exercise.ext,
         time: exercise.time
     };
     const token = await AsyncStorage.getItem('token')

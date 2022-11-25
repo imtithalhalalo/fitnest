@@ -6,20 +6,32 @@ import EmptyState from '../../../../components/EmptyState';
 import { style } from '../../../../styles/style';
 import Loader from '../../../../components/Loader';
 import getSteps from '../../../../services/user/getSteps';
+import getPersonalSteps from '../../../../services/user/getPersonalPlan';
+import getExercises from '../../../../services/user/getExercise';
 
 const WorkoutSteps = ({ route }) => {
-  const { program_id, program_name } = route.params;
+  const { program_id, program_name, personal_plan } = route.params;
 
   const [steps, setSteps] = useState([])
 
   const [loading, isLoading] = useState(true);
 
   const getData = async () => {
-    const result = await getSteps(program_id);
-    console.log(result.data)
-    if (result.success) {
-      isLoading(false)
-      setSteps(result.data);
+    if (personal_plan) {
+      const result = await getExercises(program_id);
+      console.log(result)
+      if (result.success) {
+        isLoading(false)
+        setSteps(result.data);
+        
+      }
+    } else {
+      const result = await getSteps(program_id);
+      console.log(result.data)
+      if (result.success) {
+        isLoading(false)
+        setSteps(result.data);
+      }
     }
   }
   useEffect(() => {
@@ -27,7 +39,7 @@ const WorkoutSteps = ({ route }) => {
   }, [])
   return (
     <SafeAreaView style={style.mainContainer}>
-      <Header text={program_name + " Exercise"} back={"back"} />
+      <Header text={program_name} back={"back"} />
 
       {
         loading ?
