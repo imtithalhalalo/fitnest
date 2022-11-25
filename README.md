@@ -70,6 +70,8 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Using the above mentioned tech stacks and the wireframes build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
+### Images
+
 | Splash  | SignUp  | LogIn  | Edit Profile  |
 | -----------------| -----|-----|-----|
 | ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/splash.jpg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/signup.jpg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/login.jpg) |![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/editprofile.jpg)
@@ -82,6 +84,11 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| -----| -----------------| -----|
 | ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chats.jpg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chat.jpg)| ![Water Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/plans.jpg)
 
+
+### GIFs
+| Splash / LogIn  | SignUp  | LogIn  | Edit Profile  |
+| -----------------| -----|-----|-----|
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg)
 <br><br>
 <img src="./readme/title6.svg"/>
 
