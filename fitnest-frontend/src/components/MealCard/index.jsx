@@ -3,14 +3,14 @@ import { Card } from 'react-native-paper';
 import React from 'react'
 import { styles } from './style'
 import { useNavigation } from '@react-navigation/core';
-
+import { address } from '../../variables/global';
 const MealCard = (props) => {
     const navigation = useNavigation();
 
     return (
         <Card style={styles.gridItem} onPress={() => {navigation.navigate('MealDetails', {title: props.title, image: props.image, id: props.id})}}>
             {props.image ? (
-                <Card.Cover style={styles.cardCover} source={{ uri: props.image }} resizeMode={'contain'} />
+                <Card.Cover style={styles.cardCover} source={{ uri: `${address}/${props.image}` }} resizeMode={'contain'} />
             ) : (
                 <></>
             )}
