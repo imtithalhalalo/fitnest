@@ -52,7 +52,7 @@ const Programs = () => {
 
   return (
     <SafeAreaView style={style.mainContainer}>
-      <Header text={"My Plans"} image={userData.image} />
+      <Header text={"Plans"} image={userData.image} />
       <Search onChangeText={(keyword) => { handleSearch(keyword) }}
         onClear={() => handleSearch('')} value={search} />
 
