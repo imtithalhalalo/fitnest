@@ -10,6 +10,10 @@ import Loader from '../../../../components/Loader';
 import { styles } from '../../../../components/MealCard/style';
 import { style } from '../../../../styles/style';
 import getMeals from '../../../../services/user/getMeals';
+import { BASE_URL } from '../../../../variables/global';
+import axios from 'axios';
+
+
 
 const Meals = () => {
 
@@ -20,17 +24,22 @@ const Meals = () => {
     const [loading, isLoading] = useState(true);
 
     const getData = async () => {
-        const result = await getMeals(category);
-        console.log(result.data)
-        if (result.success) {
+        try {
+            const res = await axios({
+                method: 'GET',
+                url: `${BASE_URL}/meals/category/${category}`,
+            })
             isLoading(false)
-            setMeals(result.data);
-            setFilteredMeals(result.data)
+            setMeals(res.data['meals'])
+            setFilteredMeals(res.data['meals'])
+            // return {success: true, data: res.data['meals']}
+        }catch (error) {
+            return {success: false, error: error}
         }
     }
     useEffect(() => {
         getData()
-    }, [])
+    }, [category])
     
     const handleSearch = (keyword) => {
         if (keyword) {
@@ -53,6 +62,7 @@ const Meals = () => {
         />
     )
 
+    
     return (
         <SafeAreaView style={style.mainContainer}>
             <Header text={"My Suggested Meals"} />
@@ -67,7 +77,7 @@ const Meals = () => {
                     inactiveTextColor={colors.black}
                     values={['Breakfast', 'Lunch', 'Dinner']}
                     value={category}
-                    onSelect={val => setCategory(val)}
+                    onSelect={value => {setCategory(value)}}
                     textStyle={{ fontSize: 18, textAlign: 'center' }}
                 />
             </View>
@@ -89,6 +99,7 @@ const Meals = () => {
                             ListFooterComponent={<SafeAreaView />}
                         />
             }
+            
 
         </SafeAreaView>
     )
