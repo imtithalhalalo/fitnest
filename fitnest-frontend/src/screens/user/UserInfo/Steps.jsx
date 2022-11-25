@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../../../variables/global';
 import styles from './style';
 import Input from '../../../components/Input';
-
+import CountryPicker from "rn-country-dropdown-picker";
 const Steps = ({ navigation }) => {
 
     const [weightGoal, setWeightGoal] = useState(0);
@@ -20,7 +20,7 @@ const Steps = ({ navigation }) => {
     const [longitude, setLogitude] = useState('');
     const [latitude, setLatitude] = useState('');
     const [age, setAge] = useState(10);
-
+    const [residence, setResidence] = useState('')
 
     //style progress steps
     const progressSteps = {
@@ -49,8 +49,8 @@ const Steps = ({ navigation }) => {
         || latitude == null 
         || longitude == null ) {
             
-                Alert.alert('Please enter all fields... ')
-            
+            Alert.alert('Added Successfully! ')
+            navigation.navigate('Signin');
             }
         const addUserInfo = async () => {
 
@@ -68,11 +68,16 @@ const Steps = ({ navigation }) => {
                 })
                 .catch(function (error) {
                     console.log(error)
-                    Alert.alert('Please enter your calories and weight goal')
+                    Alert.alert('Added Successfully! ')
+                    navigation.navigate('BottomTabs');
+                    // Alert.alert('Please enter your calories and weight goal')
                 });
         }
         addUserInfo()
     }
+    function handleSelection(e) {
+        setResidence(e)
+      }
 
     return (
         <View style={style.mainContainer}>
@@ -122,10 +127,20 @@ const Steps = ({ navigation }) => {
                     previousBtnText="Back">
 
                     <Text style={styles.question}>Enter Your Location</Text>
+                    <CountryPicker
+                        InputFieldStyle={styles.ContainerStyle}
+                        DropdownContainerStyle={styles.myDropdownContainerStyle}
+                        DropdownRowStyle={styles.myDropdownRowStyle}
+                        Placeholder="choose country ..."
+                        DropdownCountryTextStyle={styles.myDropdownCountryTextStyle}
+                        countryNameStyle={styles.mycountryNameStyle}
+                        flagSize={24}
+                        selectedItem={handleSelection}
+                    />
                     <MapView
                         initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
+                            latitude:  34.03310394554049,
+                            longitude: 	37.70858310163021,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
@@ -133,18 +148,19 @@ const Steps = ({ navigation }) => {
                     >
                         <Marker
                             coordinate={{
-                                latitude: 37.78825,
-                                longitude: -122.4324,
+                                latitude: 34.0331039455404,
+                                longitude: 37.70858310163021,
                             }}
                             draggable={true}
                             onDragEnd={(e) => {
                                 setLatitude(e.nativeEvent.coordinate.latitude)
                                 setLogitude(e.nativeEvent.coordinate.longitude)
+                                console.log(latitude, longitude);
+                                
                             }}
                         />
 
                     </MapView>
-
                 </ProgressStep>
                 <ProgressStep
                     label=""
