@@ -15,6 +15,9 @@ use App\Models\Save;
 use App\Models\Tips;
 use App\Models\TrainerInfo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\File;
 
 class TrainerController extends Controller {
 
@@ -151,12 +154,27 @@ class TrainerController extends Controller {
     public function addProgram(Request $request) {
         $program = [];
         $user_id = Auth::id();
+        // $validator = Validator::make($request->all(), [
+        //     'ext' => 'required|string',
+        //     'photo' => 'required|string',
+        // ]);
+        // if($validator->fails()){
+        //     return response()->json($validator->errors()->toJson(), 400);
+        // }
+        //image upload
+        $extension=$request->ext;
+        $image_64 = $request->image; 
+        $img = base64_decode($image_64);
+        $path = uniqid() . "." . $extension;
+        file_put_contents($path, $img);
+        echo $path;
+
         if( $request->user_id ) {
             //adding personal plan info
             $program = PersonalPlans::create([
                 'title' => $request->title,
                 'num_weeks' => $request->num_weeks,
-                'image' => $request->image,
+                'image' => $path,
                 'trainer_id' => $user_id,
                 'user_id' => $request->user_id
             ]);
@@ -165,7 +183,7 @@ class TrainerController extends Controller {
             $program = Program::create([
                 'title' => $request->title,
                 'num_weeks' => $request->num_weeks,
-                'image' => $request->image,
+                'image' => $path,
                 'user_id' => $user_id
             ]);
         }
@@ -205,17 +223,26 @@ class TrainerController extends Controller {
 
     public function connectExerciseToProgram(Request $request) {
         $user_id = Auth::id();
-
-        //connecting exercise to program
-        $connect = ProgramExercise::create([
-            'user_id' => $user_id,
-            'program_id' => $request->program_id,
-            'exercise_id' => $request->exercise_id,
-        ]);
-
+        $connect = [];
+        if($request->plan_id) {
+            //connecting exercise to plan
+            $connect = PlanExercise::create([
+                'user_id' => $user_id,
+                'plan_id' => $request->plan_id,
+                'exercise_id' => $request->exercise_id,
+            ]);            
+        }else {
+            //connecting exercise to program
+            $connect = ProgramExercise::create([
+                'user_id' => $user_id,
+                'program_id' => $request->program_id,
+                'exercise_id' => $request->exercise_id,
+            ]);
+        }
         return response()->json([
             'status' => 'success',
             'connected' => $connect
         ], 200);
+        
     }
 }
