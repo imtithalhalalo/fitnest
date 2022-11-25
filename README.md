@@ -90,6 +90,14 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| -----|-----|-----|
 | ![SignIn](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/signin.gif) | ![SignUp / User Info](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/userinfo.gif) | ![Search Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/search.gif) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/plans.gif)
 
+| Sleeping  | Water Consumption | Calories  | Weight  |
+| -----------------| -----|-----|-----|
+| ![Sleeping](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/sleeping.gif) | ![Water Consumption](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/water.gif) | ![Calories](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/calories.gif) | ![Weight](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/weight.gif)
+
+| Meals  | Edit Profile | Chats / Chat  | Notifications  |
+| -----------------| -----|-----|-----|
+| ![Meals](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/meals.gif) | ![SignUp / User Info](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/userinfo.gif) | ![Search Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/search.gif) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/plans.gif)
+
 <br><br>
 <img src="./readme/title6.svg"/>
 
