@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     cardTitle: {
         fontSize: 20,
         fontWeight: '500',
-        color: colors.purple
+        color: colors.purple,
+        textTransform: 'uppercase'
     },
     cardSubtitle: {
         fontSize: 14,
@@ -50,7 +51,20 @@ const styles = StyleSheet.create({
     titlesContainer: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        width: '50%'
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    rowSpace: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 })
 
