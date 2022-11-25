@@ -74,21 +74,22 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Splash  | SignUp  | LogIn  | Edit Profile  |
 | -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/splash.jpg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/signup.jpg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/login.jpg) |![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/editprofile.jpg)
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/splash.jpg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/signup.jpg) | ![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/login.jpg) | ![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/editprofile.jpg)
 
 | Landing  | Exercises  | Meals  | Weight  |
 | -----------------| -----|-----|-----|
-| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) |![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) |![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
+| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) | ![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) | ![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
 
 | Chat  | Chat with Trainer  | Water Consumption  | Plans  |
 | -----------------| -----| -----------------| -----|
 | ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chats.jpg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chat.jpg)| ![Water Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/plans.jpg)
 
 
-### GIFs
-| Splash / LogIn  | SignUp  | LogIn  | Edit Profile  |
+### User
+| Splash / LogIn  | SignUp / User Info  | Search  | Plans  |
 | -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/water.gif)
+| ![SignIn](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/signin.gif) | ![SignUp / User Info](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/userinfo.gif) | ![Search Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/search.gif) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/plans.gif)
+
 <br><br>
 <img src="./readme/title6.svg"/>
 
