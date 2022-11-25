@@ -33,6 +33,9 @@ const Chats = ({ navigation }) => {
         Linking.openURL(url)
     }
 
+    const sendWhatsappMessage = (phone_num, message) => {
+        Linking.openURL('whatsapp://send?text=' + message + '&phone=' + phone_num)
+    }
     return (
         <SafeAreaView style={style.mainContainer}>
             <Header text={"Chat With Trainer"} />
