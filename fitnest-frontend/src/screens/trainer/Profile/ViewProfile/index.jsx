@@ -10,7 +10,7 @@ import Button from '../../../../components/Button';
 import { AntDesign } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useTrainerInfo from '../../../../services/user/getTrainerInfo';
-
+import { address } from '../../../../variables/global';
 const Profile = ({ navigation }) => {
     const { userData } = useContext(UserContext);
 
@@ -37,7 +37,7 @@ const Profile = ({ navigation }) => {
                 <View style={styles.profContainer}>
                     <View>
                         {userData.image ? (
-                            <Image source={{ uri: userData.image }} style={styles.profileImg} />
+                            <Image source={{ uri: `${address}/${userData.image}` }} style={styles.profileImg} />
                         ) : (
                             <Image source={require('../../../../../assets/images/profile.jpg')} style={styles.profileImg} />
                         )
