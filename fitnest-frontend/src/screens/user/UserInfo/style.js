@@ -57,6 +57,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20
     },
+    ContainerStyle: {
+        borderRadius: 10,
+        borderWidth: 1,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 5,
+        paddingTop: 5
+    }
 })
 
 export default styles
