@@ -91,10 +91,14 @@ const AddPlan = () => {
                     <Input label={"Workout Name"} handleChange={title => setTitle(title)} />
                     <Input label={"Duration in Weeks"} handleChange={num_weeks => setWeeksNum(num_weeks)} keyboardType={'number-pad'} />
 
-                    <View style={styles.btnBox}>
-                        <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 10 }} onPress={uploadImage} />
-                        <Text style={styles.uploadImgTxt} onPress={uploadImage} >Upload Image</Text>
-                    </View>
+
+                    <TouchableOpacity style={[style.secondaryBtn, {width: '50%',alignSelf: 'flex-start'}]} onPress={uploadImage}>
+                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                         <FontAwesome name="image" size={20} color={colors.purple} />
+                         <Text style={style.secondaryTextBtn}>Upload Image</Text>   
+                        </View>
+                    </TouchableOpacity>
+
                     {
                         modalVisibility ?
                             <CustomModal
@@ -121,7 +125,7 @@ const AddPlan = () => {
                                     <TouchableOpacity style={{ alignItems: 'flex-end', marginBottom: 20 }} onPress={() => setPersonalPlanModalVisibility(false)}>
                                         <FontAwesome name={"close"} size={30} color={colors.purple} />
                                     </TouchableOpacity>
-                                    <Text style={[style.secondaryText, { fontWeight: '500' }]}>Choose user</Text>
+                                    <Text style={[style.secondaryTextBtn, { fontWeight: '500' }]}>Choose user</Text>
                                     <Dropdown
                                         style={styles.dropdown}
                                         placeholderStyle={styles.placeholderStyle}

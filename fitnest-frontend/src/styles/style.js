@@ -89,21 +89,22 @@ const style = StyleSheet.create({
         alignItems: 'center',
     },
     secondaryBtn: {
-        width: width_proportion,
+        width: '97%',
+        padding: '2%',
         backgroundColor: 'transparent',
+        borderRadius: 10,
         height: 50,
-        borderRadius: 15,
-        justifyContent: 'center',
-        marginBottom: 22,
-        borderColor: colors.purple,
-        borderWidth: 3,
-        marginTop: 30,
-    },
-    secondaryText: {
         textAlign: 'center',
-        textAlignVertical: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginTop: '10%',
+        borderWidth: 2,
+        borderColor: colors.purple
+    },
+    secondaryTextBtn: {
+        fontSize: 18,
         color: colors.purple,
-        fontSize: 20,
+        textAlign: 'center'
     },
     //main pages
     loading: {
