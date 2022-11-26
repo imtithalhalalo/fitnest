@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, ScrollView, Alert, TextInput } from 'react-native'
+import { Text, View, SafeAreaView, ScrollView, Alert, TextInput, TouchableOpacity } from 'react-native'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { Dropdown } from 'react-native-element-dropdown';
 import { style } from '../../../styles/style';
@@ -38,7 +38,7 @@ const AddMeal = () => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [tips, setTips] = useState([]);
   const [tip, setTip] = useState('');
-  const [key,setKey] = useState(0);
+  const [key, setKey] = useState(0);
   const [base64, setBase64] = useState('');
   const [ext, setExt] = useState('');
 
@@ -78,8 +78,8 @@ const AddMeal = () => {
     }
     setBase64(res.base64);
   }
-  useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
-  
+  useEffect(() => { image ? setExt(image.split('.').pop()) : null }, [image])
+
   const handleAddIngredient = async () => {
     if (!ingredient) return
     setIngredient(ingredient);
@@ -202,10 +202,12 @@ const AddMeal = () => {
             <Input container={styles.inputContainer} label={"Protein"} handleChange={protein => setProteins(protein)} keyboardType='number-pad' />
 
           </View>
-          <View style={styles.btnBox}>
-            <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} />
-            <Text style={styles.uploadImgTxt} onPress={uploadImage}>Upload Image</Text>
-          </View>
+          <TouchableOpacity style={[style.secondaryBtn, { width: '50%', alignSelf: 'flex-start' }]} onPress={uploadImage}>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              <FontAwesome name="image" size={20} color={colors.purple} />
+              <Text style={style.secondaryTextBtn}>Upload Image</Text>
+            </View>
+          </TouchableOpacity>
 
 
           {
@@ -219,7 +221,7 @@ const AddMeal = () => {
             ) : <></>
           }
 
-          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)} input={ingredient}/>
+          <Input label={"Meal Ingredients"} handleChange={ingredient => setIngredient(ingredient)} input={ingredient} />
           <Button text={"Add Ingredient"} onPress={handleAddIngredient} secondary={true} />
           <View style={styles.ingredientsContainer}>
             {
@@ -236,9 +238,9 @@ const AddMeal = () => {
             <TextInput
               multiline
               style={[style.input, { height: 150 }]}
-              onChangeText={tip => setTip(tip)} 
+              onChangeText={tip => setTip(tip)}
               value={tip}
-              />
+            />
           </View>
           <Button text={"Add Tip"} onPress={handleAddTip} secondary={true} />
           <View style={styles.ingredientsContainer}>
