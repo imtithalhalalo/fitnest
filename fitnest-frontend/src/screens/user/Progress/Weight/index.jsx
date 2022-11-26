@@ -225,10 +225,9 @@ const Weight = ({ navigation }) => {
                       style={style.input}
                       onChangeText={weight => setWeight(weight)} />
                   </View>
-                  <TouchableOpacity onPress={showDatePicker}>
-                    <Text style={[style.secondaryText, { textAlign: 'left', fontSize: 16 }]}>Choose Date</Text>
-                  </TouchableOpacity>
 
+                  <Button text={"Choose Date"} onPress={showDatePicker} secondary={true}/>
+                  
                   <TouchableOpacity
                     style={[style.primaryBtn]}
                     onPress={addWeight}

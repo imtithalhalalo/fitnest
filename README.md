@@ -35,10 +35,17 @@
 
 > This design was planned before on paper, then moved to Figma app for the fine details.
 
-| Splash  | SignUp  | LogIn  | Landing  |
+| Splash  | SignUp  | LogIn  | Edit Profile  |
 | -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/signup.svg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.svg) |![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.svg)
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/splash.svg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/signup.svg) |![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/login.svg) |![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/profile.svg)
 
+| Landing  | Exercises  | Meals  | Weight  |
+| -----------------| -----|-----|-----|
+| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/landing.svg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/exercises.svg) |![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/meals.svg) |![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/weight.svg)
+
+| Chat  | Chat with Trainer  |
+| -----------------| -----|
+| ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/chats.svg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/images/chat.svg)
 
 
 
@@ -62,6 +69,39 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 <img src="./readme/title5.svg"/>
 
 > Using the above mentioned tech stacks and the wireframes build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
+
+### Images
+
+| Splash  | SignUp  | LogIn  | Edit Profile  |
+| -----------------| -----|-----|-----|
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/splash.jpg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/signup.jpg) | ![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/login.jpg) | ![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/editprofile.jpg)
+
+| Landing  | Exercises  | Meals  | Weight  |
+| -----------------| -----|-----|-----|
+| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) | ![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) | ![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
+
+| Chat  | Chat with Trainer  | Water Consumption  | Plans  |
+| -----------------| -----| -----------------| -----|
+| ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chats.jpg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chat.jpg)| ![Water Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/plans.jpg)
+
+### Common Screens
+
+| Splash / LogIn  | Edit Profile | Realtime Chat  | Notifications  |
+| -----------------| -----|-----|-----|
+| ![SignIn](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/signin.gif) | ![Edit Profile](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/editprofile.gif) | ![Chats / Chat](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/chat.gif) | ![Notifications](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/notifications.gif)
+
+| Phone Call Redirection | Whatsapp Redirection |
+| -----------------| -----|
+| ![Phone Call Redirection](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/phonecall.gif) | ![Whatsapp Redirection](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/whatsapp.gif)
+
+### User
+| SignUp / User Info  | Search  | Plans  | Meals |
+| -----------------| -----|-----|-----|
+| ![SignUp / User Info](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/userinfo.gif) | ![Search Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/search.gif) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/plans.gif) | ![Meals](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/meals.gif)
+
+| Sleeping  | Water Consumption | Calories  | Weight  |
+| -----------------| -----|-----|-----|
+| ![Sleeping](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/sleeping.gif) | ![Water Consumption](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/water.gif) | ![Calories](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/calories.gif) | ![Weight](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/weight.gif)
 
 
 
@@ -91,7 +131,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 2. Navigate to frontend-fitnest / Install NPM packages
    ```sh
-   cd frontend-fitnest
+   cd fitnest-frontend
    npm install
    ```
 3. Run the start up command
