@@ -108,9 +108,8 @@ const ViewProgress = ({ navigation }) => {
     const dateNow = new Date();
     const now = dateNow.getHours() * 60 + dateNow.getMinutes();
 
-    // if(true)
-    //     sendNotification();
-
+    if (start <= now && now <= end)
+        sendNotification();
 
 
     const getWeight = async () => {
@@ -195,7 +194,7 @@ const ViewProgress = ({ navigation }) => {
                     </Card>
 
                 </SafeAreaView>
-                <View style={{ backgroundColor: colors.white, height: 440}}>
+                <View style={{ backgroundColor: colors.white, height: 500}}>
                     <Text style={[style.subtitle, {marginLeft: '7%'}]}>My Personal Plan</Text>
                     <Carousel
                         layout="tinder"
