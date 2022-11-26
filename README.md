@@ -103,6 +103,11 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| -----|-----|-----|
 | ![Sleeping](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/sleeping.gif) | ![Water Consumption](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/water.gif) | ![Calories](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/calories.gif) | ![Weight](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/weight.gif)
 
+### Trainer
+| Add Plan  | Add Personal Plan  | Add Exercise  | Add Meal |
+| -----------------| -----|-----|-----|
+| ![Add Plan](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_plan.gif) | ![Add Personal Plan](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_personal_plan.gif) | ![Add Exercise](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_step.gif) | ![Add Meal](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_meal.gif)
+
 
 
 <br><br>
