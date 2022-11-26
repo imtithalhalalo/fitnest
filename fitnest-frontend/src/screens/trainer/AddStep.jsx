@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { style } from '../../styles/style'
 import { FontAwesome } from "@expo/vector-icons";
@@ -76,10 +76,12 @@ const AddStep = () => {
                         style={[style.input, { height: 150 }]}
                         onChangeText={description => setDescription(description)} />
                 </View>
-                <View style={styles.btnBox}>
-                    <FontAwesome name="image" size={20} color={colors.black} style={{ paddingRight: 20 }} />
-                    <Text style={styles.uploadImgTxt} onPress={uploadImage}>Upload Image</Text>
-                </View>
+                <TouchableOpacity style={[style.secondaryBtn, {width: '50%',alignSelf: 'flex-start'}]} onPress={uploadImage}>
+                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                         <FontAwesome name="image" size={20} color={colors.purple} />
+                         <Text style={style.secondaryTextBtn}>Upload Image</Text>   
+                        </View>
+                </TouchableOpacity>
                 {
                     modalVisibility ? (
                         <CustomModal
