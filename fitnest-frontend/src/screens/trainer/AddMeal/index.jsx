@@ -52,11 +52,8 @@ const AddMeal = () => {
         url: `${BASE_URL}/meals/get_last_ingredient`,
       }).then(response => {
         setId(response.data.id)
-        console.log(response)
       }).catch((err) => {
-
         console.log(err.response.data);
-
       })
     }
     getLastId()
@@ -120,7 +117,7 @@ const AddMeal = () => {
     };
 
     const token = await AsyncStorage.getItem('token');
-    console.log(data)
+
     await axios({
       headers: { 'Authorization': 'Bearer ' + token },
       method: 'POST',
@@ -128,13 +125,13 @@ const AddMeal = () => {
       data: data,
     })
       .then(function (response) {
-        console.log(response);
+
         Alert.alert('Added Successfully! ')
         res = []
         return true
       })
       .catch(function (error) {
-        console.log(error)
+
         Alert.alert('Try again! ')
         return false
       });
@@ -142,7 +139,7 @@ const AddMeal = () => {
 
   const deleteIngredient = async (id) => {
     const token = await AsyncStorage.getItem('token');
-    console.log(id)
+
     await axios({
       headers: { 'Authorization': 'Bearer ' + token },
       method: 'POST',
@@ -152,7 +149,6 @@ const AddMeal = () => {
         console.log(response.data.status);
       })
       .catch(function (error) {
-        console.log(error.response.data)
         Alert.alert('Try again! ')
       });
     setIngredients(ingredients.filter((element) => element.id !== id))

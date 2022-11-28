@@ -36,7 +36,6 @@ const AddPlan = () => {
         if (!res.cancelled) {
             setImage(res.uri);
         }
-        console.log(res.base64)
         setBase64(res.base64)
     }
     useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
@@ -62,8 +61,6 @@ const AddPlan = () => {
                 image: base64,
                 user_id: user
             }
-            console.log(data)
-            console.log(image)
             await addPersonalPlan(data)
         } else {
             if (!title || !num_weeks) {

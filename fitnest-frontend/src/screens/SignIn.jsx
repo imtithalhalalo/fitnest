@@ -39,7 +39,7 @@ const SignIn = ({ navigation }) => {
       await AsyncStorage.setItem('token', result.data.token.original["access_token"])
 
       let user_type = result.data.user["user_type"];
-      console.log(result.data.user["user_type"])
+      
 
       if (user_type === 'trainer') {
         navigation.reset({
@@ -54,7 +54,7 @@ const SignIn = ({ navigation }) => {
         })
         navigation.navigate("BottomTabs")
       }
-      console.log(await AsyncStorage.getItem('token'))
+    
     }else {
       setError(result.error)
       setModalVisibility(true);

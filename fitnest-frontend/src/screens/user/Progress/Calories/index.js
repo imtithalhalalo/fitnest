@@ -37,9 +37,9 @@ const Calories = () => {
     }
     const addRemainingCalories = async (calories_burned = null, calories = null) => {
         let remaining_calories = parseInt(userInfo.calories_goal)
-        console.log(remaining_calories)
+        
         if (calories) {
-            console.log(calories)
+            
             remaining_calories = remaining_calories + parseInt(calories);
 
         } else {

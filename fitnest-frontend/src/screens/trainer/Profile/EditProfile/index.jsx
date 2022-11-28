@@ -49,7 +49,6 @@ const EditProfile = ({ navigation }) => {
             setImage(res.uri);
         }
         setBase64(res.base64);
-        console.log(image)
 
     }
     useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])
@@ -103,7 +102,6 @@ const EditProfile = ({ navigation }) => {
             })
             Alert.alert('Edited Successfully');
         } catch (err) {
-            console.log(err.response.data)
             displayError('Please enter all fields')
             return { success: false, error: err }
         }

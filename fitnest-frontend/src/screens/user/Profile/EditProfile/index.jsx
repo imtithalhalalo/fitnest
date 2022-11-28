@@ -45,7 +45,7 @@ const EditProfile = ({ navigation }) => {
             setImage(res.uri);
         }
         setBase64(res.base64);
-        console.log(image)
+
 
     }
     useEffect(()=>{ image? setExt(image.split('.').pop()):null},[image])

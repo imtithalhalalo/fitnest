@@ -9,7 +9,6 @@ import MealCard from '../../../../components/MealCard';
 import Loader from '../../../../components/Loader';
 import { styles } from '../../../../components/MealCard/style';
 import { style } from '../../../../styles/style';
-import getMeals from '../../../../services/user/getMeals';
 import { BASE_URL } from '../../../../variables/global';
 import axios from 'axios';
 
@@ -32,7 +31,6 @@ const Meals = () => {
             isLoading(false)
             setMeals(res.data['meals'])
             setFilteredMeals(res.data['meals'])
-            // return {success: true, data: res.data['meals']}
         }catch (error) {
             return {success: false, error: error}
         }

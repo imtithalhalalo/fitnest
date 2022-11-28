@@ -26,7 +26,7 @@ const Programs = () => {
 
   const getData = async () => {
     const result = await getPrograms();
-    console.log(result.data)
+
     if (result.success) {
       isLoading(false)
       setPrograms(result.data);

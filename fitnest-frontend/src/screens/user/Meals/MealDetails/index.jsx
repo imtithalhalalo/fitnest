@@ -27,7 +27,6 @@ const MealDetails = ({ route, navigation }) => {
       setIngredients(res);
     }
     if (resp !== null) {
-      console.log(tips)
       setTips(resp);
     }
   }, [response, res]);

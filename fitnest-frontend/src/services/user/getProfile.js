@@ -13,7 +13,7 @@ const useAxios = () => {
             url: `${BASE_URL}/profile`,
         }).then(response => {
             setResponse(response.data['user'])
-            console.log(response.data['user'])
+
             setloading(false)
         }).catch((err) => {
             setError(err)

@@ -11,7 +11,7 @@ const getPersonalSteps = async () => {
             url: `${BASE_URL}/personal_plans`,
             headers: { 'Authorization': 'Bearer ' + token },
         })
-        console.log(res.data)
+  
         return { success: true, data: res.data['plans'] }
     }catch (error) {
         console.log(error.response.data)

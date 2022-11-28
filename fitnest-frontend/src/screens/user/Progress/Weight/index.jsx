@@ -59,16 +59,16 @@ const Weight = ({ navigation }) => {
   };
   const getWeight = async () => {
     const weightData = await getWeightAxios();
-    console.log(weightData)
+
     if (weightData.success) {
       do {
         setWeightArray([])
         weightData.data.map(({ weight }) => (weightArray.push(weight)))
         weightData.data.map(({ created_at }) => (monthsArray.push(parseInt(parseInt(new Date(created_at).getMonth()) + 1) + `/` + new Date(created_at).getDate())))
-        console.log(weightArray)
+ 
         setWeightArray(weightArray.slice(weightArray.length - 5, weightArray.length))
         setMonthsArray(monthsArray.slice(weightArray.length - 5, weightArray.length + 1))
-        console.log(monthsArray)
+      
 
       } while (weightArray.length == 0)
     }
@@ -83,8 +83,7 @@ const Weight = ({ navigation }) => {
       setLoading(true)
     }, 10000);
     clearTimeout(timeId)
-    console.log(monthsArray)
-    console.log(weightArray)
+
   }, [])
 
   const addWeight = async () => {
@@ -102,7 +101,7 @@ const Weight = ({ navigation }) => {
       })
       setLoading(true)
     } catch (err) {
-      console.log(err.response.data)
+  
       return { success: false, error: err }
     }
 
@@ -120,8 +119,6 @@ const Weight = ({ navigation }) => {
     } catch (err) {
       console.log(err)
     }
-
-    console.log(data)
   }
   return (
     <>

@@ -11,7 +11,7 @@ const getExercises = async (plan_id) => {
             headers: { 'Content-Type': 'multipart/form-data;' },
             headers: { 'Authorization': 'Bearer ' + token },
         })
-        console.log(res.data)
+ 
         return { success: true, data: res.data['exercise'] }
     }catch (error) {
         return { success: false, error: error.response }

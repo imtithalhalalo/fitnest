@@ -70,7 +70,7 @@ const Steps = ({ navigation }) => {
                     console.log(error)
                     Alert.alert('Added Successfully! ')
                     navigation.navigate('BottomTabs');
-                    // Alert.alert('Please enter your calories and weight goal')
+
                 });
         }
         addUserInfo()
@@ -139,8 +139,8 @@ const Steps = ({ navigation }) => {
                     />
                     <MapView
                         initialRegion={{
-                            latitude:  34.03310394554049,
-                            longitude: 	37.70858310163021,
+                            latitude:  33.8547,
+                            longitude: 	35.8623,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
@@ -148,8 +148,8 @@ const Steps = ({ navigation }) => {
                     >
                         <Marker
                             coordinate={{
-                                latitude: 34.0331039455404,
-                                longitude: 37.70858310163021,
+                                latitude: 33.8547,
+                                longitude: 35.8623,
                             }}
                             draggable={true}
                             onDragEnd={(e) => {

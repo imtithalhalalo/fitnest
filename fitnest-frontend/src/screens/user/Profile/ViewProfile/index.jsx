@@ -17,7 +17,7 @@ const Profile = ({ navigation }) => {
 
     //user info - weight goal - calories goal
     const [userInfo, setUserInfo] = useState({});
-    const { res, error, loading } = useAxios();
+
     const { response } = useUserInfo();
 
     useLayoutEffect(() => {

@@ -13,7 +13,7 @@ const useGetMealTips = ({ id }) => {
             url: `${BASE_URL}/meals/tip/${id}`,
         }).then(response => {
             setResponse(response.data['tips'])
-            console.log(response.data)
+
             setloading(false)
         }).catch((err) => {
             setError(err)
