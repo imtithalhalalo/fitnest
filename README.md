@@ -70,20 +70,6 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 > Using the above mentioned tech stacks and the wireframes build with figma from the user stories we have, the implementation of the app is shown as below, these are screenshots from the real app
 
-### Images
-
-| Splash  | SignUp  | LogIn  | Edit Profile  |
-| -----------------| -----|-----|-----|
-| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/splash.jpg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/signup.jpg) | ![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/login.jpg) | ![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/editprofile.jpg)
-
-| Landing  | Exercises  | Meals  | Weight  |
-| -----------------| -----|-----|-----|
-| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) | ![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) | ![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
-
-| Chat  | Chat with Trainer  | Water Consumption  | Plans  |
-| -----------------| -----| -----------------| -----|
-| ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chats.jpg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chat.jpg)| ![Water Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/plans.jpg)
-
 ### Common Screens
 
 | Splash / LogIn  | Edit Profile | Realtime Chat  | Notifications  |
@@ -108,7 +94,19 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 | -----------------| -----|-----|-----|
 | ![Add Plan](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_plan.gif) | ![Add Personal Plan](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_personal_plan.gif) | ![Add Exercise](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_step.gif) | ![Add Meal](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/add_meal.gif)
 
+### Images
 
+| Splash  | SignUp  | LogIn  | Edit Profile  |
+| -----------------| -----|-----|-----|
+| ![Splash](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/splash.jpg) | ![Sign Up Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/signup.jpg) | ![Sign In Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/login.jpg) | ![Edit Profile Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/editprofile.jpg)
+
+| Landing  | Exercises  | Meals  | Weight  |
+| -----------------| -----|-----|-----|
+| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) | ![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) | ![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
+
+| Chat  | Chat with Trainer  | Water Consumption  | Plans  |
+| -----------------| -----| -----------------| -----|
+| ![Chats Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chats.jpg) | ![Chat](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/chat.jpg)| ![Water Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/water.jpg) | ![Plans Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/plans.jpg)
 
 <br><br>
 <img src="./readme/title6.svg"/>
