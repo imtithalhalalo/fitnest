@@ -102,7 +102,7 @@ Here's a brief high-level overview of the tech stack the Well app uses:
 
 | Landing  | Exercises  | Meals  | Weight  |
 | -----------------| -----|-----|-----|
-| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) | ![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) | ![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
+| ![Landing Page](https://github.com/imtithalhalalo/fitnest/blob/master/readme/prototyping/gif/landing.jpg) | ![Exercises Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/exercise.jpg) | ![Meals Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/meals.jpg) | ![Weight Page](https://github.com/imtithalhalalo/fitnest/blob/frontend/readme/prototyping/gif/weight.jpg)
 
 | Chat  | Chat with Trainer  | Water Consumption  | Plans  |
 | -----------------| -----| -----------------| -----|
