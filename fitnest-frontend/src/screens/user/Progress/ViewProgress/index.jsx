@@ -194,7 +194,7 @@ const ViewProgress = ({ navigation }) => {
                     </Card>
 
                 </SafeAreaView>
-                <View style={{ backgroundColor: colors.white, height: 500}}>
+                <View style={{ backgroundColor: colors.white, height: 450}}>
                     <Text style={[style.subtitle, {marginLeft: '7%'}]}>My Personal Plan</Text>
                     <Carousel
                         layout="tinder"
@@ -221,7 +221,7 @@ const ViewProgress = ({ navigation }) => {
                         tappableDots={true}
                     />
                     </View>
-                    <View style={{ backgroundColor: colors.white, paddingBottom: '20%', height: 700 }}>
+                    <View style={{ backgroundColor: colors.white, paddingBottom: '30%', height: 700 }}>
                     <Text style={[style.subtitle, {marginLeft: '7%'}]}>Suggested Plans</Text>
                     <Carousel
                         layout="tinder"
@@ -247,12 +247,7 @@ const ViewProgress = ({ navigation }) => {
                         inactiveDotScale={1}
                         tappableDots={true}
                     />
-                    <View style={{
-                        paddingLeft: '5%',
-                        paddingRight: '5%',
-                    }}>
-                        
-                    </View>
+                    
                     
                     <View style={{
                         paddingLeft: '5%',

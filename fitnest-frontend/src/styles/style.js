@@ -77,6 +77,11 @@ const style = StyleSheet.create({
         marginTop: '2%',
         marginBottom: '4%'
     },
+    secondaryText: {
+        fontSize: 18,
+        color: colors.purple,
+        textAlign: 'center'
+    },
     inputLabel: {
         margin: 5,
         fontSize: 14,
@@ -106,6 +111,7 @@ const style = StyleSheet.create({
         color: colors.purple,
         textAlign: 'center'
     },
+
     //main pages
     loading: {
         flex: 1,
